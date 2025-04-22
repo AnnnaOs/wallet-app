@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://wallet.b.goit.study/docs/',
+  baseURL: 'https://wallet-app-server-zu2t.onrender.com',
 });
 
 export const setToken = token => {
