@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, selectAuthError } from '../redux/auth/operations';
+import { registerUserThunk, selectAuthError } from '../redux/auth/operations';
 import styles from './RegistrationPage.module.css';
 
 const RegistrationPage = () => {
@@ -27,7 +27,7 @@ const RegistrationPage = () => {
     }
 
     const { name, email, password } = formData;
-    dispatch(registerUser({ name, email, password }));
+    dispatch(registerUserThunk({ name, email, password }));
   };
 
   return (

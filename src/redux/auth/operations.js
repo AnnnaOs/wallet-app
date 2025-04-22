@@ -1,13 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-axios.defaults.baseURL = 'https://wallet.b.goit.study/api';
-
-export const registerUser = createAsyncThunk(
+import { api, setToken, clearToken } from '../../configAPI/api.js';
+export const registerUserThunk = createAsyncThunk(
   'auth/register',
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post('/auth/register', userData);
+      const response = await api.post('/auth/register', userData);
+      setToken(response.data.token);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message || 'Registration failed');
