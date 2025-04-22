@@ -34,7 +34,7 @@ const RegistrationPage = () => {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2 className={styles.title}>Register</h2>
+        <h2 className={styles.title}>Money Guard</h2>
 
         <input
           type="text"
