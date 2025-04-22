@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser, selectAuthError } from '../redux/auth/operations';
 import styles from './RegistrationPage.module.css';
 
 const RegistrationPage = () => {
+  const dispatch = useDispatch();
+  const error = useSelector(selectAuthError);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,8 +25,9 @@ const RegistrationPage = () => {
       alert('Passwords do not match!');
       return;
     }
-    console.log('Registering:', formData);
-    
+
+    const { name, email, password } = formData;
+    dispatch(registerUser({ name, email, password }));
   };
 
   return (
@@ -69,6 +75,8 @@ const RegistrationPage = () => {
         <button type="submit" className={styles.registerButton}>
           Register
         </button>
+
+        {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
   );

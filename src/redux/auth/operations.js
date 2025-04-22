@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://your-api-url.com/api';
+axios.defaults.baseURL = 'https://wallet.b.goit.study/api';
 
 export const registerUser = createAsyncThunk(
   'auth/register',
