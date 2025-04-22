@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUserThunk, selectAuthError } from '../redux/auth/operations';
+import { registerUserThunk } from '../redux/auth/operations';
+import { selectAuthError } from '../redux/auth/selectors';
 import styles from './RegistrationPage.module.css';
 
 const RegistrationPage = () => {
