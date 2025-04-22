@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { api, setToken, clearToken } from '../../configAPI/api.js';
+import { api, setToken } from '../../configAPI/api.js';
 export const registerUserThunk = createAsyncThunk(
   'auth/register',
   async (userData, thunkAPI) => {
