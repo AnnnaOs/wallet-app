@@ -7,7 +7,8 @@ import StatisticsTab from '../pages/StatisticsTab.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
 import HomeTab from '../pages/HomeTab.jsx';
 import CurrencyTab from '../pages/CurrencyTab.jsx';
-import RegistrationPage from '../pages/RegistrationPage.jsx';
+import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
+
 import BalanceTab from './BalanceTab.jsx';
 
 const App = () => {
@@ -63,5 +64,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
