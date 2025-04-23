@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useIsMobile } from '../hooks/useIsMobile.js';
@@ -21,54 +21,56 @@ const RegistrationPage = lazy(() =>
 
 const App = () => {
   const isMobile = useIsMobile();
+
   return (
     <div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        >
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
           <Route
-            path="index"
+            path="/"
             element={
-              isMobile ? (
-                <>
-                  <Balance />
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
+            }
+          >
+            <Route
+              path="index"
+              element={
+                isMobile ? (
+                  <>
+                    <Balance />
+                    <HomeTab />
+                  </>
+                ) : (
                   <HomeTab />
-                </>
-              ) : (
-                <HomeTab />
-              )
+                )
+              }
+            />
+            <Route path="statistics" element={<StatisticsTab />} />
+            <Route
+              path="currency"
+              element={isMobile ? <CurrencyTab /> : <Navigate to="/" />}
+            />
+          </Route>
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
             }
           />
-          <Route path="statistics" element={<StatisticsTab />} />
           <Route
-            path="currency"
-            element={isMobile ? <CurrencyTab /> : <Navigate to="/" />}
+            path="register"
+            element={
+              <RestrictedRoute>
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
           />
-        </Route>
-        <Route
-          path="login"
-          element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <RestrictedRoute>
-              <RegistrationPage />
-            </RestrictedRoute>
-          }
-        />
-      </Routes>
-      ;
+        </Routes>
+      </Suspense>
     </div>
   );
 };
