@@ -15,3 +15,16 @@ export const registerUserThunk = createAsyncThunk(
     }
   }
 );
+
+export const logOutThunk = createAsyncThunk(
+  'auth/logOut',
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.post('/auth/logout', null, {
+        withCredentials: true,
+      });
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
