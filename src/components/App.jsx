@@ -1,15 +1,23 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { useIsMobile } from '../hooks/useIsMobile.js';
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
-import { useIsMobile } from '../redux/hooks/useIsMobile.js';
-import DashboardPage from '../pages/DashboardPage.jsx';
-import StatisticsTab from '../pages/StatisticsTab.jsx';
-import LoginPage from '../pages/LoginPage.jsx';
-import HomeTab from '../pages/HomeTab.jsx';
-import CurrencyTab from '../pages/CurrencyTab.jsx';
-import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
+import Balance from './Balance.jsx';
 
-import BalanceTab from './BalanceTab.jsx';
+const DashboardPage = lazy(() =>
+  import('../pages/DashboardPage/DashboardPage.jsx')
+);
+const StatisticsTab = lazy(() =>
+  import('../pages/StatisticsTab/StatisticsTab.jsx')
+);
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage.jsx'));
+const HomeTab = lazy(() => import('../pages/HomeTab/HomeTab.jsx'));
+const CurrencyTab = lazy(() => import('../pages/CurrencyTab/CurrencyTab.jsx'));
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage.jsx')
+);
 
 const App = () => {
   const isMobile = useIsMobile();
@@ -29,7 +37,7 @@ const App = () => {
             element={
               isMobile ? (
                 <>
-                  <BalanceTab />
+                  <Balance />
                   <HomeTab />
                 </>
               ) : (
@@ -64,3 +72,5 @@ const App = () => {
     </div>
   );
 };
+
+export default App;
