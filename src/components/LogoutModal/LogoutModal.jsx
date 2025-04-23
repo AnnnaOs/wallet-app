@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOutThunk } from 'redux/auth/operations';
-import css from './LogoutModal.module.css';
+import styles from './LogoutModal.module.css';
 
 const LogoutModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,27 +24,26 @@ const LogoutModal = () => {
 
   return (
     <>
-      {/* Тимчасова кнопка — видалити, коли буде готовий хедер */}
-      <button className={css.logoutTriggerButton} onClick={handleOpen}>
+      {/* Тимчасова кнопка — видалити або перемістити при інтеграції */}
+      <button className={styles.logoutTriggerButton} onClick={handleOpen}>
         Exit
       </button>
 
       {isOpen && (
-        <div className="logout-overlay">
-          <div className="logout-modal">
-            <h2 className="logout-title">Exit</h2>
-            <p className="logout-text">Are you sure you want to log out?</p>
-            <div className="logout-buttons">
+        <div className={styles.logoutOverlay}>
+          <div className={styles.logoutModal}>
+            <h2 className={styles.logoutTitle}>Exit</h2>
+            <p className={styles.logoutText}>
+              Are you sure you want to log out?
+            </p>
+            <div className={styles.logoutButtons}>
               <button
-                className="logout-btn logout-btn--confirm"
+                className={styles.logoutBtnConfirm}
                 onClick={handleLogout}
               >
                 Log out
               </button>
-              <button
-                className="logout-btn logout-btn--cancel"
-                onClick={handleClose}
-              >
+              <button className={styles.logoutBtnCancel} onClick={handleClose}>
                 Cancel
               </button>
             </div>

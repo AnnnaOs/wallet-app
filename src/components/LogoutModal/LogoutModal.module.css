@@ -2,7 +2,7 @@
   display: none; /* видалити або перемістити при інтеграції */
 }
 
-.logout-overlay {
+.logoutOverlay {
   position: fixed;
   inset: 0;
   background-color: rgba(46, 47, 66, 0.4);
@@ -12,7 +12,7 @@
   z-index: 1000;
 }
 
-.logout-modal {
+.logoutModal {
   background-color: #fff;
   border-radius: 20px;
   padding: 40px 20px;
@@ -22,7 +22,7 @@
   text-align: center;
 }
 
-.logout-title {
+.logoutTitle {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 18px;
@@ -30,19 +30,19 @@
   margin-bottom: 20px;
 }
 
-.logout-text {
+.logoutText {
   font-size: 16px;
   color: #2e2f42;
   margin-bottom: 32px;
 }
 
-.logout-buttons {
+.logoutButtons {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.logout-btn {
+.logoutBtn {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: 600;
@@ -52,44 +52,50 @@
   transition: background-color 0.3s ease;
 }
 
-.logout-btn--confirm {
+.logoutBtnConfirm {
+  /* composes: logoutBtn; */
   background: linear-gradient(90deg, #ffc727 0%, #9c27b0 100%);
   color: #fff;
 }
 
-.logout-btn--cancel {
+.logoutBtnCancel {
+  /* composes: logoutBtn; */
   background-color: #e7eaf2;
   color: #2e2f42;
 }
 
+.logoutTriggerButton {
+  display: none;
+}
+
 /* Tablet */
 @media (min-width: 768px) {
-  .logout-modal {
+  .logoutModal {
     max-width: 400px;
     padding: 48px 32px;
   }
 
-  .logout-title {
+  .logoutTitle {
     font-size: 20px;
   }
 
-  .logout-text {
+  .logoutText {
     font-size: 18px;
   }
 }
 
 /* Desktop */
 @media (min-width: 1280px) {
-  .logout-modal {
+  .logoutModal {
     max-width: 500px;
     padding: 56px 48px;
   }
 
-  .logout-title {
+  .logoutTitle {
     font-size: 22px;
   }
 
-  .logout-text {
+  .logoutText {
     font-size: 20px;
   }
 }
