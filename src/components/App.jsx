@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useIsMobile.js';
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
-import Balance from './Balance.jsx';
+import Balance from './Balance/Balance.jsx';
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage.jsx')
