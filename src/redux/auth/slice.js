@@ -11,7 +11,7 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   IsRefreshing: false,
-  isError: null,
+  isAuthError: null,
 };
 
 const authSlice = createSlice({
@@ -21,18 +21,18 @@ const authSlice = createSlice({
     builder
       .addCase(registerUserThunk.pending, state => {
         state.isLoading = true;
-        state.isError = null;
+        state.isAuthError = null;
       })
       .addCase(registerUserThunk.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.isError = null;
+        state.isAuthError = null;
       })
       .addCase(registerUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isError = payload;
+        state.isAuthError = payload;
       });
   },
 });

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUserThunk } from '../../redux/auth/operations';
-import { selectAuthError } from '../../redux/auth/selectors';
+import { selectIsAuthError } from '../../redux/auth/selectors';
 import styles from './RegistrationPage.module.css';
 
 const RegistrationPage = () => {
   const dispatch = useDispatch();
-  const error = useSelector(selectAuthError);
+  const error = useSelector(selectIsAuthError);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -15,12 +15,12 @@ const RegistrationPage = () => {
     confirmPassword: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match!');
