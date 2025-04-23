@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { api, setToken } from '../../configAPI/api.js';
+import { api, setToken, clearToken } from '../../configAPI/api.js';
 
 export const registerUserThunk = createAsyncThunk(
   'auth/register',
@@ -16,13 +16,12 @@ export const registerUserThunk = createAsyncThunk(
   }
 );
 
-export const logOutThunk = createAsyncThunk(
-  'auth/logOut',
+export const logoutThunk = createAsyncThunk(
+  'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post('/auth/logout', null, {
-        withCredentials: true,
-      });
+      await api.post('/auth/logout');
+      clearToken();
     } catch (error) {
       return rejectWithValue(error.message);
     }

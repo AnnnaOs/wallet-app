@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOutThunk } from 'redux/auth/operations';
-import './LogoutModal.css';
+import css from './LogoutModal.module.css';
 
 const LogoutModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ const LogoutModal = () => {
   return (
     <>
       {/* Тимчасова кнопка — видалити, коли буде готовий хедер */}
-      <button className="logout-trigger-button" onClick={handleOpen}>
+      <button className={css.logoutTriggerButton} onClick={handleOpen}>
         Exit
       </button>
 

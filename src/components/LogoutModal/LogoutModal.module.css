@@ -1,3 +1,7 @@
+.logoutTriggerButton {
+  display: none; /* видалити або перемістити при інтеграції */
+}
+
 .logout-overlay {
   position: fixed;
   inset: 0;
@@ -56,10 +60,6 @@
 .logout-btn--cancel {
   background-color: #e7eaf2;
   color: #2e2f42;
-}
-
-.logout-trigger-button {
-  display: none; /* видалити або перемістити при інтеграції */
 }
 
 /* Tablet */
