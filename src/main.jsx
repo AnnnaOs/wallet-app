@@ -8,6 +8,9 @@ import { store, persistor } from './redux/store';
 import App from './components/App.jsx';
 import 'modern-normalize';
 import './index.css';
+import { initializeToken } from './configAPI/api';
+
+initializeToken();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
