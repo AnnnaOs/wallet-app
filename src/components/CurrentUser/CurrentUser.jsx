@@ -1,4 +1,4 @@
-import s from './ContactList.module.css';
+import s from './CurrentUser.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
