@@ -1,15 +1,30 @@
-import { useEffect, Suspense } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import CurrentUser from './CurrentUser/CurrentUser.jsx';
 import { refreshThunk } from '../redux/auth/operations';
-import { selectIsRefreshing } from '../redux/auth/selectors';
+import { useIsMobile } from '../hooks/useIsMobile.js';
+import PrivateRoute from '../routes/PrivateRoute.jsx';
+import RestrictedRoute from '../routes/RestrictedRoute.jsx';
+import Balance from './Balance/Balance.jsx';
 import Loader from './Loader/Loader';
+
+const DashboardPage = lazy(() =>
+  import('../pages/DashboardPage/DashboardPage.jsx')
+);
+const StatisticsTab = lazy(() =>
+  import('../pages/StatisticsTab/StatisticsTab.jsx')
+);
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage.jsx'));
+const HomeTab = lazy(() => import('../pages/HomeTab/HomeTab.jsx'));
+const CurrencyTab = lazy(() => import('../pages/CurrencyTab/CurrencyTab.jsx'));
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage.jsx')
+);
 
 const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -19,13 +34,56 @@ const App = () => {
     }
   }, [dispatch]);
 
-  return isRefreshing ? <Loader /> : (
-    <Suspense fallback={null}>
-      <Routes>
-        <Route path="user" element={<CurrentUser />} />
-        {/* другие маршруты */}
-      </Routes>
-    </Suspense>
+  return (
+    <div>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
+            }
+          >
+            <Route
+              path="index"
+              element={
+                isMobile ? (
+                  <>
+                    <Balance />
+                    <HomeTab />
+                  </>
+                ) : (
+                  <HomeTab />
+                )
+              }
+            />
+            <Route path="statistics" element={<StatisticsTab />} />
+            <Route
+              path="currency"
+              element={isMobile ? <CurrencyTab /> : <Navigate to="/" />}
+            />
+          </Route>
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute>
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
+    </div>
   );
 };
 
