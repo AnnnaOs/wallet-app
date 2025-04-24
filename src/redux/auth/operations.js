@@ -21,10 +21,12 @@ export const loginUserThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await api.post('/auth/login', credentials);
-      setToken(response.data.token); 
+      setToken(response.data.accessToken);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message || 'Login failed');
+      return thunkAPI.rejectWithValue(
+        error.response.data.message || 'Login failed'
+      );
     }
   }
 );
