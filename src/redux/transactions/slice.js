@@ -1,34 +1,12 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// === slice.js ===
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  fetchTransactions,
+  createTransaction,
+  updateTransaction,
+  deleteTransaction,
+} from './operations';
 
-// 1. Створення асинхронних операцій (thunks)
-export const fetchTransactions = createAsyncThunk(
-  'transactions/fetchTransactions',
-  async () => {
-    const response = await fetch('http://localhost:3000/transactions', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODBhMGM0ZDFhMTA3M2ExNzIwNmNhZDkiLCJpYXQiOjE3NDU0OTc1NTgsImV4cCI6MTc0NTU4Mzk1OH0.GAXFSGHQw98TYxOdFy5E-P9vdfz2UfrJJAdFKy5y--A`,
-      },
-    });
-    const data = await response.json();
-    return data;
-  }
-);
-
-export const deleteTransaction = createAsyncThunk(
-  'transactions/deleteTransaction',
-  async id => {
-    await fetch(`http://localhost:3000/transactions/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-    return id; // Повертаємо ID для того, щоб видалити його з Redux
-  }
-);
-
-// 2. Створення slice
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState: {
@@ -41,6 +19,7 @@ const transactionsSlice = createSlice({
     builder
       .addCase(fetchTransactions.pending, state => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.loading = false;
@@ -48,12 +27,26 @@ const transactionsSlice = createSlice({
       })
       .addCase(fetchTransactions.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
+      })
+      .addCase(createTransaction.fulfilled, (state, action) => {
+        state.transactions.push(action.payload);
+      })
+      .addCase(updateTransaction.fulfilled, (state, action) => {
+        const index = state.transactions.findIndex(
+          t => t._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.transactions[index] = action.payload;
+        }
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
           transaction => transaction._id !== action.payload
         );
+      })
+      .addCase(deleteTransaction.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });

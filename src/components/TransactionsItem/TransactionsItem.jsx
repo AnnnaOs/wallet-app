@@ -1,10 +1,14 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import {
+//   deleteTransaction,
+//   fetchTransactions,
+// } from '../../redux/transactions/slice';
+import { selectAllTransactions } from '../../redux/transactions/selectors';
 import {
   deleteTransaction,
   fetchTransactions,
-} from '../../redux/transactions/slice';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAllTransactions } from '../../redux/transactions/selectors';
+} from '../../redux/transactions/operations';
 
 const TransactionsItem = () => {
   const dispatch = useDispatch();
