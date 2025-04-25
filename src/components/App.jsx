@@ -81,6 +81,7 @@ const App = () => {
               </RestrictedRoute>
             }
           />
+          <Route path="*" element={<Navigate to="/" />}></Route>
         </Routes>
       </Suspense>
     </div>
