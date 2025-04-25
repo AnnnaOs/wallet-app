@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { refreshThunk } from '../redux/auth/operations';
-import { useIsMobile } from '../hooks/useIsMobile.js';
+import { useResponsive } from '../hooks/useResponsive.js';
 // import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Balance from './Balance/Balance.jsx';
@@ -25,7 +25,7 @@ const RegistrationPage = lazy(() =>
 
 const App = () => {
   const dispatch = useDispatch();
-  const isMobile = useIsMobile();
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
