@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 // import { transactionsReducer } from './transactions/slice';
-// import { statisticsReducer } from './statistics/slice';
+import { statisticsReducer } from './statistics/slice';
 // import { modalsReducer } from './modals/slice';
 
 const authPersistConfig = {
@@ -25,7 +25,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     // transactions: transactionsReducer,
-    // statistics: statisticsReducer,
+    statistics: statisticsReducer,
     // modals: modalsReducer,
   },
   middleware: getDefaultMiddleware =>

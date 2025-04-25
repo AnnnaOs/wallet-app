@@ -1,0 +1,20 @@
+.statisticsTab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 16px;
+}
+
+@media (min-width: 768px) {
+  .statisticsTab {
+    padding: 32px;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .statisticsTab {
+    padding: 40px 100px;
+    gap: 40px;
+  }
+}
