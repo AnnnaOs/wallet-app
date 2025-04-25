@@ -4,10 +4,11 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { refreshThunk } from '../redux/auth/operations';
 import { useIsMobile } from '../hooks/useIsMobile.js';
-import PrivateRoute from '../routes/PrivateRoute.jsx';
+// import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Balance from './Balance/Balance.jsx';
 import Loader from './Loader/Loader';
+import { setToken } from '../configAPI/api.js';
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage.jsx')
@@ -29,7 +30,7 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setAuthHeader(token);
+      setToken(token);
       dispatch(refreshThunk());
     }
   }, [dispatch]);
@@ -38,14 +39,7 @@ const App = () => {
     <div>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <DashboardPage />
-              </PrivateRoute>
-            }
-          >
+          <Route path="/" element={<DashboardPage />}>
             <Route
               path="index"
               element={
