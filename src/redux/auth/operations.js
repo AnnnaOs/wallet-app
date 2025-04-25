@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, setToken, clearToken } from '../../configAPI/api.js';
 
+// Регистрация
 export const registerUserThunk = createAsyncThunk(
   'auth/register',
   async (userData, thunkAPI) => {
@@ -10,12 +11,13 @@ export const registerUserThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
-        error.response.data.message || 'Registration failed'
+        error.response?.data?.message || 'Registration failed'
       );
     }
   }
 );
 
+// Логин
 export const loginUserThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
@@ -31,6 +33,7 @@ export const loginUserThunk = createAsyncThunk(
   }
 );
 
+// Логаут
 export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -39,6 +42,47 @@ export const logoutThunk = createAsyncThunk(
       clearToken();
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Получение текущего пользователя (refresh)
+export const refreshThunk = createAsyncThunk(
+  '/user/current',
+  async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue('No token found');
+    }
+
+    setToken(savedToken);
+
+    try {
+      const { data } = await api.get('/user/current');
+      return data;
+    } catch (error) {
+      console.error('Ошибка при загрузке данных:', error.response?.data || error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Редактирование пользователя
+export const editCurrentUserThunk = createAsyncThunk(
+  'user/current',
+  async ({ id, name, email, balance, avatarUrl }, thunkAPI) => {
+    try {
+      const updateData = {};
+      if (name !== undefined) updateData.name = name;
+      if (email !== undefined) updateData.email = email;
+      if (balance !== undefined) updateData.balance = balance;
+      if (avatarUrl !== undefined) updateData.avatarUrl = avatarUrl;
+
+      const { data } = await api.patch(`/user/${id}`, updateData);
+      return data;
+    } catch (error) {
+      console.log('Ошибка обновления данных:', error.response?.data);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
