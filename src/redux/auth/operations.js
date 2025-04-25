@@ -7,7 +7,7 @@ export const registerUserThunk = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await api.post('/auth/register', userData);
-      setToken(response.data.token);
+      setToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -23,11 +23,11 @@ export const loginUserThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await api.post('/auth/login', credentials);
-      setToken(response.data.token);
+      setToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
-        error.response?.data?.message || 'Login failed'
+        error.response.data.message || 'Login failed'
       );
     }
   }
