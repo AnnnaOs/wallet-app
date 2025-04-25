@@ -1,0 +1,103 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  background: linear-gradient(276deg, #2e1746 3.19%, #2e225f 100%);
+  box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.25),
+    inset 0 -3px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoText {
+  margin: 0;
+  font-weight: 400;
+  font-size: 12px;
+  color: #fbfbfb;
+}
+
+.logoIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.userBlock {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 8px;
+}
+
+.exitBtn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.exitText {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 16px 0;
+  }
+
+  .logoText {
+    font-size: 17px;
+  }
+
+  .logoIcon {
+    width: 25px;
+    height: 23px;
+  }
+
+  .username {
+    font-size: 16px;
+    margin-right: 12px;
+    padding-right: 12px;
+    position: relative;
+  }
+
+  .username::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .icon {
+    margin-right: 8px;
+  }
+
+  .exitText {
+    display: inline;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}

@@ -16,6 +16,19 @@ export const registerUserThunk = createAsyncThunk(
   }
 );
 
+export const loginUserThunk = createAsyncThunk(
+  'auth/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await api.post('/auth/login', credentials);
+      setToken(response.data.token); 
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message || 'Login failed');
+    }
+  }
+);
+
 export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
