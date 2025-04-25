@@ -1,94 +1,123 @@
 .container {
-    width: 1280px;
-    height: 720px;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 100vw;
+    height: 100vh;
+
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
+    padding: 0 20px;
     background-color: var(--main-background);
-    background: url('../../images/gradient-register-desk.webp') center/cover no-repeat;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
+
+    background-image: url('../../images/gradient-mobile.webp');
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
-.glow-ball {
-    position: absolute;
-    top: -200px;
-    left: -200px;
-    z-index: 0;
+@media only screen and (min-width: 768px) {
+    .container {
+        background-image: url('../../images/tablet-back-dollars-min.png'), url('../../images/gradient-tablet.webp');
+
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .container {
+        background-image: url('../../images/desktop-back-dollars.png'), url('../../images/gradient-desktop.webp');
+    }
+}
+
+
+.modal {
+    width: 280px;
+    margin: 0 auto;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logoTitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--white);
 }
 
 .form {
-    width: 533px;
-    height: 624px;
-    background-color:var(--text-button);
-    box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-    background: linear-gradient(360deg, 
-    rgba(83, 61, 186, 0.7) 0%, 
-    rgba(80, 48, 154, 0.7) 35.94%, 
-    rgba(106, 70, 165, 0.7) 61.04%,
-    rgba(133, 93, 175, 0.7) 100%);
+    position: relative;
 }
 
+.inpBox {
+    display: flex;
+    flex-direction: column;
 
-.title {
-    text-align: center;
-    color: white;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
-.input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 1rem;
+.strengthBarBox {
+    position: absolute;
+    top: 62%;
 }
 
-.input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+.strengthBar {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.registerButton {
-    width: 100%;
-    padding: 0.75rem;
-    margin-top: 0.5rem;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #f9a826 0%, #c74bff 100%);
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+.btnBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-.registerButton:hover {
-    opacity: 0.9;
-}
+@media only screen and (min-width: 768px) {
+    .modal {
+        border-radius: 8px;
+        width: 533px;
+        backdrop-filter: blur(100px);
+        box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+        background-color: var(--main-background);
+        background: var(--form-color);
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 
-.loginButton {
-    width: 100%;
-    padding: 0.75rem;
-    margin-top: 0.5rem;
-    border-radius: 12px;
-    color: var(--text-button);
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-}
+    .logoIcon {
+        width: 36px;
+        height: 36px;
+    }
 
-.loginButton:hover {
-    background: var(--white-600);
-}
+    .logoTitle {
+        font-size: 26px;
+    }
 
-.error {
-    color: #ff6b6b;
-    text-align: center;
-    margin-top: 1rem;
+    .form {
+        width: 409px;
+    }
+
+    .strengthBar {
+        width: 409px;
+    }
 }

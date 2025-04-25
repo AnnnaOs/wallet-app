@@ -1,0 +1,183 @@
+
+  .modal {
+      width: 280px;
+      margin: 0 auto;
+      padding-top: 23px;
+      padding-bottom: 23px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .logoBox {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+  }
+
+  .titel {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 19px;
+      color: var(--white);
+  }
+
+  .form {
+      position: relative;
+  }
+
+  .input {
+      display: flex;
+      flex-direction: column;
+
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 40px;
+  }
+
+  .inputBox {
+      position: relative;
+  }
+
+  .inputBox {
+      position: relative;
+    font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        color: var(--white-60);
+    
+        border: none;
+        outline: none;
+        background: transparent;
+        border-bottom: 1px solid var(--white-40);
+        width: 280px;
+        height: 35px;
+        padding-left: 50px;
+  }
+
+  .inputIcon {
+      fill: var(--white-40);
+      stroke: none;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      width: 25px;
+      height: 24px;
+      font-size: 20px;
+      color: var(--white-40);
+  }
+
+  .strengthBarBox {
+      position: absolute;
+      top: 62%;
+  }
+
+  .strengthBar {
+      width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .btnBox {
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+  .oneBtn {
+            width: 280px;
+              height: 50px;
+              border-radius: 20px;
+              box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
+              border: none;
+              cursor: pointer;
+              padding: 0;
+              text-transform: uppercase;
+              font-size: 18px;
+              font-weight: 400;
+              line-height: 27px;
+              letter-spacing: 0.1em;
+              transition: all 0.5s ease 0s;
+              background-image: linear-gradient(96.76deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%);
+              background-size: 100% 100%;
+              background-repeat: no-repeat;
+              text-align: center;
+              color: rgba(251, 251, 251, 1);
+          }
+
+  .multiColorButton {
+      color: rgba(251, 251, 251, 1);
+      background-image: none;
+      background: linear-gradient(96.76deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%);
+      transition: all 1s ease 0s;
+  }
+
+  .multiColorButton:hover,
+  .multiColorButton:focus {
+      transform: scale(1.05);
+      background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
+      background-size: 200%;
+      background-position: right center;
+  }
+
+  .multiColorButton:active {
+      transform: scale(1.08);
+      font-size: 19px;
+  }
+
+  .whiteButton {
+      color: #623f8b;
+      background: #fcfcfc;
+  }
+
+  .whiteButton:hover,
+  .whiteButton:focus {
+      transform: scale(1.05);
+      background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(98, 63, 139) 31%, rgb(255, 255, 255) 100%);
+      background-size: 200%;
+      background-position: right center;
+      transition: all 1s ease 0s;
+  }
+
+  .whiteButton:active {
+      transform: scale(1.08);
+      font-size: 19px;
+  }
+
+  @media only screen and (min-width: 768px) {
+      .modal {
+          border-radius: 8px;
+          width: 533px;
+          backdrop-filter: blur(100px);
+          box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+          background: var(--form-color);
+          padding-top: 40px;
+          padding-bottom: 40px;
+      }
+
+      .logoIcon {
+          width: 36px;
+          height: 36px;
+      }
+
+      .titel {
+          font-size: 26px;
+      }
+
+      .form {
+          width: 409px;
+      }
+
+      .strengthBar {
+          width: 409px;
+      }
+      .oneBtn{
+                  width: 300px;
+              }
+          
+  }
