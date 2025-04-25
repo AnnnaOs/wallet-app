@@ -8,7 +8,8 @@ import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Balance from './Balance/Balance.jsx';
 import Loader from './Loader/Loader';
-
+import { useMediaQuery } from 'react-responsive';
+import s from './App.module.css';
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage.jsx')
 );
@@ -33,9 +34,17 @@ const App = () => {
       dispatch(refreshThunk());
     }
   }, [dispatch]);
+  const isMobiles = useMediaQuery({ maxWidth: 767 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
+  const isDesktop = useMediaQuery({ minWidth: 1025 });
 
+  let backgroundClass = '';
+
+  if (isMobiles) backgroundClass = s.bgMobile;
+  else if (isTablet) backgroundClass = s.bgTablet;
+  else if (isDesktop) backgroundClass = s.bgDesktop;
   return (
-    <div>
+    <div className={`${s.app} ${backgroundClass}`}>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route

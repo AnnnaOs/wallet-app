@@ -1,0 +1,28 @@
+@import '../../styles/variables.css';
+
+th,
+td {
+  color: var(--white);
+  font-size: 16px;
+}
+
+th {
+  font-weight: 600;
+}
+.editBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+table {
+  cursor: default;
+}
+
+.deleteBtn {
+  cursor: pointer;
+  background: var(--button-background);
+  color: var(--white-second);
+  border: none;
+  padding: 4px 12px;
+  border-radius: 18px;
+}
