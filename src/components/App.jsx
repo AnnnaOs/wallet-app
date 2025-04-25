@@ -1,10 +1,13 @@
-import { lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { refreshThunk } from '../redux/auth/operations';
 import { useIsMobile } from '../hooks/useIsMobile.js';
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Balance from './Balance/Balance.jsx';
+import Loader from './Loader/Loader';
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage.jsx')
@@ -20,11 +23,20 @@ const RegistrationPage = lazy(() =>
 );
 
 const App = () => {
+  const dispatch = useDispatch();
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setAuthHeader(token);
+      dispatch(refreshThunk());
+    }
+  }, [dispatch]);
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route
             path="/"
