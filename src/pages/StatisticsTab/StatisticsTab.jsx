@@ -1,9 +1,3 @@
-const StatisticsTab = () => {
-  return (
-    <>
-      <h1>Statistics Page</h1>
-    </>
-  );
-};
+const StatisticsTab = () => {};
 
 export default StatisticsTab;
