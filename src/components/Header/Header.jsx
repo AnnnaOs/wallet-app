@@ -34,7 +34,7 @@ const Header = () => {
         </button>
       </div>
 
-      {isModalOpen && <LogoutModal onClose={closeModal} />}
+      {isModalOpen && <LogoutModal isOpen={isModalOpen} onClose={closeModal} />}
     </header>
   );
 };
