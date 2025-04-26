@@ -1,0 +1,29 @@
+/* ButtonAddTransactions.module.css */
+
+.closeButton {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #4CAF50; /* Ярко-зелёный цвет */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(76, 175, 80, 0.5); /* Мягкая зелёная тень */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Анимация при наведении */
+  .closeButton:hover {
+    background-color: #43A047; /* Немного темнее при ховере */
+    transform: scale(1.05); /* Лёгкое увеличение */
+  }
+  
+  /* Иконка плюса внутри кнопки */
+  .icon {
+    width: 16px;
+    height: 16px;
+    stroke: #ffffff; /* Белый цвет плюса */
+  }
+  
