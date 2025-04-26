@@ -4,9 +4,9 @@ export const apiMg = axios.create({
     baseURL: 'http://localhost:3000/api',
   });  
 
-export const fetchCurrentUserThunk = createAsyncThunk('user/fetchCurrentUser', async (_, thunkAPI) => {
+export const fetchCurrentUserThunk = createAsyncThunk('user/current', async (_, thunkAPI) => {
     try {
-        const {data} = await apiMg.get('currentUser');
+        const {data} = await apiMg.get('current');
         
         return data;
     } catch (error) {
