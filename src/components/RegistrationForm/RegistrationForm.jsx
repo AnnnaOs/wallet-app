@@ -37,18 +37,18 @@ const RegistrationForm = () => {
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
-        
-          <img src={logo} alt="Wallet Logo" width="26" height="26" className={styles.logoIcon} />
-          <h2 className={styles.title}>Money Guard</h2>
+
+        <img src={logo} alt="Wallet Logo" width="26" height="26" className={styles.logoIcon} />
+        <h2 className={styles.title}>Money Guard</h2>
         
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <div className={styles.inputBox}>
-              <div className={styles.inputContainer}>
+          <div className={styles.inputBox}>
+            <div className={styles.inputContainer}>
               <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
-                name="user"
+                name="icon-user"
               />
               <input
                 type="text"
@@ -62,12 +62,12 @@ const RegistrationForm = () => {
 
             <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-              <IconSvg
+             <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
-                name=""
-              /> 
+                name="icon-email"
+              />
               <input
                 type="email"
                 placeholder="E-mail"
@@ -80,11 +80,11 @@ const RegistrationForm = () => {
 
             <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-              <IconSvg
+               <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
-                name=""
+                name="icon-lock"
               />
               <input
                 type="password"
@@ -98,12 +98,12 @@ const RegistrationForm = () => {
 
             <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-              <IconSvg
+               <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
-                name=""
-              /> 
+                name="icon-lock"
+              />
               <input
                 type="password"
                 placeholder="Confirm password"
@@ -118,7 +118,7 @@ const RegistrationForm = () => {
           <div className={styles.strengthBarBox}>
             <PasswordStrengthBar
               className={styles.strengthBar}
-              password={watch('confirmPassword')}
+              password={watch('password')}
               barColors={['#ddd', '#ef4836', '#f6b44d', '#2b90ef', '#25c281']}
               scoreWords={['weak', 'weak', 'okay', 'good', 'strong']}
               shortScoreWord=""
@@ -127,24 +127,20 @@ const RegistrationForm = () => {
               scoreWordClassName="strength-score"
             />
           </div>
-
+          
           <div className={styles.btnBox}>
-  <button
-    type="submit"
-    disabled={hasTriedSubmit && !isValid}
-    className={`${styles.oneBtn} ${styles.multiColorButton}`}
-  >
-    Register
-  </button>
-  <Link to="/login">
-    <button
-      type="button"
-      className={`${styles.oneBtn} ${styles.whiteButton}`}
-    >
-      Log in
-    </button>
-  </Link>
-</div>
+            <button
+              type="submit"
+              disabled={hasTriedSubmit && !isValid}
+              className={`${styles.oneBtn} ${styles.multiColorButton}`}
+            >Register</button>
+            <Link to="/login">
+            <button
+              type="button"
+              className={`${styles.oneBtn} ${styles.whiteButton}`}
+            >Log in</button>
+            </Link>
+          </div>
 
           {error && <p className={styles.error}>{error}</p>}
         </form>
