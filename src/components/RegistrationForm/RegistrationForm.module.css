@@ -2,38 +2,18 @@
     position: fixed;
     top: 0;
     right: 0;
-
     width: 100vw;
     height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 0 20px;
-    background-color: var(--main-background);
-
+    background-color: #101010;
     background-image: url('../../images/gradient-mobile.webp');
-
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-
-@media only screen and (min-width: 768px) {
-    .container {
-        background-image: url('../../images/tablet-back-dollars-min.png'), url('../../images/gradient-tablet.webp');
-
-        padding: 0;
-    }
-}
-
-@media only screen and (min-width: 1280px) {
-    .container {
-        background-image: url('../../images/desktop-back-dollars.png'), url('../../images/gradient-desktop.webp');
-    }
-}
-
 
 .modal {
     width: 280px;
@@ -45,33 +25,74 @@
     align-items: center;
 }
 
-.logoBox {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
+.logo {
+    margin: 0 auto;
+    display: block;
 }
 
-.logoTitle {
+.title {
+    text-align: center;
+    color: #fbfbfb;
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
     font-size: 19px;
-    color: var(--white);
+    font-weight: 400;
+    margin: 0px 0px 52px 0px;
 }
 
 .form {
-    position: relative;
-}
-
-.inpBox {
     display: flex;
     flex-direction: column;
-
     gap: 40px;
-    align-items: center;
-    margin-bottom: 40px;
 }
+
+.inputContainer {
+    position: relative;
+ }
+
+ .inputContainer::after {
+     content: '';
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     height: 1px;
+     background: rgba(255, 255, 255, 0.4);
+     transition: all 0.3s ease;
+ }
+
+ .inputIcon {
+    position: absolute;
+        left: 10.5px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 16px;
+        z-index: 1;
+        border: none;
+        background: transparent;
+        background: rgba(255, 255, 255, 0.6);
+            color: #fff;
+ }
+
+ .input {
+    width: 100%;
+        padding: 9px 10px 10px 54px;
+        border: none;
+        background: rgba(255, 255, 255, 0);
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+           
+ }
+
+ .input::placeholder {
+     color: rgba(255, 255, 255, 0.6);
+ }
+
+ .input:focus {
+     outline: none;
+ }
 
 .strengthBarBox {
     position: absolute;
@@ -92,26 +113,92 @@
     gap: 20px;
 }
 
+.oneBtn {
+    width: 280px;
+    height: 50px;
+    border-radius: 20px;
+    box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0.1em;
+    transition: all 0.5s ease 0s;
+    background-image: linear-gradient(96.76deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: rgba(251, 251, 251, 1);
+}
+
+.multiColorButton {
+    color: rgba(251, 251, 251, 1);
+    background-image: none;
+    background: linear-gradient(96.76deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%);
+    transition: all 1s ease 0s;
+}
+
+.multiColorButton:hover,
+.multiColorButton:focus {
+    transform: scale(1.05);
+    background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
+    background-size: 200%;
+    background-position: right center;
+}
+
+.multiColorButton:active {
+    transform: scale(1.08);
+    font-size: 19px;
+}
+
+.whiteButton {
+    color: #623f8b;
+    background: #fcfcfc;
+}
+
+.whiteButton:hover,
+.whiteButton:focus {
+    transform: scale(1.05);
+    background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(98, 63, 139) 31%, rgb(255, 255, 255) 100%);
+    background-size: 200%;
+    background-position: right center;
+    transition: all 1s ease 0s;
+}
+
+.whiteButton:active {
+    transform: scale(1.08);
+    font-size: 19px;
+}
+
 @media only screen and (min-width: 768px) {
+    
+    .container {
+            background-image: url('../../images/tablet-back-dollars-min.png'), url('../../images/gradient-tablet.webp');
+    
+            padding: 0;
+        }
+
     .modal {
         border-radius: 8px;
         width: 533px;
         backdrop-filter: blur(100px);
         box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-        background-color: var(--main-background);
         background: var(--form-color);
         padding-top: 40px;
         padding-bottom: 40px;
     }
 
-    .logoIcon {
-        width: 36px;
-        height: 36px;
-    }
-
-    .logoTitle {
-        font-size: 26px;
-    }
+         .logo {
+             width: 36px;
+             height: 36px;
+         }
+    
+         .title {
+             font-size: 26px;
+         }
 
     .form {
         width: 409px;
@@ -119,5 +206,17 @@
 
     .strengthBar {
         width: 409px;
+    }
+
+    .oneBtn {
+        width: 300px;
+    }
+
+}
+
+
+@media only screen and (min-width: 1280px) {
+    .container {
+        background-image: url('../../images/desktop-back-dollars.png'), url('../../images/gradient-desktop.webp');
     }
 }
