@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, setToken, clearToken } from '../../configAPI/api.js';
 
-// Регистрация
 export const registerUserThunk = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -17,7 +16,6 @@ export const registerUserThunk = createAsyncThunk(
   }
 );
 
-// Логин
 export const loginUserThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
@@ -31,7 +29,6 @@ export const loginUserThunk = createAsyncThunk(
   }
 );
 
-// Логаут
 export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -44,7 +41,6 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-// Получение текущего пользователя (refresh)
 export const refreshThunk = createAsyncThunk(
   '/user/current',
   async (_, thunkAPI) => {
@@ -59,13 +55,12 @@ export const refreshThunk = createAsyncThunk(
       const { data } = await api.get('/user/current');
       return data;
     } catch (error) {
-      console.error('Ошибка при загрузке данных:', error.response?.data || error.message);
+      console.error(error.response?.data || error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// Редактирование пользователя
 export const editCurrentUserThunk = createAsyncThunk(
   'user/current',
   async ({ id, name, email, balance, avatarUrl }, thunkAPI) => {
@@ -79,7 +74,7 @@ export const editCurrentUserThunk = createAsyncThunk(
       const { data } = await api.patch(`/user/${id}`, updateData);
       return data;
     } catch (error) {
-      console.log('Ошибка обновления данных:', error.response?.data);
+      console.log(error.response?.data);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -1,17 +1,16 @@
-import { FidgetSpinner } from "react-loader-spinner";
+import { RotatingTriangles } from 'react-loader-spinner';
 
 function Loader() {
-    return (
-        <FidgetSpinner
-    visible={true}
-    height="80"
-    width="80"
-    ariaLabel="fidget-spinner-loading"
-    wrapperStyle={{}}
-    wrapperClass="fidget-spinner-wrapper"
+  return (
+    <RotatingTriangles
+      visible={true}
+      height="80"
+      width="80"
+      color="['#1B5299', '#EF8354', '#DB5461']"
+      ariaLabel="rotating-triangles-loading"
+      wrapperStyle={{}}
+      wrapperClass="fidget-spinner-wrapper"
     />
-    )
+  );
 }
 export default Loader;
-
-  
