@@ -1,7 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const apiMg = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'https://wallet-app-dusky.vercel.app',
+  });
+  apiMg.interceptors.request.use(config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   });  
 
 export const fetchCurrentUserThunk = createAsyncThunk('user/current', async (_, thunkAPI) => {
@@ -16,7 +23,7 @@ export const fetchCurrentUserThunk = createAsyncThunk('user/current', async (_, 
 });
 
 export const editCurrentUserThunk = createAsyncThunk(
-    'user/editCurrentUser',
+    'user/current',
     async ({ id, name, email, balance, avatarUrl }, thunkAPI) => {
       try {
         const updateData = {};

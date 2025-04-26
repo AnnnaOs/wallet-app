@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logOutThunk } from 'redux/auth/operations';
+import { logoutThunk } from '../../redux/auth/operations.js';
 import styles from './LogoutModal.module.css';
 
 const LogoutModal = () => {
@@ -14,7 +14,7 @@ const LogoutModal = () => {
 
   const handleLogout = async () => {
     try {
-      await dispatch(logOutThunk()).unwrap();
+      await dispatch(logoutThunk()).unwrap();
       localStorage.clear();
       navigate('/login');
     } catch (error) {

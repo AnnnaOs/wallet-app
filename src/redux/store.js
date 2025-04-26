@@ -11,7 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
-import { transactionsReducer } from './transactions/slice';
+import transactionsReducer from './transactions/slice';
+
 // import { statisticsReducer } from './statistics/slice';
 // import { modalsReducer } from './modals/slice';
 
@@ -20,18 +21,20 @@ const authPersistConfig = {
   storage,
   whitelist: ['token'],
 };
-
-// Конфигурация для сохранения состояния транзакций
 const transactionsPersistConfig = {
   key: 'transactions',
   storage,
-  whitelist: ['transactions'], // Сохраняем состояние транзакций
 };
 
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    transactions: persistReducer(transactionsPersistConfig, transactionsReducer),
+    transactions: persistReducer(
+      transactionsPersistConfig,
+      transactionsReducer
+    ),
+
+    // transactions: transactionsReducer,
     // statistics: statisticsReducer,
     // modals: modalsReducer,
   },
