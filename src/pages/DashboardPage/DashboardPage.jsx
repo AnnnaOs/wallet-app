@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import TransactionsList from '../../components/TransactionsList/TransactionsList';
+import Header from '../../components/Header/Header.jsx';
 import HomeTab from '../HomeTab/HomeTab';
 
 const DashboardPage = () => {
   return (
     <>
+      <Header />
       <Link to="/home">
         🏠 <HomeTab />
       </Link>
-      {/* <TransactionsList /> */}
     </>
   );
 };
