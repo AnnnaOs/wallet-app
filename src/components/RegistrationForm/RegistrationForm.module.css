@@ -1,3 +1,8 @@
+@import '../../styles/variables.css';
+@import '../../styles/fonts.css';
+@import '../../styles/reset.css';
+
+
 .container {
     position: fixed;
     top: 0;
@@ -8,7 +13,7 @@
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    background-color: #101010;
+    background-color: var(--main-background);
     background-image: url('../../images/gradient-mobile.webp');
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,7 +37,7 @@
 
 .title {
     text-align: center;
-    color: #fbfbfb;
+    color: var(--white);
     font-family: 'Poppins', sans-serif;
     font-size: 19px;
     font-weight: 400;
@@ -56,7 +61,7 @@
      left: 0;
      width: 100%;
      height: 1px;
-     background: rgba(255, 255, 255, 0.4);
+     background: var(--white-400);
      transition: all 0.3s ease;
  }
 
@@ -70,16 +75,15 @@
         z-index: 1;
         border: none;
         background: transparent;
-        background: rgba(255, 255, 255, 0.6);
-            color: #fff;
- }
+                fill: var(--white-600);
+            }
 
  .input {
     width: 100%;
         padding: 9px 10px 10px 54px;
         border: none;
         background: rgba(255, 255, 255, 0);
-        color: #fff;
+        color: var(--white);
         font-family: "Poppins", sans-serif;
             font-weight: 400;
             font-size: 18px;
@@ -87,7 +91,7 @@
  }
 
  .input::placeholder {
-     color: rgba(255, 255, 255, 0.6);
+     color: var(--white-600);
  }
 
  .input:focus {
@@ -127,7 +131,7 @@
     line-height: 27px;
     letter-spacing: 0.1em;
     transition: all 0.5s ease 0s;
-    background-image: linear-gradient(96.76deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%);
+    background-image: var(--button-background);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     text-align: center;
@@ -137,7 +141,7 @@
 .multiColorButton {
     color: rgba(251, 251, 251, 1);
     background-image: none;
-    background: linear-gradient(96.76deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%);
+    background: var(--button-background);
     transition: all 1s ease 0s;
 }
 
@@ -155,8 +159,8 @@
 }
 
 .whiteButton {
-    color: #623f8b;
-    background: #fcfcfc;
+    color: var(--text-button);
+    background: var(--white);
 }
 
 .whiteButton:hover,

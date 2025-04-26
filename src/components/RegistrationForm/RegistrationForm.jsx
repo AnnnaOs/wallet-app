@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUserThunk } from '../../redux/auth/operations';
 import { selectIsAuthError } from '../../redux/auth/selectors';
-import PasswordStrengthBar from 'react-password-strength-bar';
-import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa'; 
+import PasswordStrengthBar from 'react-password-strength-bar'; 
 import logo from '../../images/logo-mob.svg';
+import IconSvg from '../../components/IconSvg/IconSvg';
 import styles from './RegistrationForm.module.css';
 
 
@@ -44,7 +44,12 @@ const RegistrationForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <div className={styles.inputBox}>
               <div className={styles.inputContainer}>
-                <FaUser className={styles.inputIcon} />
+              <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="user"
+              />
               <input
                 type="text"
                 placeholder="Name"
@@ -56,8 +61,13 @@ const RegistrationForm = () => {
             </div>
 
             <div className={styles.inputBox}>
-              <div className={styles.inputContainer}>
-                <FaEnvelope className={styles.inputIcon}/> 
+            <div className={styles.inputContainer}>
+              <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name=""
+              /> 
               <input
                 type="email"
                 placeholder="E-mail"
@@ -69,8 +79,13 @@ const RegistrationForm = () => {
             </div>
 
             <div className={styles.inputBox}>
-              <div className={styles.inputContainer}>
-                <FaLock className={styles.inputIcon} /> 
+            <div className={styles.inputContainer}>
+              <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name=""
+              />
               <input
                 type="password"
                 placeholder="Password"
@@ -82,8 +97,13 @@ const RegistrationForm = () => {
             </div>
 
             <div className={styles.inputBox}>
-              <div className={styles.inputContainer}>
-                <FaLock className={styles.inputIcon}/> 
+            <div className={styles.inputContainer}>
+              <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name=""
+              /> 
               <input
                 type="password"
                 placeholder="Confirm password"
