@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { refreshThunk } from '../redux/auth/operations';
-import useResponsive from '../hooks/useResponsive.js';
+import { useResponsive } from '../hooks/useResponsive.js';
 // import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Balance from './Balance/Balance.jsx';
 import Loader from './Loader/Loader';
 import { setToken } from '../configAPI/api.js';
-import s from './App.module.css';
+
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage.jsx')
 );
@@ -26,8 +26,6 @@ const RegistrationPage = lazy(() =>
 const App = () => {
   const dispatch = useDispatch();
   const { isMobile } = useResponsive();
-  const { isTablet } = useResponsive();
-  const { isDesktop } = useResponsive();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -36,14 +34,9 @@ const App = () => {
       dispatch(refreshThunk());
     }
   }, [dispatch]);
-  let backgroundClass = '';
-
-  if (isMobile) backgroundClass = s.bgMobile;
-  else if (isTablet) backgroundClass = s.bgTablet;
-  else if (isDesktop) backgroundClass = s.bgDesktop;
 
   return (
-    <div className={`${s.app} ${backgroundClass}`}>
+    <div>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<DashboardPage />}>
