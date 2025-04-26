@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logoutThunk } from '../../redux/auth/operations';
+import { logOutThunk } from 'redux/auth/operations';
 import styles from './LogoutModal.module.css';
 
 const LogoutModal = ({ isOpen, onClose }) => {

@@ -1,0 +1,44 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+
+  color: var(--white);
+  background-color: var(--main-background);
+
+  background-image: url('../images/noimg-gradient-desktop.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  @media only screen and (max-width: 767px) {
+    body {
+      background-image: url('../images/noimg-gradient-mobile.webp');
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    body {
+      background-image: url('../images/noimg-gradient-tablet.webp');
+    }
+  }
+
+  @media only screen and (min-width: 1280px) {
+    body {
+      background-image: url('../images/noimg-gradient-desktop.webp');
+    }
+  }
+
+  main {
+    flex-grow: 1;
+  }
+}

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { loginSchema } from '../../validationSchemas/validationSchemas';
 import styles from './LoginForm.module.css';
 import logo from '../../images/logo-mob.svg';
 import emailIcon from '../../images/email-icon.svg';
-import passwordIcon from '../../images/password-icon.svg'
+import passwordIcon from '../../images/password-icon.svg';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -43,10 +42,10 @@ const LoginForm = () => {
         <form onSubmit={formik.handleSubmit} className={styles.form} noValidate>
           <div className={styles.inputGroup}>
             <div className={styles.inputContainer}>
-              <img 
-                src={emailIcon} 
-                alt="Email icon" 
-                className={styles.inputIcon} 
+              <img
+                src={emailIcon}
+                alt="Email icon"
+                className={styles.inputIcon}
               />
               <input
                 type="email"
