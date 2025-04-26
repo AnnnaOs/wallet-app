@@ -6,8 +6,7 @@ import { selectIsAuthError, selectIsLoading } from '../../redux/auth/selectors';
 import { loginSchema } from '../../validationSchemas/validationSchemas';
 import styles from './LoginForm.module.css';
 import logo from '../../images/logo-mob.svg';
-import emailIcon from '../../images/email-icon.svg';
-import passwordIcon from '../../images/password-icon.svg';
+import IconSvg from '../IconSvg/IconSvg';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -42,10 +41,11 @@ const LoginForm = () => {
         <form onSubmit={formik.handleSubmit} className={styles.form} noValidate>
           <div className={styles.inputGroup}>
             <div className={styles.inputContainer}>
-              <img
-                src={emailIcon}
-                alt="Email icon"
+              <IconSvg
                 className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="icon-email"
               />
               <input
                 type="email"
@@ -65,10 +65,11 @@ const LoginForm = () => {
 
           <div className={styles.inputGroup}>
             <div className={styles.inputContainer}>
-              <img
-                src={passwordIcon}
-                alt="Password icon"
+              <IconSvg
                 className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="icon-lock"
               />
               <input
                 type="password"

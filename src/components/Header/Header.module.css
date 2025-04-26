@@ -50,8 +50,7 @@
 }
 
 .icon {
-  width: 18px;
-  height: 18px;
+  fill: var(--white-600);
 }
 
 .exitText {

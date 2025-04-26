@@ -7,7 +7,7 @@ import {
 } from '../../redux/transactions/operations';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { formatDate } from '../../utils/formatDate';
-
+import s from './TransactionsItem.module.css';
 const TransactionsItem = () => {
   const dispatch = useDispatch();
   const transactions = useSelector(selectAllTransactions);
@@ -17,7 +17,7 @@ const TransactionsItem = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="">
       <table>
         <thead>
           <tr>
@@ -33,18 +33,24 @@ const TransactionsItem = () => {
           {transactions.map(t => (
             <tr key={t._id}>
               <td>{formatDate(t.date)}</td>
-              <td>{t.type}</td>
+              <td>{t.type === 'Income' ? '+' : '-'}</td>
               <td>{t.category}</td>
               <td>{t.comment}</td>
               <td>{t.sum}</td>
 
               <td>
-                <button onClick={() => dispatch(updateTransaction(t._id))}>
+                <button
+                  onClick={() => dispatch(updateTransaction(t._id))}
+                  className={s.editBtn}
+                >
                   ✏️
                 </button>
               </td>
               <td>
-                <button onClick={() => dispatch(deleteTransaction(t._id))}>
+                <button
+                  onClick={() => dispatch(deleteTransaction(t._id))}
+                  className={s.deleteBtn}
+                >
                   Delete
                 </button>
               </td>
