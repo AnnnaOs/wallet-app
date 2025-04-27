@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUserThunk } from '../../redux/auth/operations';
 import { selectIsAuthError } from '../../redux/auth/selectors';
-import PasswordStrengthBar from 'react-password-strength-bar'; 
+import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import logo from '../../images/logo-mob.svg';
 import IconSvg from '../../components/IconSvg/IconSvg';
+import { useTogglePassword } from '../../hooks/useTogglePassword';
 import styles from './RegistrationForm.module.css';
 
 
@@ -21,6 +22,9 @@ const RegistrationForm = () => {
     watch,
     formState: { errors, isValid },
   } = useForm({ mode: 'onChange' });
+
+  const { visible: showPassword, toggle: togglePassword } = useTogglePassword();
+  const { visible: showConfirmPassword, toggle: toggleConfirmPassword } = useTogglePassword();
 
   const onSubmit = data => {
     setHasTriedSubmit(true);
@@ -80,54 +84,60 @@ const RegistrationForm = () => {
 
             <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-               <IconSvg
+              <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
                 name="icon-lock"
               />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 {...register('password', { required: true })}
                 className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
               />
-              </div>
-              {errors.password && <p className={styles.errorText}>This field is required</p>}
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={togglePassword}>
+                <IconSvg
+                  width={18}
+                  height={18}
+                  name={showPassword ? 'icon-eye' : 'icon-eye-blocked'}
+                />
+              </button>
             </div>
+            {errors.password && <p className={styles.errorText}>This field is required</p>}
+          </div>
 
             <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-               <IconSvg
+              <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
-                name="icon-lock"
-              />
+                name="icon-lock" />
               <input
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 placeholder="Confirm password"
                 {...register('confirmPassword', { required: true })}
                 className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
               />
-              </div>
-              {errors.confirmPassword && <p className={styles.errorText}>This field is required</p>}
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={toggleConfirmPassword}>
+                <IconSvg
+                  width={18}
+                  height={18}
+                  name={showConfirmPassword ? 'icon-eye' : 'icon-eye-blocked'} />
+              </button>
             </div>
-          
-
-          <div className={styles.strengthBarBox}>
-            <PasswordStrengthBar
-              className={styles.strengthBar}
-              password={watch('password')}
-              barColors={['#ddd', '#ef4836', '#f6b44d', '#2b90ef', '#25c281']}
-              scoreWords={['weak', 'weak', 'okay', 'good', 'strong']}
-              shortScoreWord=""
-              minLength={6}
-              scoreWordStyle={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.6)', margin: '0' }}
-              scoreWordClassName="strength-score"
-            />
+            {errors.confirmPassword && <p className={styles.errorText}>This field is required</p>}
           </div>
-          
+
+          <ProgressBar watch={watch} />
+
           <div className={styles.btnBox}>
             <button
               type="submit"
