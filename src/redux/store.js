@@ -10,15 +10,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { authReducer } from './auth/slice';
-
-// import { transactionsReducer } from './transactions/slice';
-import { statisticsReducer } from './statistics/slice';
-
 import transactionsReducer from './transactions/slice';
+import { statisticsReducer } from './statistics/slice';
 import { financeReducer } from './finance/slice';
-
-// import { modalsReducer } from './modals/slice';
+import { modalsReducer } from './modals/slice';
+import { authReducer } from './auth/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -38,10 +34,8 @@ export const store = configureStore({
       transactionsReducer
     ),
     finance: financeReducer,
-
-    // transactions: transactionsReducer,
     statistics: statisticsReducer,
-    // modals: modalsReducer,
+    modals: modalsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

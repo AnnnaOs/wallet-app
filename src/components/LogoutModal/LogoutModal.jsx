@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutThunk } from '../../redux/auth/operations.js';
 import styles from './LogoutModal.module.css';
+
 const LogoutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
