@@ -1,6 +1,6 @@
-import { useState } from "react";
-import AddTransactionForm from "../AddTransactionForm/AddTransactionForm.jsx"; // Путь к модалке
-import IconSvg from "../IconSvg/IconSvg.jsx"; // Иконка
+import { useState } from 'react';
+import AddTransactionForm from '../AddTransactionForm/AddTransactionForm.jsx'; // Путь к модалке
+import IconSvg from '../IconSvg/IconSvg.jsx'; // Иконка
 
 import style from './ButtonAddTransactions.module.css'; // Стили кнопки
 
@@ -12,18 +12,16 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen} className={style.closeButton}>
+      <button type="button" onClick={handleOpen} className={style.addBtn}>
         <IconSvg
-          className={style.icon}
-          width={44}
-          height={44}
+          className={style.plusIcon}
+          width={20}
+          height={20}
           name="icon-plus"
         />
       </button>
 
-      {isModalOpen && (
-        <AddTransactionForm onClose={handleClose} />
-      )}
+      {isModalOpen && <AddTransactionForm onClose={handleClose} />}
     </>
   );
 };
