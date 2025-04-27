@@ -1,21 +1,12 @@
-@import '../../styles/variables.css';
-
-th,
-td {
-  color: var(--white);
-  font-size: 16px;
-}
-
-th {
-  font-weight: 600;
-}
 .editBtn {
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-table {
-  cursor: default;
+  color: var(--white-600);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .deleteBtn {
@@ -23,6 +14,119 @@ table {
   background: var(--button-background);
   color: var(--white-second);
   border: none;
-  padding: 4px 12px;
+  padding: 6px 12px;
   border-radius: 18px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+  font-size: 14px;
+}
+.sumOrange {
+  color: var(--yellow);
+}
+
+.sumRed {
+  color: var(--dashboard-text);
+}
+.iconEdit {
+  fill: transparent;
+  stroke: var(--white-600);
+}
+
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobileItem {
+  background: var(--form-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 280px;
+  width: 100%;
+  margin: 0 auto;
+}
+.mobileItem li,
+tbody tr td {
+  border-bottom: 1px solid var(--white-200);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+.mobileButtons {
+  margin-top: 8px;
+}
+
+.mobileItemWrap,
+.mobileButtons {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.mobileItem li,
+.mobileItem span {
+  font-size: 16px;
+  letter-spacing: 0%;
+}
+
+.spanTitleDetails,
+th {
+  font-size: 16px;
+  font-weight: 600;
+}
+.spanRight {
+  max-width: 130px;
+  margin-left: auto;
+}
+.borderOrange {
+  border-left: 5px solid var(--yellow);
+}
+.borderRed {
+  border-left: 5px solid var(--dashboard-text);
+}
+/* tablet and desktope */
+.table {
+  cursor: default;
+  border-collapse: separate;
+  margin: 0 auto;
+  border-spacing: 0;
+}
+td {
+  font-size: 14px;
+}
+
+th,
+td {
+  padding: 12px 18px;
+}
+
+thead {
+  background: var(--form-color);
+  border-collapse: separate;
+  overflow: hidden;
+  border-spacing: 0;
+}
+
+thead th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  overflow: hidden;
+}
+
+thead th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
+@media (min-width: 1280px) {
+  th,
+  td {
+    padding: 12px 30px;
+  }
+  .table {
+    margin: 0;
+  }
 }
