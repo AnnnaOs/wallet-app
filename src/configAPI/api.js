@@ -21,4 +21,3 @@ export const initializeToken = () => {
     setToken(token);
   }
 };
-

@@ -1,0 +1,54 @@
+.balanceWrapper {
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  background-color: rgba(82, 59, 126, 0.6);
+  backdrop-filter: blur(100px);
+  border-radius: 8px;
+  width: 280px;
+  height: 80px;
+  margin: 0 auto;
+  padding: 8px 0 12px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.textBalance {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--white-400);
+}
+
+.currency {
+  font-size: 30px;
+  color: var(--white);
+}
+
+.totalBalance {
+  font-size: 30px;
+}
+
+.currencyBalance {
+  margin-right: 6px;
+  font-weight: 400;
+}
+
+.amount {
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .balanceWrapper {
+    margin: 0;
+    align-items: flex-start;
+    margin-left: 32px;
+    padding-left: 40px;
+    width: 336px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .balanceWrapper {
+    margin: 0;
+    padding-left: 56px;
+    width: 480px;
+  }
+}

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './Header.module.css';
 import LogoutModal from '../LogoutModal/LogoutModal';
 import logo from '../../images/logo.svg';
-import btnExit from '../../images/btnExit.svg';
+import IconSvg from '../../components/IconSvg/IconSvg.jsx';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,12 +29,17 @@ const Header = () => {
       <div className={styles.userBlock}>
         <span className={styles.username}>{username || 'Name'}</span>
         <button onClick={openModal} className={styles.exitBtn}>
-          <img src={btnExit} alt="Logout Icon" className={styles.icon} />
+          <IconSvg
+            className={styles.icon}
+            width={18}
+            height={18}
+            name="icon-exit"
+          />
           <span className={styles.exitText}>Exit</span>
         </button>
       </div>
 
-      {isModalOpen && <LogoutModal onClose={closeModal} />}
+      {isModalOpen && <LogoutModal isOpen={isModalOpen} onClose={closeModal} />}
     </header>
   );
 };
