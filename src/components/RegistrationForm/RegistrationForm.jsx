@@ -103,7 +103,7 @@ const RegistrationForm = () => {
                 <IconSvg
                   width={18}
                   height={18}
-                  name={showPassword ? 'icon-eye-off' : 'icon-eye'}
+                  name={showPassword ? 'icon-eye-blocked' : 'icon-eye'}
                 />
               </button>
             </div>
@@ -130,7 +130,7 @@ const RegistrationForm = () => {
                 <IconSvg
                   width={18}
                   height={18}
-                  name={showConfirmPassword ? 'icon-eye-off' : 'icon-eye'} />
+                  name={showConfirmPassword ? 'icon-eye-blocked' : 'icon-eye'} />
               </button>
             </div>
             {errors.confirmPassword && <p className={styles.errorText}>This field is required</p>}
