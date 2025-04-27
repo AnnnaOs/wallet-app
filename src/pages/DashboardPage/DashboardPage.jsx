@@ -16,7 +16,7 @@ const DashboardPage = () => {
       <Navigation />
       <Balance />
       <Link to="/home">
-        🏠 <HomeTab />
+        <HomeTab />
       </Link>
       {(isTablet || isDesktop) && <CurrencyTab />}
     </>
