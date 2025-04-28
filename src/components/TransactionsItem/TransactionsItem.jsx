@@ -1,29 +1,44 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteTransaction,
   fetchTransactions,
-  updateTransaction,
 } from '../../redux/transactions/operations';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { formatDate } from '../../utils/formatDate';
 import s from './TransactionsItem.module.css';
 import IconSvg from '../IconSvg/IconSvg';
 import useResponsive from '../../hooks/useResponsive';
+import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction.jsx';
 const TransactionsItem = () => {
   const dispatch = useDispatch();
   const transactions = useSelector(selectAllTransactions);
   const { isMobile } = useResponsive();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [dispatch]);
+
   const formatSum = sum => {
     return new Intl.NumberFormat('uk-UA', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(sum);
   };
+
+  const openEditModal = transaction => {
+    setSelectedTransaction(transaction);
+    setIsModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsModalOpen(false);
+    setSelectedTransaction(null);
+  };
+
   return (
     <div className={s.homeTabWrap}>
       {isMobile ? (
@@ -74,7 +89,7 @@ const TransactionsItem = () => {
                   Delete
                 </button>
                 <button
-                  onClick={() => dispatch(updateTransaction(t._id))}
+                  onClick={() => openEditModal(t)}
                   className={`${s.editBtn} ${s.spanRight}`}
                 >
                   <IconSvg
@@ -124,7 +139,7 @@ const TransactionsItem = () => {
                   }}
                 >
                   <button
-                    onClick={() => dispatch(updateTransaction(t._id))}
+                    onClick={() => openEditModal(t)}
                     className={s.editBtn}
                     style={{ marginLeft: 'auto' }}
                   >
@@ -196,6 +211,14 @@ const TransactionsItem = () => {
           ))}
         </tbody>
       </table> */}
+
+      {selectedTransaction && (
+        <ModalEditTransaction
+          isOpen={isModalOpen}
+          onClose={closeEditModal}
+          transaction={selectedTransaction}
+        />
+      )}
     </div>
   );
 };

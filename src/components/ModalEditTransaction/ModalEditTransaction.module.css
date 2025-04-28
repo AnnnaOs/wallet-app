@@ -1,0 +1,81 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 13, 91, 0.23);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(7px);
+}
+
+.modal {
+  background: linear-gradient(117.84deg, #1e0e5e 2.84%, #471ca9 67.28%);
+  border-radius: 8px;
+  outline: none;
+  padding: 32px 20px;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(100px);
+
+  /* Адаптив */
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.modalTitle {
+  font-weight: 400;
+  font-size: 24px;
+  color: #fbfbfb;
+  margin: 0;
+}
+
+.closeButton {
+  background: transparent;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: 0;
+  stroke: #fbfbfb;
+  transition: transform 0.3s ease, fill 0.3s ease;
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 40px 73px;
+    width: 540px;
+  }
+  .modalHeader {
+    margin-bottom: 40px;
+  }
+
+  .modalTitle {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .modal {
+    width: 600px;
+  }
+}
