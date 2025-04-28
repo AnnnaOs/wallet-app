@@ -36,36 +36,38 @@ const TransactionsItem = () => {
                 t.type === 'Income' ? s.borderOrange : s.borderRed
               }`}
             >
-              <li className={s.mobileItemWrap}>
-                <span className={s.spanTitleDetails}>Date</span>{' '}
-                <span className={s.spanRight}>{formatDate(t.date)}</span>
-              </li>
-              <li className={s.mobileItemWrap}>
-                <span className={s.spanTitleDetails}>Type</span>{' '}
-                <span className={s.spanRight}>
-                  {t.type === 'Income' ? '+' : '-'}
-                </span>
-              </li>
-              <li className={s.mobileItemWrap}>
-                <span className={s.spanTitleDetails}>Category</span>{' '}
-                <span className={s.spanRight}>{t.category}</span>
-              </li>
-              <li className={s.mobileItemWrap}>
-                <span className={s.spanTitleDetails}>Comment</span>
-                <span className={s.spanRight} style={{ textAlign: 'right' }}>
-                  {t.comment}
-                </span>
-              </li>
-              <li className={s.mobileItemWrap}>
-                <span className={s.spanTitleDetails}>Sum</span>
-                <span
-                  className={`${t.type === 'Income' ? s.sumOrange : s.sumRed} ${
-                    s.spanRight
-                  }`}
-                >
-                  {formatSum(t.sum)}
-                </span>
-              </li>
+              <ul>
+                <li className={s.mobileItemWrap}>
+                  <span className={s.spanTitleDetails}>Date</span>{' '}
+                  <span className={s.spanRight}>{formatDate(t.date)}</span>
+                </li>
+                <li className={s.mobileItemWrap}>
+                  <span className={s.spanTitleDetails}>Type</span>{' '}
+                  <span className={s.spanRight}>
+                    {t.type === 'Income' ? '+' : '-'}
+                  </span>
+                </li>
+                <li className={s.mobileItemWrap}>
+                  <span className={s.spanTitleDetails}>Category</span>{' '}
+                  <span className={s.spanRight}>{t.category}</span>
+                </li>
+                <li className={s.mobileItemWrap}>
+                  <span className={s.spanTitleDetails}>Comment</span>
+                  <span className={s.spanRight} style={{ textAlign: 'right' }}>
+                    {t.comment}
+                  </span>
+                </li>
+                <li className={s.mobileItemWrap}>
+                  <span className={s.spanTitleDetails}>Sum</span>
+                  <span
+                    className={`${
+                      t.type === 'Income' ? s.sumOrange : s.sumRed
+                    } ${s.spanRight}`}
+                  >
+                    {formatSum(t.sum)}
+                  </span>
+                </li>
+              </ul>
               <div className={s.mobileButtons}>
                 <button
                   onClick={() => dispatch(deleteTransaction(t._id))}
