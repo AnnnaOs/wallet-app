@@ -128,7 +128,9 @@
 
 .inputError {
     border: 1px solid #ff4d4d;
-    background-color: var(--white-600);
+    background-color: var(--main-background);
+    background-image: url('../../images/gradient-mobile.webp');
+    
 }
 
 .errorText {
