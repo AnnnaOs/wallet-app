@@ -1,15 +1,13 @@
-import style from './AddTransactionForm.module.css';
+import React, { useState, useEffect, useId } from 'react';
 import { useDispatch } from 'react-redux';
-import { createTransaction } from '../../redux/transactions/operations.js'; // Подключаем операцию
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useState, useEffect, useId } from "react";
-import * as Yup from "yup";
+import { createTransaction } from '../../redux/transactions/operations.js';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { api } from '../../configAPI/api';
+import style from './AddTransactionForm.module.css';
 import IconSvg from '../IconSvg/IconSvg.jsx';
-import { fetchCategories } from '../../redux/modals/operations.js';
-
 
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Виберіть тип транзакції'),
@@ -38,15 +36,38 @@ const AddTransactionForm = ({ onClose }) => {
   useEffect(() => {
     async function loadCategories() {
       try {
-        const data = await fetchCategories();
-        setAllCategories(data);
+        const response = await api.get('/categories');
+        console.log('API Response:', response); // Добавим логирование
+        const { incomes, expenses } = response.data;
+    
+        if (!Array.isArray(incomes) || !Array.isArray(expenses)) {
+          throw new Error('Invalid categories structure'); // Если данные не массивы, выбрасываем ошибку
+        }
+    
+        const formattedCategories = [
+          ...incomes.map(cat => ({
+            id: cat,
+            value: cat.toLowerCase(),
+            label: cat,
+            type: 'income'
+          })),
+          ...expenses.map(cat => ({
+            id: cat,
+            value: cat.toLowerCase(),
+            label: cat,
+            type: 'expense'
+          }))
+        ];
+    
+        setAllCategories(formattedCategories);
       } catch (error) {
         console.error('Failed to fetch categories:', error);
+        // Показываем ошибку пользователю, чтобы он знал, что произошло
       }
     }
+    
     loadCategories();
   }, []);
-  
 
   const initialValues = {
     transactionType: 'income',
@@ -56,7 +77,7 @@ const AddTransactionForm = ({ onClose }) => {
     transactionname: '',
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     const newTransaction = {
       type: values.transactionType,
       category: values.category,
@@ -64,13 +85,24 @@ const AddTransactionForm = ({ onClose }) => {
       date: values.date,
       transaction: values.transactionname,
     };
-    dispatch(createTransaction(newTransaction)); // Диспатчим добавление транзакции
-    actions.resetForm();
-    onClose();
+    
+    try {
+      // Отправляем данные на сервер
+      await dispatch(createTransaction(newTransaction)).unwrap();
+      actions.resetForm();
+
+      // Закрытие модалки после успешного добавления транзакции
+      setTimeout(() => {
+        onClose();
+      }, 500);  // Задержка для подтверждения успеха
+    } catch (error) {
+      console.error('Ошибка при добавлении транзакции:', error);
+      // Показываем сообщение о ошибке пользователю (например, через toast)
+    }
   };
 
   return (
-    <div className={style.overlay}> {/* Оверлей */}
+    <div className={style.overlay}>
       <div className={style.modal}>
         <Formik
           validationSchema={FeedbackSchema}
@@ -80,13 +112,10 @@ const AddTransactionForm = ({ onClose }) => {
           {({ values, resetForm, setFieldValue }) => (
             <Form className={style.container}>
 
-                <button type="button" onClick={() => { resetForm(); onClose(); }} className={style.closeButton}>
-                  <IconSvg className={style.icon}
-                  width={16}
-                  height={16}
-                  name="icon-close" />
-                </button>
-              {/* Заголовок */}
+              <button type="button" onClick={() => { resetForm(); onClose(); }} className={style.closeButton}>
+                <IconSvg className={style.icon} width={16} height={16} name="icon-close" />
+              </button>
+
               <h2 className={style.title}>Add transaction</h2>
 
               {/* Switcher Income / Expense */}
@@ -124,7 +153,6 @@ const AddTransactionForm = ({ onClose }) => {
                       <option key={cat.id} value={cat.value}>{cat.label}</option>
                     ))}
                 </Field>
-
                 <ErrorMessage className={style.msg} name="category" component="span" />
               </div>
 

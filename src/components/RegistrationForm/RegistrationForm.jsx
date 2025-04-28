@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUserThunk } from '../../redux/auth/operations';
 import { selectIsAuthError } from '../../redux/auth/selectors';
-import PasswordStrengthBar from 'react-password-strength-bar';
-import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa'; 
+import PasswordStrengthBar from 'react-password-strength-bar'; 
+import logo from '../../images/logo-mob.svg';
+import IconSvg from '../../components/IconSvg/IconSvg';
 import styles from './RegistrationForm.module.css';
-import modalstyles from '../../pages/RegistrationPage/RegistrationPage.module.css';
+
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -35,71 +36,89 @@ const RegistrationForm = () => {
 
   return (
     <div className={styles.container}>
-      <div className={modalstyles.modal}>
-        <div className={modalstyles.logoBox}>
-          <img src="../../images/logo.svg" alt="Logo" width="26" height="26" className={styles.logoIcon} />
-          <h2 className={modalstyles.title}>Money Guard</h2>
-        </div>
+      <div className={styles.modal}>
 
-        <form onSubmit={handleSubmit(onSubmit)} className={modalstyles.form}>
-          <div className={modalstyles.input}>
-            <div className={modalstyles.inputBox}>
-              <div className={modalstyles.inputIcon}>
-                <FaUser /> {}
-              </div>
+        <img src={logo} alt="Wallet Logo" width="26" height="26" className={styles.logoIcon} />
+        <h2 className={styles.title}>Money Guard</h2>
+        
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <div className={styles.inputBox}>
+            <div className={styles.inputContainer}>
+              <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="icon-user"
+              />
               <input
                 type="text"
                 placeholder="Name"
                 {...register('name', { required: true })}
                 className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
               />
+              </div>
               {errors.name && <p className={styles.errorText}>This field is required</p>}
             </div>
 
-            <div className={modalstyles.inputWrapper}>
-              <div className={modalstyles.iconWrapper}>
-                <FaEnvelope /> {}
-              </div>
+            <div className={styles.inputBox}>
+            <div className={styles.inputContainer}>
+             <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="icon-email"
+              />
               <input
                 type="email"
                 placeholder="E-mail"
                 {...register('email', { required: true })}
                 className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
-              />
+            />
+            </div>
               {errors.email && <p className={styles.errorText}>This field is required</p>}
             </div>
 
-            <div className={modalstyles.inputWrapper}>
-              <div className={modalstyles.iconWrapper}>
-                <FaLock /> {}
-              </div>
+            <div className={styles.inputBox}>
+            <div className={styles.inputContainer}>
+               <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="icon-lock"
+              />
               <input
                 type="password"
                 placeholder="Password"
                 {...register('password', { required: true })}
                 className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
               />
+              </div>
               {errors.password && <p className={styles.errorText}>This field is required</p>}
             </div>
 
-            <div className={modalstyles.inputWrapper}>
-              <div className={modalstyles.iconWrapper}>
-                <FaLock /> {}
-              </div>
+            <div className={styles.inputBox}>
+            <div className={styles.inputContainer}>
+               <IconSvg
+                className={styles.inputIcon}
+                width={24}
+                height={24}
+                name="icon-lock"
+              />
               <input
                 type="password"
                 placeholder="Confirm password"
                 {...register('confirmPassword', { required: true })}
-                className={`${modalstyles.input} ${errors.confirmPassword ? modalstyles.inputError : ''}`}
+                className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
               />
-              {errors.confirmPassword && <p className={modalstyles.errorText}>This field is required</p>}
+              </div>
+              {errors.confirmPassword && <p className={styles.errorText}>This field is required</p>}
             </div>
-          </div>
+          
 
-          <div className={modalstyles.strengthBarBox}>
+          <div className={styles.strengthBarBox}>
             <PasswordStrengthBar
-              className={modalstyles.strengthBar}
-              password={watch('confirmPassword')}
+              className={styles.strengthBar}
+              password={watch('password')}
               barColors={['#ddd', '#ef4836', '#f6b44d', '#2b90ef', '#25c281']}
               scoreWords={['weak', 'weak', 'okay', 'good', 'strong']}
               shortScoreWord=""
@@ -108,26 +127,22 @@ const RegistrationForm = () => {
               scoreWordClassName="strength-score"
             />
           </div>
+          
+          <div className={styles.btnBox}>
+            <button
+              type="submit"
+              disabled={hasTriedSubmit && !isValid}
+              className={`${styles.oneBtn} ${styles.multiColorButton}`}
+            >Register</button>
+            <Link to="/login">
+            <button
+              type="button"
+              className={`${styles.oneBtn} ${styles.whiteButton}`}
+            >Log in</button>
+            </Link>
+          </div>
 
-          <div className={modalstyles.btnBox}>
-  <button
-    type="submit"
-    disabled={hasTriedSubmit && !isValid}
-    className={`${modalstyles.oneBtn} ${modalstyles.multiColorButton}`}
-  >
-    Register
-  </button>
-  <Link to="/login">
-    <button
-      type="button"
-      className={`${modalstyles.oneBtn} ${modalstyles.whiteButton}`}
-    >
-      Log in
-    </button>
-  </Link>
-</div>
-
-          {error && <p className={modalstyles.error}>{error}</p>}
+          {error && <p className={styles.error}>{error}</p>}
         </form>
       </div>
     </div>
