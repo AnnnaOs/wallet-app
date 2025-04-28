@@ -102,8 +102,11 @@ td {
   padding: 12px 18px;
 }
 
+td:last-child {
+  padding-right: 10px;
+}
 thead {
-  background: var(--form-color);
+  /* background: var(--form-color); */
   border-collapse: separate;
   overflow: hidden;
   border-spacing: 0;
@@ -129,4 +132,42 @@ thead th:last-child {
   .table {
     margin: 0;
   }
+}
+
+.emptyText {
+  text-align: center;
+  font-size: 18px;
+  color: #9e9e9e;
+  margin-top: 40px;
+}
+.transactionsContainer {
+  max-height: 600px; /* Встановіть висоту на ваш вибір */
+  overflow-y: auto; /* Скролиться по вертикалі, якщо контент перевищує max-height */
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background-color: rgba(53, 37, 101, 0.9);
+  z-index: 2; /* Переконується, що заголовки будуть поверх решти контенту */
+}
+/* Для браузерів WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 4px; /* Тонка вертикальна прокрутка */
+  height: 4px; /* Тонка горизонтальна прокрутка */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1); /* Тонкий, ледь видимий тримач */
+  border-radius: 4px; /* Закруглені краї для тримача */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Прозорий фон для треку прокрутки */
+}
+
+/* Для Firefox */
+.scrollableElement {
+  scrollbar-width: thin; /* Тонка прокрутка */
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent; /* Колір тримача та фону */
 }
