@@ -97,7 +97,7 @@
 @media (min-width: 768px) {
   .logoutOverlay {
     background: transparent;
-    backdrop-filter: none;
+    backdrop-filter: blur(7px);
     box-shadow: none;
   }
 
