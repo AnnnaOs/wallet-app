@@ -17,18 +17,19 @@
 .iconNav {
   width: 38px;
   height: 38px;
+  border-radius: 6px;
   fill: var(--white-400);
 }
 
 .active .iconNav {
-  /* background-color: var(--white); */
+  background-color: var(--white);
   fill: var(--icon-violet);
 }
 
 .link:hover .iconNav,
 .link:focus .iconNav {
   fill: var(--icon-violet);
-  /* background-color: var(--white); */
+  background-color: var(--white);
 }
 
 @media screen and (min-width: 768px) {
@@ -49,6 +50,7 @@
   .iconNav {
     width: 18px;
     height: 18px;
+    border-radius: 2px;
   }
 
   .linkText {
