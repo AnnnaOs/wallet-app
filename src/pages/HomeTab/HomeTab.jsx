@@ -1,5 +1,6 @@
-import TransactionsList from '../../components/TransactionsList/TransactionsList';
 import ButtonAddTransactions from '../../components/ButtonAddTransactions/ButtonAddTransactions';
+import TransactionsList from '../../components/TransactionsList/TransactionsList';
+
 import s from './HomeTab.module.css';
 
 const HomeTab = () => {
@@ -14,3 +15,4 @@ const HomeTab = () => {
 };
 
 export default HomeTab;
+
