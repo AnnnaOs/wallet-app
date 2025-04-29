@@ -1,40 +1,36 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Chart from '../../components/Chart/Chart';
-import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
-import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
 import { fetchStatistics } from '../../redux/statistics/operations';
-import {
-  selectExpensesByCategory,
-  selectStatisticsLoading,
-  selectStatisticsError,
-} from '../../redux/statistics/selectors';
+import { selectStatistics } from '../../redux/statistics/selectors';
+
+import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
+import Chart from '../../components/Chart/Chart';
+import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
+
+import styles from './StatisticsTab.module.css';
 
 const StatisticsTab = () => {
   const dispatch = useDispatch();
-  const expensesByCategory = useSelector(selectExpensesByCategory);
-  const loading = useSelector(selectStatisticsLoading);
-  const error = useSelector(selectStatisticsError);
+  const statistics = useSelector(selectStatistics);
 
-  console.log('StatisticsTab - expensesByCategory:', expensesByCategory);
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
-    dispatch(
-      fetchStatistics({
-        month: new Date().getMonth() + 1,
-        year: new Date().getFullYear(),
-      })
-    );
-  }, [dispatch]);
+    dispatch(fetchStatistics({ month, year }));
+  }, [dispatch, month, year]);
 
   return (
-    <section className="statistics-tab">
-      {loading && <p>Loading...</p>}
-      {error && <p>Error loading statistics: {error}</p>}
-      {!loading && !error && <Chart data={expensesByCategory} />}
-      <StatisticsDashboard />
-      {!loading && !error && <StatisticsTable data={expensesByCategory} />}
-    </section>
+    <div className={styles.statisticsTab}>
+      <StatisticsDashboard
+        month={month}
+        setMonth={setMonth}
+        year={year}
+        setYear={setYear}
+      />
+      <Chart statistics={statistics} />
+      <StatisticsTable statistics={statistics} />
+    </div>
   );
 };
 

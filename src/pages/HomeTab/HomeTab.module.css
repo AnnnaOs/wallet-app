@@ -27,6 +27,6 @@
   .homeTabPageWrap {
     padding-top: 46px;
     padding-left: 69px;
-    border-left: 1px solid var(--white-600);
+    padding-right: 16px;
   }
 }

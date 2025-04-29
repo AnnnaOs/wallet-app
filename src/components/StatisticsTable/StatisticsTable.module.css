@@ -1,55 +1,51 @@
 .tableWrapper {
-  padding: 16px;
-  background: #fff;
-  border-radius: 12px;
+  margin: 40px auto 0;
+  max-width: 340px;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
 }
 
 .table {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
 }
 
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
+.table th,
+.table td {
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
 }
 
-.color {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 8px;
-  display: inline-block;
+.table th {
+  color: #b3b3b3;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.name {
-  flex: 1;
-  margin-left: 8px;
+.table td {
+  font-weight: 400;
+}
+
+.category {
+  text-transform: capitalize;
 }
 
 .amount {
-  font-weight: bold;
+  text-align: right;
 }
 
-.total {
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
+.totals {
+  font-size: 18px;
 }
 
 .expenses {
-  color: red;
+  color: #ff6596;
+  font-weight: bold;
 }
 
 .income {
-  color: green;
-}
-
-.message {
-  text-align: center;
-  color: #888;
+  color: #24cca7;
+  font-weight: bold;
 }

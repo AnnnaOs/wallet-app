@@ -1,14 +1,14 @@
 import Modal from 'react-modal';
+// import { useEffect } from 'react';
+import style from './ModalAddTransaction.module.css';
 import { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader.jsx';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import useResponsive from '../../hooks/useResponsive.js';
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm.jsx';
-import style from './ModalAddTransaction.module.css';
 
 Modal.setAppElement('#root');
-
-const ModalAddTransaction = ({ isOpen, onClose }) => {
+const ModalAddTransaction = ({ isOpen, onClose, transaction }) => {
   const { isMobile } = useResponsive();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,9 +36,11 @@ const ModalAddTransaction = ({ isOpen, onClose }) => {
         <div className={style.modalHeader}>
           <h2 className={style.modalTitle}>Add transaction</h2>
 
-          <button onClick={onClose} className={style.closeButton}>
-            <IconSvg width={16} height={16} name="icon-close" fill="white" />
-          </button>
+          {!isMobile && (
+            <button onClick={onClose} className={style.closeButton}>
+              <IconSvg width={16} height={16} name="icon-close" />
+            </button>
+          )}
         </div>
 
         {isLoading ? (
@@ -46,7 +48,7 @@ const ModalAddTransaction = ({ isOpen, onClose }) => {
             <Loader />
           </div>
         ) : (
-          <AddTransactionForm onClose={onClose} />
+          <AddTransactionForm transaction={transaction} onClose={onClose} />
         )}
       </div>
     </Modal>
