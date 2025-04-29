@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header.jsx';
 import HomeTab from '../HomeTab/HomeTab';
 import Navigation from '../../components/Navigation/Navigation.jsx';
 import { useMediaQuery } from 'react-responsive';
 import CurrencyTab from '../CurrencyTab/CurrencyTab.jsx';
 import Balance from '../../components/Balance/Balance.jsx';
+import styles from '../DashboardPage/DashboardPage.module.css';
 
 const DashboardPage = () => {
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1279 });
@@ -13,12 +13,16 @@ const DashboardPage = () => {
   return (
     <>
       <Header />
-      <Navigation />
-      <Balance />
-
-      <HomeTab />
-
-      {(isTablet || isDesktop) && <CurrencyTab />}
+      <div className={styles.mainContainer}>
+        <div className={styles.sideContainer}>
+          <div className={styles.navContainer}>
+            <Navigation />
+            <Balance />
+          </div>
+          {(isTablet || isDesktop) && <CurrencyTab />}
+        </div>
+        <HomeTab />
+      </div>
     </>
   );
 };
