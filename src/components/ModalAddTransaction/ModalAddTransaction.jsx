@@ -1,31 +1,55 @@
-import { useEffect } from 'react';
+import Modal from 'react-modal';
+import { useEffect, useState } from 'react';
+import Loader from '../Loader/Loader.jsx';
+import IconSvg from '../IconSvg/IconSvg.jsx';
+import useResponsive from '../../hooks/useResponsive.js';
+import AddTransactionForm from '../AddTransactionForm/AddTransactionForm.jsx';
 import style from './ModalAddTransaction.module.css';
-import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
 
-const ModalAddTransaction = ({ onClose }) => {
-  
+Modal.setAppElement('#root');
+
+const ModalAddTransaction = ({ isOpen, onClose }) => {
+  const { isMobile } = useResponsive();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.code === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
+    if (isOpen) {
+      setIsLoading(true);
+      // Імітація завантаження даних
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
+      return () => clearTimeout(timer);
     }
-  };
+  }, [isOpen]);
 
   return (
-    <div className={style.backdrop} onClick={handleBackdropClick}>
-      <div className={style.modal}>
-        <AddTransactionForm onClose={onClose} />
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className={style.modal}
+      overlayClassName={style.backdrop}
+      contentLabel="Add Transaction Modal"
+    >
+      <div className={style.modalEllipse}>
+        <div className={style.modalHeader}>
+          <h2 className={style.modalTitle}>Add transaction</h2>
+
+          <button onClick={onClose} className={style.closeButton}>
+            <IconSvg width={16} height={16} name="icon-close" fill="white" />
+          </button>
+        </div>
+
+        {isLoading ? (
+          <div className={style.loaderContainer}>
+            <Loader />
+          </div>
+        ) : (
+          <AddTransactionForm onClose={onClose} />
+        )}
       </div>
-    </div>
+    </Modal>
   );
 };
 

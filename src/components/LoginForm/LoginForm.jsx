@@ -7,6 +7,7 @@ import { loginSchema } from '../../validationSchemas/validationSchemas';
 import styles from './LoginForm.module.css';
 import logo from '../../images/logo-mob.svg';
 import IconSvg from '../IconSvg/IconSvg';
+import { useTogglePassword } from '../../hooks/useTogglePassword';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ const LoginForm = () => {
       }
     },
   });
+
+  const { visible: showPassword, toggle: togglePassword } = useTogglePassword();
+
 
   return (
     <div className={styles.wrapper}>
@@ -72,7 +76,7 @@ const LoginForm = () => {
                 name="icon-lock"
               />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="Password"
                 autoComplete="current-password"
@@ -81,6 +85,16 @@ const LoginForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={togglePassword}>
+                <IconSvg
+                  width={18}
+                  height={18}
+                  name={showPassword ? 'icon-eye' : 'icon-eye-blocked'}
+                />
+              </button>
             </div>
             {formik.touched.password && formik.errors.password && (
               <span className={styles.error}>{formik.errors.password}</span>

@@ -1,9 +1,15 @@
+@import '../../styles/variables.css';
+@import '../../styles/fonts.css';
+@import '../../styles/reset.css';
+
 .wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #2a0845, #6441a5);
+  background-color: var(--main-background);
+  background-image: url('../../images/gradient-mobile.webp');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -12,6 +18,7 @@
   width: 100%;
   max-width: 320px;
   padding: 0 20px;
+  
 }
 
 .logo {
@@ -21,7 +28,7 @@
 
 .title {
   text-align: center;
-  color: #fbfbfb;
+  color: var(--white);
   font-family: 'Poppins', sans-serif;
   font-size: 19px;
   font-weight: 400;
@@ -49,7 +56,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--white-400);
   transition: all 0.3s ease;
 }
 
@@ -58,8 +65,6 @@
   left: 10.5px;
   top: 50%;
   transform: translateY(-50%);
-  /* width: 20px;
-    height: 16px; */
   z-index: 1;
   border: none;
   background: transparent;
@@ -68,17 +73,19 @@
 
 .input {
   width: 100%;
-  padding: 9px 10px 10px 54px;
+  padding: 4px 10px 10px 54px;
   border: none;
   background: rgba(255, 255, 255, 0);
-  color: #fff;
-  font-family: 'Circe', sans-serif;
-  font-size: 14px;
+  color: var(--white-600);
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
   transition: all 0.3s ease;
 }
 
 .input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--white-600);
+  font-size: 18px;
 }
 
 .input:focus {
@@ -86,8 +93,10 @@
 }
 
 .error {
-  color: #ff4d4d;
-  font-size: 11px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #f00000;
   position: absolute;
   bottom: -16px;
   left: 2px;
@@ -97,12 +106,7 @@
   width: 100%;
   padding: 13px;
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    167deg,
-    #ffc727 0%,
-    #9e40ba 61.46%,
-    #7000ff 90.54%
-  );
+  background: var(--button-background);
   border: none;
   border-radius: 20px;
   font-family: 'Poppins', sans-serif;
@@ -111,12 +115,24 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
-  color: #fbfbfb;
+  color: var(--white);
   margin-bottom: 20px;
+  height: 50px;
+
+
 }
 
-.button:hover {
-  opacity: 0.9;
+.button:hover,
+.button:focus {
+    transform: scale(1.05);
+    background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
+    background-size: 200%;
+    background-position: right center;
+    transition: all 1s ease 0s;
+}
+
+.button:active {
+    transform: scale(1.08);
 }
 
 .button:disabled {
@@ -138,33 +154,53 @@
   font-size: 18px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #623f8b;
+  color: var(--text-button);
   text-align: center;
   text-decoration: none;
+  height: 50px;
 }
 
-.link:hover {
-  opacity: 0.9;
+.link:hover,
+.link:focus {
+    transform: scale(1.05);
+    background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(98, 63, 139) 31%, rgb(255, 255, 255) 100%);
+    background-size: 200%;
+    background-position: right center;
+    transition: all 1s ease 0s;
 }
 
 .formError {
-  color: #ff4d4d;
+  color: #f00000;
   text-align: center;
   margin-top: 12px;
   font-size: 12px;
 }
 
+.eyeButton {
+  fill: var(--white-600);
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 0;
+}
+
 /* Tablet styles */
 @media (min-width: 768px) {
   .wrapper {
-    background-image: url('../../images/gradient-login-tab.webp');
+    background-image: url('../../images/gradient-login-tab.webp'), url('../../images/gradient-tablet.webp');
     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
   .container {
     max-width: 533px;
     padding: 80px 62px;
-    border-radius: 16px;
+    border-radius: 8px;
     backdrop-filter: blur(100px);
     box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
     background: rgba(255, 255, 255, 0.1);
@@ -200,7 +236,7 @@
 /* desc stylec */
 @media (min-width: 1280px) {
   .wrapper {
-    background-image: url('../../images/gradient-login-desk.webp');
+    background-image: url('../../images/gradient-login-desk.webp'), url('../../images/gradient-desktop.webp');;
     background-repeat: no-repeat;
   }
 
@@ -208,3 +244,27 @@
     padding-left: 54px;
   }
 }
+
+
+/* Стилі для перевизначення автозаповнення */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff !important; 
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important; 
+  transition: background-color 5000s ease-in-out 0s; 
+}
+
+@keyframes autofill {
+  to {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  }
+}
+
+.input:-webkit-autofill {
+  animation-name: autofill;
+  animation-fill-mode: both;
+}
+
+/* git pull test */

@@ -2,9 +2,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutThunk } from '../../redux/auth/operations.js';
 import styles from './LogoutModal.module.css';
+import logo from '../../images/logo-mob.svg';
+
 const LogoutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await dispatch(logoutThunk()).unwrap();
@@ -14,17 +17,31 @@ const LogoutModal = ({ isOpen, onClose }) => {
       alert('Logout failed: ' + error);
     }
   };
+
   if (!isOpen) return null;
+
   return (
     <div className={styles.logoutOverlay}>
       <div className={styles.logoutModal}>
-        <h2 className={styles.logoutTitle}>Exit</h2>
+        {/* Додаємо новий клас */}
+        <div className={styles.logoWrapper}>
+          <img
+            src={logo}
+            alt="Wallet Logo"
+            width="36"
+            height="36"
+            className={styles.logoIcon}
+          />
+          <h2 className={styles.logoText}>Money Guard</h2>
+        </div>
+
         <p className={styles.logoutText}>Are you sure you want to log out?</p>
-        <div className={styles.logoutButtons}>
-          <button className={styles.logoutBtnConfirm} onClick={handleLogout}>
-            Log out
+
+        <div className={styles.buttons}>
+          <button className={styles.logoutBtn} onClick={handleLogout}>
+            Logout
           </button>
-          <button className={styles.logoutBtnCancel} onClick={onClose}>
+          <button className={styles.cancelBtn} onClick={onClose}>
             Cancel
           </button>
         </div>
@@ -32,4 +49,5 @@ const LogoutModal = ({ isOpen, onClose }) => {
     </div>
   );
 };
+
 export default LogoutModal;

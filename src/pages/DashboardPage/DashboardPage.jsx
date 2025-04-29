@@ -15,9 +15,7 @@ const DashboardPage = () => {
       <Header />
       <Navigation />
       <Balance />
-      <Link to="/home">
-        🏠 <HomeTab />
-      </Link>
+      <HomeTab />
       {(isTablet || isDesktop) && <CurrencyTab />}
     </>
   );
