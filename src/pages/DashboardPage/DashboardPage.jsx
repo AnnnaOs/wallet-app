@@ -15,7 +15,7 @@ const DashboardPage = () => {
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.sideContainer}>
-          <div className={styles.navContainer}>
+          <div>
             <Navigation />
             <Balance />
           </div>
