@@ -1,58 +1,48 @@
-import { useSelector } from 'react-redux';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { selectExpensesByCategory } from '../../redux/statistics/selectors';
+import styles from './Chart.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Chart = () => {
-  const expensesByCategory = useSelector(selectExpensesByCategory);
-  const balance = useSelector(state => state.auth?.user?.balance);
+const Chart = ({ statistics }) => {
+  if (!statistics || !statistics.categoriesSummary) return null;
 
-  if (!expensesByCategory?.length) {
-    return <p style={{ textAlign: 'center' }}>No data to display</p>;
-  }
+  const categories = statistics.categoriesSummary.filter(cat => cat.total > 0);
+  const totalExpenses = statistics.totalExpenses || 0;
 
   const data = {
-    labels: expensesByCategory.map(cat => cat.name),
+    labels: categories.map(cat => cat.name),
     datasets: [
       {
-        data: expensesByCategory.map(cat => cat.total),
-        backgroundColor: expensesByCategory.map(cat => cat.color),
-        borderWidth: 1,
-        cutout: '65%',
+        data: categories.map(cat => cat.total),
+        backgroundColor: [
+          '#FF6596',
+          '#24CCA7',
+          '#FED057',
+          '#FFD8D0',
+          '#6E78E8',
+          '#4A56E2',
+          '#81E1FF',
+          '#00AD84',
+        ],
+        borderWidth: 0,
       },
     ],
   };
 
   const options = {
-    responsive: true,
     plugins: {
-      legend: {
-        position: 'bottom',
-      },
+      legend: { display: false },
     },
+    cutout: '70%',
+    responsive: true,
+    maintainAspectRatio: false,
   };
 
   return (
-    <div style={{ position: 'relative', maxWidth: 400, margin: '0 auto' }}>
+    <div className={styles.chartWrapper}>
       <Doughnut data={data} options={options} />
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          fontSize: '18px',
-        }}
-      >
-        <p style={{ margin: 0 }}>Balance</p>
-        <p style={{ margin: 0 }}>
-          {balance ? `$${balance.toFixed(2)}` : 'N/A'}
-        </p>
-      </div>
+      <div className={styles.totalCenter}>₴ {totalExpenses.toFixed(2)}</div>
     </div>
   );
 };

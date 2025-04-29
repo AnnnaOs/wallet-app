@@ -1,44 +1,39 @@
-import { useSelector } from 'react-redux';
 import styles from './StatisticsTable.module.css';
 
-const StatisticsTable = () => {
-  const { statistics } = useSelector(state => state.statistics);
+const StatisticsTable = ({ statistics }) => {
+  if (!statistics || !statistics.categoriesSummary) return null;
 
-  if (!statistics?.categories?.length) {
-    return (
-      <p className={styles.message}>No statistics available for this period.</p>
-    );
-  }
+  const { categoriesSummary, totalExpenses, totalIncome } = statistics;
+
+  const filtered = categoriesSummary.filter(cat => cat.total > 0);
 
   return (
     <div className={styles.tableWrapper}>
-      <ul className={styles.table}>
-        {statistics.categories.map(category => (
-          <li key={category.name} className={styles.row}>
-            <span
-              className={styles.color}
-              style={{ backgroundColor: category.color }}
-            ></span>
-            <span className={styles.name}>{category.name}</span>
-            <span className={styles.amount}>
-              {category.total.toFixed(2)} UAH
-            </span>
-          </li>
-        ))}
-      </ul>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Sum</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filtered.map((item, index) => (
+            <tr key={index}>
+              <td className={styles.category}>{item.name}</td>
+              <td className={styles.amount}>{item.total.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-      <div className={styles.total}>
+      <div className={styles.totals}>
         <p>
           Expenses:{' '}
-          <span className={styles.expenses}>
-            {statistics.expenseSummary.toFixed(2)} UAH
-          </span>
+          <span className={styles.expenses}>₴ {totalExpenses?.toFixed(2)}</span>
         </p>
         <p>
           Income:{' '}
-          <span className={styles.income}>
-            {statistics.incomeSummary.toFixed(2)} UAH
-          </span>
+          <span className={styles.income}>₴ {totalIncome?.toFixed(2)}</span>
         </p>
       </div>
     </div>
