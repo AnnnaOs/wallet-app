@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CurrencyChart from './CurrencyChart';
+import CurrencyChart from './CurrencyChart/CurrencyChart.jsx';
 import { fetchCurrencyRates } from '../../redux/currency/operations.js';
 import s from './Currency.module.css';
 import Loader from '../Loader/Loader.jsx';

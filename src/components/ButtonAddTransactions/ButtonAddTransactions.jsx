@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
-import IconSvg from '../IconSvg/IconSvg.jsx'; // Иконка
-
-import style from './ButtonAddTransactions.module.css'; // Стили кнопки
 import ModalAddTransaction from '../ModalAddTransaction/ModalAddTransaction.jsx';
+import IconSvg from '../IconSvg/IconSvg.jsx';
+import style from './ButtonAddTransactions.module.css';
 
 const ButtonAddTransactions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,18 +12,17 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-  <button type="button" onClick={handleOpen} className={style.addBtn}>
-    <IconSvg
-      className={style.plusIcon}
-      width={20}
-      height={20}
-      name="icon-plus"
-    />
-  </button>
+      <button type="button" onClick={handleOpen} className={style.addBtn}>
+        <IconSvg
+          className={style.plusIcon}
+          width={20}
+          height={20}
+          name="icon-plus"
+        />
+      </button>
 
-  <ModalAddTransaction isOpen={isModalOpen} onClose={handleClose} />
-</>
-
+      <ModalAddTransaction isOpen={isModalOpen} onClose={handleClose} />
+    </>
   );
 };
 
