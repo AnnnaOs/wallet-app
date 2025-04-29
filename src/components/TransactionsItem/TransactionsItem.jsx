@@ -47,7 +47,6 @@ const TransactionsItem = () => {
         <div>
           <div className={s.topBar}>
             <div></div>{' '}
-            {/* Можна використати для заголовка або залишити порожнім */}
             <p className={s.transactionCount}>
               Всього транзакцій: {transactions.length}
             </p>

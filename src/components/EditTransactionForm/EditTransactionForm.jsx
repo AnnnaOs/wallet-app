@@ -32,9 +32,9 @@ const EditTransactionForm = ({ transaction, onClose }) => {
   const [activeType, setActiveType] = useState(
     transaction.type === 'Income' ? 'income' : 'expense'
   );
-  const [startDate, setStartDate] = useState(
-    new Date(transaction.transactionDate)
-  );
+  // const [startDate, setStartDate] = useState(
+  //   new Date(transaction.transactionDate)
+  // );
 
   useEffect(() => {
     async function fetchCategories() {
