@@ -1,24 +1,28 @@
-import { useDispatch } from 'react-redux';
-import { openAddModal } from '../../redux/modals/slice';
-import IconSvg from '../IconSvg/IconSvg';
-import css from './ButtonAddTransactions.module.css';
+import { useState } from 'react';
+import AddTransactionForm from '../AddTransactionForm/AddTransactionForm.jsx'; // Путь к модалке
+import IconSvg from '../IconSvg/IconSvg.jsx'; // Иконка
+
+import style from './ButtonAddTransactions.module.css'; // Стили кнопки
 
 const ButtonAddTransactions = () => {
-  const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClick = () => {
-    dispatch(openAddModal());
-  };
+  const handleOpen = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
 
   return (
-    <button className={css.addBtn} type="button" onClick={handleClick}>
-      <IconSvg
-        className={css.plusIcon}
-        width={20}
-        height={20}
-        name="icon-plus"
-      />
-    </button>
+    <>
+      <button type="button" onClick={handleOpen} className={style.addBtn}>
+        <IconSvg
+          className={style.plusIcon}
+          width={20}
+          height={20}
+          name="icon-plus"
+        />
+      </button>
+
+      {isModalOpen && <AddTransactionForm onClose={handleClose} />}
+    </>
   );
 };
 

@@ -1,0 +1,40 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(46, 47, 66, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200;
+  }
+  
+  .modal {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 40px 20px;
+    width: 90%;
+    max-width: 540px;
+    min-height: 540px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+  
+    /* Адаптив */
+  }
+  
+  @media screen and (min-width: 768px) {
+    .modal {
+      padding: 48px 32px;
+      width: 540px;
+    }
+  }
+  
+  @media screen and (min-width: 1280px) {
+    .modal {
+      padding: 48px 48px;
+      width: 600px;
+    }
+  }
+  

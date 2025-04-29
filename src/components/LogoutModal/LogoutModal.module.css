@@ -1,11 +1,13 @@
-.logoutTriggerButton {
-  display: none; /* видалити або перемістити при інтеграції */
-}
+@import '../../styles/variables.css';
+@import '../../styles/fonts.css';
+@import '../../styles/reset.css';
 
 .logoutOverlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(46, 47, 66, 0.4);
+  backdrop-filter: blur(100px);
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  background: var(--form-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,89 +15,126 @@
 }
 
 .logoutModal {
-  background-color: #fff;
+  max-width: 320px;
+  max-height: 691px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 40px 20px;
-  max-width: 280px;
-  width: 90%;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.logoutTitle {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #2e2f42;
-  margin-bottom: 20px;
-}
-
-.logoutText {
-  font-size: 16px;
-  color: #2e2f42;
-  margin-bottom: 32px;
-}
-
-.logoutButtons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.logoutBtn {
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logoutBtnConfirm {
-  /* composes: logoutBtn; */
-  background: linear-gradient(90deg, #ffc727 0%, #9c27b0 100%);
-  color: #fff;
-}
-
-.logoutBtnCancel {
-  /* composes: logoutBtn; */
-  background-color: #e7eaf2;
-  color: #2e2f42;
-}
-
-.logoutTriggerButton {
+.logoWrapper {
   display: none;
 }
 
-/* Tablet */
-@media (min-width: 768px) {
-  .logoutModal {
-    max-width: 400px;
-    padding: 48px 32px;
-  }
-
-  .logoutTitle {
-    font-size: 20px;
-  }
-
-  .logoutText {
-    font-size: 18px;
-  }
+.logoIcon {
+  width: 26px;
+  height: 26px;
 }
 
-/* Desktop */
-@media (min-width: 1280px) {
-  .logoutModal {
-    max-width: 500px;
-    padding: 56px 48px;
+.logoText {
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--white-second);
+}
+
+.logoutText {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--white-second);
+  text-align: center;
+  margin-bottom: 40px;
+  width: 214px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+}
+
+.logoutBtn,
+.cancelBtn {
+  width: 280px;
+  height: 50px;
+  padding: 13px 58px;
+  border-radius: 20px;
+  border: none;
+
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  display: inline-block;
+}
+
+.logoutBtn {
+  background: var(--button-background);
+  color: var(--white);
+  box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cancelBtn {
+  background: var(--white);
+  color: var(--text-button);
+  box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logoutBtn:hover,
+.cancelBtn:hover {
+  opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .logoutOverlay {
+    background: transparent;
+    backdrop-filter: blur(7px);
+    box-shadow: none;
   }
 
-  .logoutTitle {
-    font-size: 22px;
+  .logoutModal {
+    padding: 60px 117px;
+    box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+    background: var(--form-color);
+    border-radius: 8px;
+    max-width: 533px;
+  }
+
+  .logoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .logoIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logoText {
+    font-size: 26px;
   }
 
   .logoutText {
     font-size: 20px;
+    margin-top: 52px;
+    margin-bottom: 52px;
+    width: 299px;
+  }
+
+  .logoutBtn {
+    padding: 14px 64px;
+    color: var(--white-second);
   }
 }

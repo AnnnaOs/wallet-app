@@ -1,19 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { api } from '../../configAPI/api';
 
-export const apiMg = axios.create({
-    baseURL: 'https://wallet-app-dusky.vercel.app',
-  });
-  apiMg.interceptors.request.use(config => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  });  
-
-export const fetchCurrentUserThunk = createAsyncThunk('user/current', async (_, thunkAPI) => {
+export const fetchCurrentUserThunk = createAsyncThunk('users/current', async (_, thunkAPI) => {
     try {
-        const {data} = await apiMg.get('current');
+        const {data} = await api.get('current');
         
         return data;
     } catch (error) {
@@ -23,7 +13,7 @@ export const fetchCurrentUserThunk = createAsyncThunk('user/current', async (_, 
 });
 
 export const editCurrentUserThunk = createAsyncThunk(
-    'user/current',
+    'users/current',
     async ({ id, name, email, balance, avatarUrl }, thunkAPI) => {
       try {
         const updateData = {};
@@ -33,7 +23,7 @@ if (balance !== undefined) updateData.balance = balance;
 if (avatarUrl !== undefined) updateData.avatarUrl = avatarUrl;
  // Только разрешённые поля
   
-        const { data } = await apiMg.patch(`/user/${id}`, updateData);
+        const { data } = await api.patch(`/users/${id}`, updateData);
         return data;
       } catch (error) {
         console.log('Ошибка обновления данных:', error.response?.data);
