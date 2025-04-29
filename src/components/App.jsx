@@ -10,6 +10,7 @@ import useResponsive from '../hooks/useResponsive.js';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Loader from './Loader/Loader';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
+import { setTokenFromStorage } from '../redux/auth/slice.js';
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
@@ -30,9 +31,10 @@ const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     if (token) {
       setToken(token);
+      dispatch(setTokenFromStorage(token));
       dispatch(refreshThunk());
     }
   }, [dispatch]);

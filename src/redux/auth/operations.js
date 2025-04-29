@@ -42,7 +42,7 @@ export const logoutThunk = createAsyncThunk(
 );
 
 export const refreshThunk = createAsyncThunk(
-  '/user/current',
+  '/users/current',
   async (_, thunkAPI) => {
     const savedToken = thunkAPI.getState().auth.token;
     if (!savedToken) {
@@ -52,7 +52,7 @@ export const refreshThunk = createAsyncThunk(
     setToken(savedToken);
 
     try {
-      const { data } = await api.get('/user/current');
+      const { data } = await api.get('/users/current');
       return data;
     } catch (error) {
       console.error(error.response?.data || error.message);
