@@ -47,6 +47,10 @@
     justify-content: flex-start;
   }
 
+  .navItem:not(:last-child) {
+    margin-bottom: 18px;
+  }
+
   .iconNav {
     width: 18px;
     height: 18px;
@@ -55,7 +59,7 @@
 
   .linkText {
     font-size: 18px;
-    padding: 0 20px;
+    padding-left: 20px;
     font-weight: 400;
   }
 
