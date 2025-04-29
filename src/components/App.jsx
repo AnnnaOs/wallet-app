@@ -1,31 +1,33 @@
 import { useEffect, lazy, Suspense } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { selectIsRefreshing } from '../redux/auth/selectors';
 import { refreshThunk } from '../redux/auth/operations';
+import { setToken } from '../configAPI/api.js';
 import useResponsive from '../hooks/useResponsive.js';
 // import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
-import Balance from './Balance/Balance.jsx';
 import Loader from './Loader/Loader';
-import { setToken } from '../configAPI/api.js';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
 
 const DashboardPage = lazy(() =>
-  import('../pages/DashboardPage/DashboardPage.jsx')
+  import('../pages/DashboardPage/DashboardPage')
 );
 const StatisticsTab = lazy(() =>
-  import('../pages/StatisticsTab/StatisticsTab.jsx')
+  import('../pages/StatisticsTab/StatisticsTab')
 );
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage.jsx'));
-const HomeTab = lazy(() => import('../pages/HomeTab/HomeTab.jsx'));
-const CurrencyTab = lazy(() => import('../pages/CurrencyTab/CurrencyTab.jsx'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const HomeTab = lazy(() => import('../pages/HomeTab/HomeTab'));
+const CurrencyTab = lazy(() => import('../pages/CurrencyTab/CurrencyTab'));
 const RegistrationPage = lazy(() =>
-  import('../pages/RegistrationPage/RegistrationPage.jsx')
+  import('../pages/RegistrationPage/RegistrationPage')
 );
 
 const App = () => {
   const dispatch = useDispatch();
   const { isMobile } = useResponsive();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -35,24 +37,15 @@ const App = () => {
     }
   }, [dispatch]);
 
-  return (
-    <div>
+  return isRefreshing ? (
+    <Loader />
+  ) : (
+    <>
       <Suspense fallback={<Loader />}>
         <Routes>
+          {/* <Route path="/" element={<PrivateRoute component={<DashboardPage />} />}>  */}
           <Route path="/" element={<DashboardPage />}>
-            <Route
-              path="index"
-              element={
-                isMobile ? (
-                  <>
-                    <Balance />
-                    <HomeTab />
-                  </>
-                ) : (
-                  <HomeTab />
-                )
-              }
-            />
+            <Route index element={<HomeTab />} />
             <Route path="statistics" element={<StatisticsTab />} />
             <Route
               path="currency"
@@ -75,10 +68,10 @@ const App = () => {
               </RestrictedRoute>
             }
           />
-          <Route path="*" element={<Navigate to="/" />}></Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </div>
+    </>
   );
 };
 
