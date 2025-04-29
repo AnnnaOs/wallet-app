@@ -1,0 +1,320 @@
+.formContainer {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.typeSelector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.typeButton {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #757575;
+  transition: all 0.3s ease;
+}
+
+.typeDivider {
+  color: #e0e0e0;
+  margin: 0 5px;
+}
+
+.activeIncome {
+  color: #ffb627;
+  font-weight: 600;
+}
+
+.activeExpense {
+  color: #ff868d;
+  font-weight: 600;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.formField {
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  outline: none;
+  transition: border-bottom 0.3s;
+}
+
+.input::placeholder,
+.dateInput::placeholder {
+  color: #fbfbfb;
+  font-size: 18px;
+}
+
+.dateInputWrapper {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 18px;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.dateIcon {
+  fill: #734aef;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.errorMessage {
+  color: #ff6596;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.formFields > .formField:last-child .input {
+  padding-bottom: 52px;
+}
+
+.customSelect {
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+  color: #fbfbfb;
+  margin-bottom: 15px;
+}
+
+.selectHeader {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 8px;
+  transition: border-bottom 0.3s;
+}
+
+.arrow {
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  transition: transform 0.3s;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+.optionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: linear-gradient(
+    360deg,
+    rgba(83, 61, 186, 0.7) 0%,
+    rgba(80, 48, 154, 0.7) 35.94%,
+    rgba(106, 70, 165, 0.7) 61.04%,
+    rgba(133, 93, 175, 0.7) 100%
+  );
+  backdrop-filter: blur(100px);
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+
+  transform-origin: top center;
+  animation: dropdownAppear 0.3s ease forwards;
+}
+
+@keyframes dropdownAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.option {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.option:hover {
+  background-color: rgba(120, 100, 200, 0.9);
+}
+
+.option.selected {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  color: #ff868d;
+}
+
+.option {
+  opacity: 0;
+  animation: optionAppear 0.3s ease forwards;
+}
+
+.option:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.option:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.option:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.option:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.option:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.option:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.option:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.option:nth-child(8) {
+  animation-delay: 0.4s;
+}
+.option:nth-child(9) {
+  animation-delay: 0.45s;
+}
+.option:nth-child(10) {
+  animation-delay: 0.5s;
+}
+
+@keyframes optionAppear {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.saveButton {
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 50px;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 13px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton {
+  width: 300px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #623f8b;
+  border: none;
+  border-radius: 20px;
+  padding: 13px 0;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.saveButton:hover {
+  opacity: 0.9;
+}
+
+.cancelButton:hover {
+  background: #f5f5f5;
+}
+
+@media screen and (min-width: 768px) {
+  .formRow {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .formFields {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .dateInputWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .formRow .input,
+  .formRow .dateInput {
+    text-align: center;
+  }
+  .formFields > .formField:last-child .input {
+    padding-bottom: 8px;
+  }
+}

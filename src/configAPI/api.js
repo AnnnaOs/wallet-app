@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const api = axios.create({
   baseURL: 'https://wallet-app-server-zu2t.onrender.com',
+  // baseURL: 'http://localhost:3000',
 });
 
 export const setToken = token => {
