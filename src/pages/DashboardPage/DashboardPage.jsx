@@ -4,8 +4,9 @@ import { useMediaQuery } from 'react-responsive';
 
 import Header from '../../components/Header/Header.jsx';
 import Navigation from '../../components/Navigation/Navigation.jsx';
+// import HomeTab from '../HomeTab/HomeTab';
+import Currency from '../../components/Currency/Currency.jsx';
 import Balance from '../../components/Balance/Balance.jsx';
-import CurrencyTab from '../CurrencyTab/CurrencyTab.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
 
 import styles from './DashboardPage.module.css';
@@ -17,21 +18,20 @@ const DashboardPage = () => {
   return (
     <>
       <Header />
-      <div className={styles.mainContainer}>
-        <div className={styles.sideContainer}>
-          <div>
+      <section className={styles.mainContainer}>
+        <div className={styles.navContainer}>
+          <div className={styles.navBalance}>
             <Navigation />
             <Balance />
           </div>
-          {(isTablet || isDesktop) && <CurrencyTab />}
+          {(isTablet || isDesktop) && <Currency />}
         </div>
-
         <div className={styles.contentContainer}>
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </div>
-      </div>
+      </section>
     </>
   );
 };

@@ -1,23 +1,40 @@
 @media screen and (min-width: 768px) {
+  .mainContainer {
+    padding: 0 32px 20px 32px;
+  }
+
   .sideContainer {
     display: flex;
     gap: 32px;
+  }
+
+  .navContainer {
+    display: flex;
+    gap: 32px;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 32px;
   }
 }
 
 @media only screen and (min-width: 1280px) {
   .mainContainer {
     display: flex;
+    padding: 0;
   }
 
-  .sideContainer {
+  .navContainer {
+    display: flex;
     flex-direction: column;
-    gap: 0;
-    height: 100vh;
+    gap: 32px;
+    /* height: 100vh; */
     position: relative;
+    max-width: 480px;
+    padding: 0;
+    margin: 0;
   }
 
-  .sideContainer::after {
+  .navContainer::after {
     content: '';
     position: absolute;
     right: 0;

@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getCurrencyRates } from '../../configAPI/monoApi.js';
+import { monoAPI } from '../../configAPI/monoApi.js';
 
-export const fetchCurrencyRates = createAsyncThunk(
-  'currency/fetchRates',
+export const fetchCurrencies = createAsyncThunk(
+  'currency/fetchCurrencies',
   async (_, { rejectWithValue }) => {
     try {
-      return await getCurrencyRates();
+      const { data } = await monoAPI.get('bank/currency');
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
