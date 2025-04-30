@@ -9,6 +9,7 @@ import style from './AddTransactionForm.module.css';
 import { api } from '../../configAPI/api.js';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
+import { toast } from 'react-toastify';
 
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Выберіть тип транзакції'),
@@ -65,9 +66,11 @@ const AddTransactionForm = ({ onClose }) => {
     try {
       await dispatch(createTransaction(newTransaction)).unwrap();
       actions.resetForm();
+      toast.success('Транзакцію додано успішно!');
       onClose();
     } catch (error) {
       console.error('Помилка при додаванні транзакції:', error);
+      toast.error('Не вдалося додати транзакцію. Спробуйте ще раз.');
     }
   };
 

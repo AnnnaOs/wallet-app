@@ -9,6 +9,7 @@ import logo from '../../images/logo-mob.svg';
 import IconSvg from '../../components/IconSvg/IconSvg';
 import { useTogglePassword } from '../../hooks/useTogglePassword';
 import styles from './RegistrationForm.module.css';
+import { toast } from 'react-toastify';
 
 
 const RegistrationForm = () => {
@@ -26,16 +27,26 @@ const RegistrationForm = () => {
   const { visible: showPassword, toggle: togglePassword } = useTogglePassword();
   const { visible: showConfirmPassword, toggle: toggleConfirmPassword } = useTogglePassword();
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     setHasTriedSubmit(true);
     const { name, email, password, confirmPassword } = data;
-
+  
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      toast.error('Passwords do not match!');
       return;
     }
-
-    dispatch(registerUserThunk({ name, email, password }));
+  
+    try {
+      const resultAction = await dispatch(registerUserThunk({ name, email, password }));
+  
+      if (registerUserThunk.fulfilled.match(resultAction)) {
+        toast.success('Registration successful!');
+      } else {
+        throw new Error(resultAction.payload || 'Registration failed');
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
