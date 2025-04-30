@@ -10,7 +10,6 @@ import IconSvg from '../../components/IconSvg/IconSvg';
 import { useTogglePassword } from '../../hooks/useTogglePassword';
 import styles from './RegistrationForm.module.css';
 
-
 const RegistrationForm = () => {
   const dispatch = useDispatch();
   const error = useSelector(selectIsAuthError);
@@ -24,7 +23,8 @@ const RegistrationForm = () => {
   } = useForm({ mode: 'onChange' });
 
   const { visible: showPassword, toggle: togglePassword } = useTogglePassword();
-  const { visible: showConfirmPassword, toggle: toggleConfirmPassword } = useTogglePassword();
+  const { visible: showConfirmPassword, toggle: toggleConfirmPassword } =
+    useTogglePassword();
 
   const onSubmit = data => {
     setHasTriedSubmit(true);
@@ -41,10 +41,15 @@ const RegistrationForm = () => {
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
-
-        <img src={logo} alt="Wallet Logo" width="26" height="26" className={styles.logoIcon} />
+        <img
+          src={logo}
+          alt="Wallet Logo"
+          width="26"
+          height="26"
+          className={styles.logoIcon}
+        />
         <h2 className={styles.title}>Money Guard</h2>
-        
+
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
@@ -58,15 +63,19 @@ const RegistrationForm = () => {
                 type="text"
                 placeholder="Name"
                 {...register('name', { required: true })}
-                className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
+                className={`${styles.input} ${
+                  errors.name ? styles.inputError : ''
+                }`}
               />
-              </div>
-              {errors.name && <p className={styles.errorText}>This field is required</p>}
             </div>
+            {errors.name && (
+              <p className={styles.errorText}>This field is required</p>
+            )}
+          </div>
 
-            <div className={styles.inputBox}>
+          <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-             <IconSvg
+              <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
@@ -76,13 +85,17 @@ const RegistrationForm = () => {
                 type="email"
                 placeholder="E-mail"
                 {...register('email', { required: true })}
-                className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
-            />
+                className={`${styles.input} ${
+                  errors.email ? styles.inputError : ''
+                }`}
+              />
             </div>
-              {errors.email && <p className={styles.errorText}>This field is required</p>}
-            </div>
+            {errors.email && (
+              <p className={styles.errorText}>This field is required</p>
+            )}
+          </div>
 
-            <div className={styles.inputBox}>
+          <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
               <IconSvg
                 className={styles.inputIcon}
@@ -94,12 +107,15 @@ const RegistrationForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 {...register('password', { required: true })}
-                className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
+                className={`${styles.input} ${
+                  errors.password ? styles.inputError : ''
+                }`}
               />
               <button
                 type="button"
                 className={styles.eyeButton}
-                onClick={togglePassword}>
+                onClick={togglePassword}
+              >
                 <IconSvg
                   width={18}
                   height={18}
@@ -107,48 +123,59 @@ const RegistrationForm = () => {
                 />
               </button>
             </div>
-            {errors.password && <p className={styles.errorText}>This field is required</p>}
+            {errors.password && (
+              <p className={styles.errorText}>This field is required</p>
+            )}
           </div>
 
-            <div className={styles.inputBox}>
+          <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
               <IconSvg
                 className={styles.inputIcon}
                 width={24}
                 height={24}
-                name="icon-lock" />
+                name="icon-lock"
+              />
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 placeholder="Confirm password"
                 {...register('confirmPassword', { required: true })}
-                className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
+                className={`${styles.input} ${
+                  errors.confirmPassword ? styles.inputError : ''
+                }`}
               />
               <button
                 type="button"
                 className={styles.eyeButton}
-                onClick={toggleConfirmPassword}>
+                onClick={toggleConfirmPassword}
+              >
                 <IconSvg
                   width={18}
                   height={18}
-                  name={showConfirmPassword ? 'icon-eye' : 'icon-eye-blocked'} />
+                  name={showConfirmPassword ? 'icon-eye' : 'icon-eye-blocked'}
+                />
               </button>
             </div>
-            {errors.confirmPassword && <p className={styles.errorText}>This field is required</p>}
+            {errors.confirmPassword && (
+              <p className={styles.errorText}>This field is required</p>
+            )}
+            <ProgressBar watch={watch} />
           </div>
-
-          <ProgressBar watch={watch} />
-
           <div className={styles.btnBox}>
             <button
               type="submit"
               disabled={hasTriedSubmit && !isValid}
               className={`${styles.oneBtn} ${styles.multiColorButton}`}
-            >Register</button>
+            >
+              Register
+            </button>
             <Link to="/login">
-            <button
-              type="button"
-              className={`${styles.oneBtn} ${styles.whiteButton}`}
-            >Log in</button>
+              <button
+                type="button"
+                className={`${styles.oneBtn} ${styles.whiteButton}`}
+              >
+                Log in
+              </button>
             </Link>
           </div>
 
