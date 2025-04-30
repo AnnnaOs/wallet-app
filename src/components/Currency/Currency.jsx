@@ -1,69 +1,100 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CurrencyChart from './CurrencyChart/CurrencyChart.jsx';
-import { fetchCurrencyRates } from '../../redux/currency/operations.js';
-import s from './Currency.module.css';
-import Loader from '../Loader/Loader.jsx';
 import clsx from 'clsx';
+
+import CurrencyChart from './CurrencyChart/CurrencyChart';
+
+import {
+  selectCurrencies,
+  selectLastRequestTime,
+} from '../../redux/currency/selectors';
+import { fetchCurrencies } from '../../redux/currency/operations';
+import s from './Currency.module.css';
 
 const Currency = () => {
   const dispatch = useDispatch();
-  const { usdRate, euroRate, loading, error } = useSelector(
-    state => state.currency
-  );
+  const currencies = useSelector(selectCurrencies);
+  const lastRequestTime = useSelector(selectLastRequestTime);
 
-  useEffect(() => {
-    dispatch(fetchCurrencyRates());
-  }, [dispatch]);
-
-  const data = [
-    { name: 'start', currency: 8, label: '' },
+  const currenciesForChart = [
     {
-      name: 'USD',
-      currency: parseFloat(usdRate.rateBuy),
-      label: usdRate.rateBuy,
+      name: 'Point 1',
+      showDot: false,
+      uv: currencies[0]?.rateBuy.toFixed(2) * 0.7,
     },
-    { name: 'middle', currency: 10, label: '' },
     {
-      name: 'EURO',
-      currency: parseFloat(euroRate.rateBuy),
-      label: euroRate.rateBuy,
+      name: 'Point 2',
+      showDot: true,
+      uv: currencies[0]?.rateBuy.toFixed(2),
     },
-    { name: 'end', currency: 25, label: '' },
+    {
+      name: 'Point 3',
+      showDot: false,
+      uv: currencies[1]?.rateBuy.toFixed(2) * 0.5,
+    },
+    {
+      name: 'Point 4',
+      showDot: false,
+      uv: currencies[1]?.rateBuy.toFixed(2) * 0.6,
+    },
+    {
+      name: 'Point 5',
+      showDot: false,
+      uv: currencies[1]?.rateBuy.toFixed(2) * 0.8,
+    },
+    {
+      name: 'Point 6',
+      showDot: true,
+      uv: currencies[1]?.rateBuy.toFixed(2),
+    },
+    {
+      name: 'Point 7',
+      showDot: false,
+      uv: currencies[1]?.rateBuy.toFixed(2) - 6,
+    },
   ];
 
+  useEffect(() => {
+    const currentTime = Date.now();
+
+    if (currentTime.toString().slice(0, 10) - lastRequestTime < 3600000) {
+      return;
+    }
+    dispatch(fetchCurrencies());
+  }, [dispatch, lastRequestTime]);
+
   return (
-    <div className={s.container}>
-      <div className={s.wrapper}>
-        {loading && <Loader />}
-        {error && <p className={s.error}>{error}</p>}
-        {!loading && !error && (
-          <>
-            <table className={s.tab}>
-              <thead>
-                <tr className={clsx(s.tr, s.header)}>
-                  <th className={s.item}>Currency</th>
-                  <th className={s.item}>Purchase</th>
-                  <th className={s.item}>Sale</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className={s.tr}>
-                  <td className={s.item}>USD</td>
-                  <td className={s.item}>{usdRate.rateBuy}</td>
-                  <td className={s.item}>{usdRate.rateSell}</td>
-                </tr>
-                <tr className={s.tr}>
-                  <td className={s.item}>EUR</td>
-                  <td className={s.item}>{euroRate.rateBuy}</td>
-                  <td className={s.item}>{euroRate.rateSell}</td>
-                </tr>
-              </tbody>
-            </table>
-            <CurrencyChart data={data} />
-          </>
-        )}
-      </div>
+    <div className={s.wrapper}>
+      <table className={s.table}>
+        <thead className={s.thead}>
+          <tr className={clsx(s.row, s.mainRow)}>
+            <th className={clsx(s.item, s.mainItem)}>Currency</th>
+            <th className={clsx(s.item, s.mainItem)}>Purchase</th>
+            <th className={clsx(s.item, s.mainItem)}>Sale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className={s.row}>
+            <td className={s.item}>USD</td>
+            <td className={s.item}>
+              {currencies[0]?.rateBuy.toFixed(2) ?? 'no data'}
+            </td>
+            <td className={s.item}>
+              {currencies[0]?.rateSell.toFixed(2) ?? 'no data'}
+            </td>
+          </tr>
+          <tr className={s.row}>
+            <td className={s.item}>EUR</td>
+            <td className={s.item}>
+              {currencies[1]?.rateBuy.toFixed(2) ?? 'no data'}
+            </td>
+            <td className={s.item}>
+              {currencies[1]?.rateSell.toFixed(2) ?? 'no data'}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <CurrencyChart data={currenciesForChart} />
     </div>
   );
 };

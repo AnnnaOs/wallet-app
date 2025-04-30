@@ -8,6 +8,7 @@
   padding: 8px 0 12px 32px;
   display: flex;
   flex-direction: column;
+  border-radius: 8px;
 }
 
 .textBalance {

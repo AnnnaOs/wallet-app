@@ -1,33 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCurrencyRates } from './operations.js';
+import { fetchCurrencies } from './operations.js';
 
 const initialState = {
-  usdRate: { rateBuy: 0, rateSell: 0 },
-  euroRate: { rateBuy: 0, rateSell: 0 },
-  loading: false,
-  error: null,
+  currencies: [],
+  isLoading: false,
+  isError: false,
+  lastRequestTime: '',
 };
 
-const currencySlice = createSlice({
+const slice = createSlice({
   name: 'currency',
   initialState,
-  reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchCurrencyRates.pending, state => {
-        state.loading = true;
-        state.error = null;
+      .addCase(fetchCurrencies.fulfilled, (state, action) => {
+        state.currencies = action.payload;
+        state.lastRequestTime = action.payload[0].date;
+        state.isLoading = false;
+        state.isError = false;
       })
-      .addCase(fetchCurrencyRates.fulfilled, (state, action) => {
-        state.loading = false;
-        if (action.payload.usdRate) state.usdRate = action.payload.usdRate;
-        if (action.payload.euroRate) state.euroRate = action.payload.euroRate;
+      .addCase(fetchCurrencies.rejected, state => {
+        state.isLoading = false;
+        state.isError = true;
       })
-      .addCase(fetchCurrencyRates.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+      .addCase(fetchCurrencies.pending, state => {
+        state.isLoading = true;
+        state.isError = false;
       });
   },
 });
 
-export default currencySlice.reducer;
+export const currencyReducer = slice.reducer;

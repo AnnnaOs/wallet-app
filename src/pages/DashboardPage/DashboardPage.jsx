@@ -1,8 +1,9 @@
+import { Outlet } from 'react-router-dom';
 import Header from '../../components/Header/Header.jsx';
-import HomeTab from '../HomeTab/HomeTab';
+// import HomeTab from '../HomeTab/HomeTab';
 import Navigation from '../../components/Navigation/Navigation.jsx';
 import { useMediaQuery } from 'react-responsive';
-import CurrencyTab from '../CurrencyTab/CurrencyTab.jsx';
+import Currency from '../../components/Currency/Currency.jsx';
 import Balance from '../../components/Balance/Balance.jsx';
 import styles from '../DashboardPage/DashboardPage.module.css';
 
@@ -13,16 +14,16 @@ const DashboardPage = () => {
   return (
     <>
       <Header />
-      <div className={styles.mainContainer}>
-        <div className={styles.sideContainer}>
-          <div>
+      <section className={styles.mainContainer}>
+        <div className={styles.navContainer}>
+          <div className={styles.navBalance}>
             <Navigation />
             <Balance />
           </div>
-          {(isTablet || isDesktop) && <CurrencyTab />}
+          {(isTablet || isDesktop) && <Currency />}
         </div>
-        <HomeTab />
-      </div>
+        <Outlet />
+      </section>
     </>
   );
 };

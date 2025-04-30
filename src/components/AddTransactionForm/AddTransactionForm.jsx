@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createTransaction } from '../../redux/transactions/operations.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -72,162 +72,157 @@ const AddTransactionForm = ({ onClose }) => {
   };
 
   return (
-    
-      <div className={style.modal}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={FeedbackSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ values, setFieldValue, resetForm }) => (
-            <Form className={style.form} >
-              
-              <div className={style.switcher}>
-                <p className={style.picker}>Income</p>
-                <div className={style.switchWrapper}>
-                  <label
-                    className={`${style.switchButton} ${
-                      values.transactionType === 'income' ? style.active : ''
-                    }`}
-                  >
-                    <Field
-                      type="radio"
-                      name="transactionType"
-                      value="income"
-                      className={style.hiddenRadio}
-                      onClick={() => {
-                        setActiveType('income');
-                        setFieldValue('category', 'Income');
-                      }}
-                    />
-                    <IconSvg
-                      className={style.icon}
-                      width={20}
-                      height={20}
-                      name="icon-plus"
-                    />
-                  </label>
-                  <label
-                    className={`${style.switchButton} ${
-                      values.transactionType === 'expense' ? style.active : ''
-                    }`}
-                  >
-                    <Field
-                      type="radio"
-                      name="transactionType"
-                      value="expense"
-                      className={style.hiddenRadio}
-                      onClick={() => {
-                        setActiveType('expense');
-                        setFieldValue('category', '');
-                      }}
-                    />
-                    <IconSvg
-                      className={style.icon}
-                      width={20}
-                      height={20}
-                      name="icon-minus"
-                    />
-                  </label>
-                </div>
-                <p className={style.picker}>Expense</p>
-              </div>
-
-              {/* Категория */}
-              {values.transactionType === 'expense' && (
-                <div className={style.formFields}>
-                  <CustomSelect
-                    options={categories.expenses || []}
-                    value={values.category}
-                    onChange={(selected) =>
-                      setFieldValue('category', selected)
-                    }
-                    placeholder="Select a category"
-                  />
-                  <ErrorMessage
-                    name="category"
-                    component="span"
-                    className={style.errorMessage}
-                  />
-                </div>
-              )}
-
-              <div className={style.formRow}>
-                {/* Сумма */}
-                <div className={style.formField}>
+    <div className={style.modal}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={FeedbackSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, setFieldValue, resetForm }) => (
+          <Form className={style.form}>
+            <div className={style.switcher}>
+              <p className={style.picker}>Income</p>
+              <div className={style.switchWrapper}>
+                <label
+                  className={`${style.switchButton} ${
+                    values.transactionType === 'income' ? style.active : ''
+                  }`}
+                >
                   <Field
-                    type="text"
-                    name="sum"
-                    className={style.input}
-                    placeholder="0.00"
+                    type="radio"
+                    name="transactionType"
+                    value="income"
+                    className={style.hiddenRadio}
+                    onClick={() => {
+                      setActiveType('income');
+                      setFieldValue('category', 'Income');
+                    }}
                   />
-                  <ErrorMessage
-                    name="sum"
-                    component="span"
-                    className={style.msg}
+                  <IconSvg
+                    className={style.icon}
+                    width={20}
+                    height={20}
+                    name="icon-plus"
                   />
-                </div>
-
-                {/* Дата */}
-                <div className={style.formField}>
-                  <div className={style.dateInputWrapper}>
-                    <DatePicker
-                      selected={values.date}
-                      onChange={date => setFieldValue('date', date)}
-                      dateFormat="dd.MM.yyyy"
-                      className={style.dateInput}
-                      maxDate={new Date()}
-                    />
-                    <IconSvg
-                      className={style.dateIcon}
-                      name="icon-calendar"
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="date"
-                    component="div"
-                    className={style.errorMessage}
+                </label>
+                <label
+                  className={`${style.switchButton} ${
+                    values.transactionType === 'expense' ? style.active : ''
+                  }`}
+                >
+                  <Field
+                    type="radio"
+                    name="transactionType"
+                    value="expense"
+                    className={style.hiddenRadio}
+                    onClick={() => {
+                      setActiveType('expense');
+                      setFieldValue('category', '');
+                    }}
                   />
-                </div>
-              
+                  <IconSvg
+                    className={style.icon}
+                    width={20}
+                    height={20}
+                    name="icon-minus"
+                  />
+                </label>
               </div>
+              <p className={style.picker}>Expense</p>
+            </div>
 
-              {/* Комментарий */}
-              <div className={style.formField}>
-                <Field
-                  type="text"
-                  name="comment"
-                  className={style.input}
-                  placeholder="Comment"
+            {/* Категория */}
+            {values.transactionType === 'expense' && (
+              <div className={style.formFields}>
+                <CustomSelect
+                  options={categories.expenses || []}
+                  value={values.category}
+                  onChange={selected => setFieldValue('category', selected)}
+                  placeholder="Select a category"
                 />
                 <ErrorMessage
-                  name="comment"
+                  name="category"
                   component="span"
                   className={style.errorMessage}
                 />
               </div>
+            )}
 
-              <div className={style.buttonGroup}>
-                <button type="submit" className={style.saveButton}>
-                  ADD
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    resetForm();
-                    onClose();
-                  }}
-                  className={style.cancelButton}
-                >
-                  CANCEL
-                </button>
+            <div className={style.formRow}>
+              {/* Сумма */}
+              <div className={style.formField}>
+                <Field
+                  type="text"
+                  name="sum"
+                  className={style.input}
+                  placeholder="0.00"
+                />
+                <ErrorMessage
+                  name="sum"
+                  component="span"
+                  className={style.msg}
+                />
               </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
+
+              {/* Дата */}
+              <div className={style.formField}>
+                <div className={style.dateInputWrapper}>
+                  <DatePicker
+                    selected={values.date}
+                    onChange={date => setFieldValue('date', date)}
+                    dateFormat="dd.MM.yyyy"
+                    className={style.dateInput}
+                    maxDate={new Date()}
+                  />
+                  <IconSvg
+                    className={style.dateIcon}
+                    name="icon-calendar"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <ErrorMessage
+                  name="date"
+                  component="div"
+                  className={style.errorMessage}
+                />
+              </div>
+            </div>
+
+            {/* Комментарий */}
+            <div className={style.formField}>
+              <Field
+                type="text"
+                name="comment"
+                className={style.input}
+                placeholder="Comment"
+              />
+              <ErrorMessage
+                name="comment"
+                component="span"
+                className={style.errorMessage}
+              />
+            </div>
+
+            <div className={style.buttonGroup}>
+              <button type="submit" className={style.saveButton}>
+                ADD
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  resetForm();
+                  onClose();
+                }}
+                className={style.cancelButton}
+              >
+                CANCEL
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

@@ -23,12 +23,12 @@
   font-family: 'Circe';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/Poppins/Circe-Regular.woff') format('woff');
+  src: url('../fonts/Circe-Regular.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Circe';
   font-style: normal;
   font-weight: 600;
-  src: url('../fonts/Poppins/Circe-Bold.woff') format('woff');
+  src: url('../fonts/Circe-Bold.woff') format('woff');
 }
