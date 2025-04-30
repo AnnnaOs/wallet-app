@@ -11,6 +11,8 @@ import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Loader from './Loader/Loader';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
 import { setTokenFromStorage } from '../redux/auth/slice.js';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
@@ -73,6 +75,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 };
