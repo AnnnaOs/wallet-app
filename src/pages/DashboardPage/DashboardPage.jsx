@@ -1,11 +1,15 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../../components/Header/Header.jsx';
-// import HomeTab from '../HomeTab/HomeTab';
-import Navigation from '../../components/Navigation/Navigation.jsx';
 import { useMediaQuery } from 'react-responsive';
+
+import Header from '../../components/Header/Header.jsx';
+import Navigation from '../../components/Navigation/Navigation.jsx';
+// import HomeTab from '../HomeTab/HomeTab';
 import Currency from '../../components/Currency/Currency.jsx';
 import Balance from '../../components/Balance/Balance.jsx';
-import styles from '../DashboardPage/DashboardPage.module.css';
+import Loader from '../../components/Loader/Loader.jsx';
+
+import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1279 });
@@ -22,7 +26,11 @@ const DashboardPage = () => {
           </div>
           {(isTablet || isDesktop) && <Currency />}
         </div>
-        <Outlet />
+        <div className={styles.contentContainer}>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
       </section>
     </>
   );

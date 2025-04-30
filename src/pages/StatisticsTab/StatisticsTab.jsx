@@ -1,35 +1,107 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStatistics } from '../../redux/statistics/operations';
-import { selectStatistics } from '../../redux/statistics/selectors';
+import {
+  selectStatLoading,
+  selectStatError,
+  selectSummary,
+  selectIncomeSummaryByPeriod,
+  selectExpenseSummaryByPeriod,
+} from '../../redux/statistics/selectors';
+import {
+  getExpenseSummaryByCategories,
+  getIncomeAndExpenseSummaryByPeriod,
+} from '../../redux/statistics/operations';
 
-import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
 import Chart from '../../components/Chart/Chart';
+import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
 import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
+import Loader from '../../components/Loader/Loader';
+import { months } from '../..//components/StatisticsDashboard/constants';
 
-import styles from './StatisticsTab.module.css';
+import css from './StatisticsTab.module.css';
 
 const StatisticsTab = () => {
   const dispatch = useDispatch();
-  const statistics = useSelector(selectStatistics);
 
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [year, setYear] = useState(new Date().getFullYear());
+  const summary = useSelector(selectSummary);
+  const isLoading = useSelector(selectStatLoading);
+  const error = useSelector(selectStatError);
+  const incomeSummaryByPeriod = useSelector(selectIncomeSummaryByPeriod);
+  const expensesSummaryByPeriod = useSelector(selectExpenseSummaryByPeriod);
+
+  const now = new Date();
+  const currentMonthName = months[now.getMonth() + 1];
+  const currentYear = `${now.getFullYear()}`;
+
+  const [selectedMonth, setSelectedMonth] = useState(currentMonthName);
+  const [selectedYear, setSelectedYear] = useState(currentYear);
 
   useEffect(() => {
-    dispatch(fetchStatistics({ month, year }));
-  }, [dispatch, month, year]);
+    const fetchData = (monthName, year) => {
+      if (!monthName || !year) return;
+
+      const yearNumber = Number(year);
+      const monthIndex = months.indexOf(monthName);
+
+      const period =
+        monthName === 'All month'
+          ? { year: yearNumber }
+          : { month: monthIndex, year: yearNumber };
+
+      dispatch(getExpenseSummaryByCategories(period));
+      dispatch(getIncomeAndExpenseSummaryByPeriod(period));
+    };
+
+    fetchData(selectedMonth, selectedYear);
+  }, [selectedMonth, selectedYear, dispatch]);
+
+  const handleMonthChange = month => {
+    setSelectedMonth(month);
+  };
+
+  const handleYearChange = year => {
+    setSelectedYear(year);
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <div className={css.statistics}>
+        <p className={css.error}>{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className={styles.statisticsTab}>
-      <StatisticsDashboard
-        month={month}
-        setMonth={setMonth}
-        year={year}
-        setYear={setYear}
-      />
-      <Chart statistics={statistics} />
-      <StatisticsTable statistics={statistics} />
+    <div className={css.statistics}>
+      <div>
+        <h2 className={css.statisticsTitle}>Statistics</h2>
+        <div className={css.chart}>
+          <Chart
+            summary={summary || []}
+            expensesSummaryByPeriod={expensesSummaryByPeriod || 0}
+          />
+        </div>
+      </div>
+
+      <div className={css.statisticsData}>
+        <div className={css.statisticsDashboard}>
+          <StatisticsDashboard
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            onMonthChange={handleMonthChange}
+            onYearChange={handleYearChange}
+          />
+        </div>
+        <StatisticsTable
+          summary={summary || []}
+          incomeSummaryByPeriod={incomeSummaryByPeriod || 0}
+          expensesSummaryByPeriod={expensesSummaryByPeriod || 0}
+        />
+      </div>
     </div>
   );
 };
