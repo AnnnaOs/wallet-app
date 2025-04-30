@@ -6,7 +6,7 @@ import { selectIsRefreshing } from '../redux/auth/selectors';
 import { refreshThunk } from '../redux/auth/operations';
 import { setToken } from '../configAPI/api.js';
 import useResponsive from '../hooks/useResponsive.js';
-// import PrivateRoute from '../routes/PrivateRoute.jsx';
+import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Loader from './Loader/Loader';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
@@ -45,8 +45,14 @@ const App = () => {
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* <Route path="/" element={<PrivateRoute component={<DashboardPage />} />}>  */}
-          <Route path="/" element={<DashboardPage />}>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
+            }
+          >
             <Route index element={<HomeTab />} />
             <Route path="statistics" element={<StatisticsTab />} />
             <Route
@@ -54,22 +60,26 @@ const App = () => {
               element={isMobile ? <CurrencyTab /> : <Navigate to="/" />}
             />
           </Route>
+
           <Route
-            path="login"
+            path="/login"
             element={
               <RestrictedRoute>
                 <LoginPage />
               </RestrictedRoute>
             }
           />
+
           <Route
-            path="register"
+            path="/register"
             element={
               <RestrictedRoute>
                 <RegistrationPage />
               </RestrictedRoute>
             }
           />
+
+          {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
