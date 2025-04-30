@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { logoutThunk } from '../../redux/auth/operations.js';
 import styles from './LogoutModal.module.css';
 import logo from '../../images/logo-mob.svg';
+import { toast } from 'react-toastify';
 
 const LogoutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -12,9 +13,10 @@ const LogoutModal = ({ isOpen, onClose }) => {
     try {
       await dispatch(logoutThunk()).unwrap();
       localStorage.clear();
+      toast.success('Logged out successfully');
       navigate('/login');
     } catch (error) {
-      alert('Logout failed: ' + error);
+      toast.error('Logout failed: ' + error.message);
     }
   };
 
