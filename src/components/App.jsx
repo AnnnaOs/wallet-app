@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { selectIsRefreshing } from '../redux/auth/selectors';
 import { refreshThunk } from '../redux/auth/operations';
-import { setToken } from '../configAPI/api.js';
+import { initializeToken, setToken } from '../configAPI/api.js';
 import useResponsive from '../hooks/useResponsive.js';
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
@@ -12,7 +12,7 @@ import Loader from './Loader/Loader';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
 import { setTokenFromStorage } from '../redux/auth/slice.js';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
@@ -33,9 +33,10 @@ const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
+    initializeToken();
     const token = localStorage.getItem('authToken');
     if (token) {
-      setToken(token);
+      // setToken(token);
       dispatch(setTokenFromStorage(token));
       dispatch(refreshThunk());
     }
