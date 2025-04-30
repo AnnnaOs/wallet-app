@@ -19,15 +19,21 @@ import Loader from '../../components/Loader/Loader';
 import { months } from '../..//components/StatisticsDashboard/constants';
 
 import css from './StatisticsTab.module.css';
+import { useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 const StatisticsTab = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const summary = useSelector(selectSummary);
   const isLoading = useSelector(selectStatLoading);
   const error = useSelector(selectStatError);
   const incomeSummaryByPeriod = useSelector(selectIncomeSummaryByPeriod);
   const expensesSummaryByPeriod = useSelector(selectExpenseSummaryByPeriod);
+
+  const token = localStorage.getItem('authToken');
 
   const now = new Date();
   const currentMonthName = months[now.getMonth() + 1];
@@ -37,6 +43,9 @@ const StatisticsTab = () => {
   const [selectedYear, setSelectedYear] = useState(currentYear);
 
   useEffect(() => {
+    if (!isLoggedIn || !token) {
+      navigate('/login');
+    }
     const fetchData = (monthName, year) => {
       if (!monthName || !year) return;
 
@@ -63,16 +72,33 @@ const StatisticsTab = () => {
     setSelectedYear(year);
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  // if (error) {
+  //   return (
+  //     <div className={css.statistics}>
+  //       <p className={css.error}>{error}</p>
+  //     </div>
+  //   );
+  // }
 
   if (error) {
+    if (error === 'No token') {
+      return (
+        <div className={css.statistics}>
+          <p className={css.error}>You must be logged in to view statistics</p>
+          <button onClick={() => navigate('/login')}>Login</button>
+        </div>
+      );
+    }
+
     return (
       <div className={css.statistics}>
         <p className={css.error}>{error}</p>
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (

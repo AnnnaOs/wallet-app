@@ -19,6 +19,7 @@ const TransactionsItem = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [filterType, setFilterType] = useState('All');
 
   useEffect(() => {
     dispatch(fetchTransactions());
@@ -40,22 +41,38 @@ const TransactionsItem = () => {
     setIsModalOpen(false);
     setSelectedTransaction(null);
   };
-
+  const filteredTransactions = transactions.filter(t => {
+    if (filterType === 'All') return true;
+    return t.type === (filterType === 'Income' ? 'Income' : 'Expense');
+  });
   return (
     <div className={s.homeTabWrap}>
       {transactions.length !== 0 ? (
         <div>
           <div className={s.topBar}>
-            <div></div>{' '}
-            <p className={s.transactionCount}>
-              Всього транзакцій: {transactions.length}
-            </p>
+            <div className={s.selectWrapper}>
+              <label htmlFor="filterSelect" className={s.selectLabel}></label>
+              <div className={s.selectContainer}>
+                <select
+                  id="filterSelect"
+                  value={filterType}
+                  onChange={e => setFilterType(e.target.value)}
+                  className={s.customSelect}
+                >
+                  <option value="All">🌐 All</option>
+                  <option value="Income">💰 Income</option>
+                  <option value="Expense">📉 Expense</option>
+                </select>
+                <span className={s.selectArrow}></span>
+              </div>
+            </div>
+            <p className={s.transactionCount}>Total: {transactions.length}</p>
           </div>
           <div className={s.transactionsContainer}>
             {isMobile ? (
               <ul className={s.mobileList}>
                 <AnimatePresence>
-                  {transactions.map(t => (
+                  {filteredTransactions.map(t => (
                     <motion.li
                       key={t._id}
                       className={`${s.mobileItem} ${
@@ -132,73 +149,90 @@ const TransactionsItem = () => {
                 </AnimatePresence>
               </ul>
             ) : (
-              <table className={s.table}>
-                <thead>
-                  <tr>
-                    <th style={{ textAlign: 'left' }}>Date</th>
-                    <th style={{ textAlign: 'center' }}>Type</th>
-                    <th>Category</th>
-                    <th style={{ textAlign: 'left' }}>Comment</th>
-                    <th style={{ textAlign: 'right' }}>Sum</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <AnimatePresence>
-                    {transactions.map(t => (
-                      <motion.tr
-                        key={t._id}
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{
-                          type: 'spring',
-                          stiffness: 300,
-                          duration: 0.3,
-                        }}
-                      >
-                        <td>{formatDate(t.date)}</td>
-                        <td style={{ textAlign: 'center' }}>
-                          {t.type === 'Income' ? '+' : '-'}
-                        </td>
-                        <td>{t.category}</td>
-                        <td>{t.comment}</td>
-                        <td
-                          className={
-                            t.type === 'Income' ? s.sumOrange : s.sumRed
-                          }
-                          style={{ textAlign: 'right' }}
+              <div className={s.tableWrapper}>
+                <table className={s.table}>
+                  <thead className={s.thead}>
+                    <tr className={s.tr}>
+                      <th style={{ textAlign: 'left' }} className={s.th}>
+                        Date
+                      </th>
+                      <th style={{ textAlign: 'center' }} className={s.th}>
+                        Type
+                      </th>
+                      <th className={s.th}>Category</th>
+                      <th style={{ textAlign: 'left' }} className={s.th}>
+                        Comment
+                      </th>
+                      <th style={{ textAlign: 'right' }} className={s.th}>
+                        Sum
+                      </th>
+                      <th
+                        className={s.th}
+                        style={{ width: '50px', padding: 0 }}
+                      ></th>
+                      <th
+                        className={s.th}
+                        style={{ width: '100px', padding: 0 }}
+                      ></th>
+                    </tr>
+                  </thead>
+                  <tbody className={s.tbody}>
+                    <AnimatePresence>
+                      {filteredTransactions.map(t => (
+                        <motion.tr
+                          key={t._id}
+                          className={s.tr}
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 20 }}
+                          transition={{
+                            type: 'spring',
+                            stiffness: 300,
+                            duration: 0.3,
+                          }}
                         >
-                          {formatSum(t.sum)}
-                        </td>
-                        <td style={{ padding: '3px' }}>
-                          <button
-                            onClick={() => openEditModal(t)}
-                            className={s.editBtn}
-                            style={{ marginLeft: 'auto' }}
+                          <td className={s.td}>{formatDate(t.date)}</td>
+                          <td style={{ textAlign: 'center' }} className={s.td}>
+                            {t.type === 'Income' ? '+' : '-'}
+                          </td>
+                          <td className={s.td}>{t.category}</td>
+                          <td className={s.td}>{t.comment}</td>
+                          <td
+                            className={`${
+                              t.type === 'Income' ? s.sumOrange : s.sumRed
+                            } ${s.td}`}
+                            style={{ textAlign: 'right' }}
                           >
-                            <IconSvg
-                              name="icon-pen"
-                              width={14}
-                              height={13}
-                              className={s.iconEdit}
-                            />
-                          </button>
-                        </td>
-                        <td style={{ paddingLeft: '5px' }}>
-                          <button
-                            onClick={() => dispatch(deleteTransaction(t._id))}
-                            className={s.deleteBtn}
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </AnimatePresence>
-                </tbody>
-              </table>
+                            {formatSum(t.sum)}
+                          </td>
+                          <td style={{ padding: '3px' }} className={s.td}>
+                            <button
+                              onClick={() => openEditModal(t)}
+                              className={s.editBtn}
+                              style={{ marginLeft: 'auto' }}
+                            >
+                              <IconSvg
+                                name="icon-pen"
+                                width={14}
+                                height={13}
+                                className={s.iconEdit}
+                              />
+                            </button>
+                          </td>
+                          <td style={{ paddingLeft: '5px' }} className={s.td}>
+                            <button
+                              onClick={() => dispatch(deleteTransaction(t._id))}
+                              className={s.deleteBtn}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </motion.tr>
+                      ))}
+                    </AnimatePresence>
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </div>

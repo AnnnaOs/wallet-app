@@ -4,7 +4,8 @@ import { setToken, api } from '../../configAPI/api';
 export const getTransactionsCategories = createAsyncThunk(
   'transactions/categories',
   async (_, thunkApi) => {
-    const savedToken = thunkApi.getState().auth.token;
+    // const savedToken = thunkApi.getState().auth.token;
+    const savedToken = localStorage.getItem('authToken');
 
     if (!savedToken) {
       return thunkApi.rejectWithValue('No token');
@@ -13,7 +14,7 @@ export const getTransactionsCategories = createAsyncThunk(
     setToken(savedToken);
 
     try {
-      const { data } = await api.get('/api/transaction-categories');
+      const { data } = await api.get('/summary/transaction-categories');
       return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -26,7 +27,8 @@ export const getTransactionsCategories = createAsyncThunk(
 export const getExpenseSummaryByCategories = createAsyncThunk(
   'transactions/summaryByCategories',
   async ({ month, year }, thunkApi) => {
-    const savedToken = thunkApi.getState().auth.token;
+    // const savedToken = thunkApi.getState().auth.token;
+    const savedToken = localStorage.getItem('authToken');
 
     if (!savedToken) {
       return thunkApi.rejectWithValue('No token');
@@ -35,7 +37,7 @@ export const getExpenseSummaryByCategories = createAsyncThunk(
     setToken(savedToken);
 
     try {
-      let query = `api/transactions-summary/categories?year=${year}`;
+      let query = `/summary/transactions-summary/categories?year=${year}`;
       if (typeof month === 'number') {
         query += `&month=${month}`;
       }
@@ -53,7 +55,8 @@ export const getExpenseSummaryByCategories = createAsyncThunk(
 export const getIncomeAndExpenseSummaryByPeriod = createAsyncThunk(
   'transactions/summaryByPeriod',
   async ({ month, year }, thunkApi) => {
-    const savedToken = thunkApi.getState().auth.token;
+    // const savedToken = thunkApi.getState().auth.token;
+    const savedToken = localStorage.getItem('authToken');
 
     if (!savedToken) {
       return thunkApi.rejectWithValue('No token');
@@ -62,7 +65,7 @@ export const getIncomeAndExpenseSummaryByPeriod = createAsyncThunk(
     setToken(savedToken);
 
     try {
-      let query = `api/transactions-summary-by-period?year=${year}`;
+      let query = `/summary/transactions-summary-by-period?year=${year}`;
       if (typeof month === 'number') {
         query += `&month=${month}`;
       }
