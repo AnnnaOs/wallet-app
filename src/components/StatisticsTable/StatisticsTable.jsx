@@ -1,40 +1,84 @@
-import styles from './StatisticsTable.module.css';
+import { useState, useMemo } from 'react';
+import { FaSort } from 'react-icons/fa';
+import { formatNumber } from '../../components/StatisticsTable/formatNumber';
+import { getCategoryColor } from '../../components/StatisticsTable/getCategoryColor';
+import css from './StatisticsTable.module.css';
 
-const StatisticsTable = ({ statistics }) => {
-  if (!statistics || !statistics.categoriesSummary) return null;
+const StatisticsTable = ({
+  summary,
+  incomeSummaryByPeriod,
+  expensesSummaryByPeriod,
+}) => {
+  const [sortField, setSortField] = useState(null);
+  const [sortOrder, setSortOrder] = useState('desc');
 
-  const { categoriesSummary, totalExpenses, totalIncome } = statistics;
+  const toggleSort = field => {
+    if (sortField === field) {
+      setSortOrder(prev => (prev === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
 
-  const filtered = categoriesSummary.filter(cat => cat.total > 0);
+  const sortedSummary = useMemo(() => {
+    let sorted = [...summary];
+
+    if (sortField === 'sum') {
+      sorted.sort((a, b) => {
+        if (sortOrder === 'asc') {
+          return a.total - b.total;
+        } else {
+          return b.total - a.total;
+        }
+      });
+    }
+
+    return sorted;
+  }, [summary, sortField, sortOrder]);
 
   return (
-    <div className={styles.tableWrapper}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Sum</th>
-          </tr>
-        </thead>
+    <div className={css.tableWrapper}>
+      <div className={css.tableHeader}>
+        <span>Category</span>
+        <span className={css.sumHeader} onClick={() => toggleSort('sum')}>
+          Sum
+          <FaSort
+            className={`${css.sortIcon} ${
+              sortField === 'sum' && sortOrder === 'asc' ? css.asc : ''
+            }`}
+          />
+        </span>
+      </div>
+      <table className={css.table}>
         <tbody>
-          {filtered.map((item, index) => (
-            <tr key={index}>
-              <td className={styles.category}>{item.name}</td>
-              <td className={styles.amount}>{item.total.toFixed(2)}</td>
-            </tr>
-          ))}
+          {sortedSummary.map((item, index) => {
+            const color = getCategoryColor(index);
+            return (
+              <tr key={item.category}>
+                <td className={css.dotCell}>
+                  <span
+                    className={css.colorDot}
+                    style={{ backgroundColor: color }}
+                  />
+                </td>
+                <td>{item.category}</td>
+                <td>{formatNumber(item.total)}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
-      <div className={styles.totals}>
-        <p>
-          Expenses:{' '}
-          <span className={styles.expenses}>₴ {totalExpenses?.toFixed(2)}</span>
-        </p>
-        <p>
-          Income:{' '}
-          <span className={styles.income}>₴ {totalIncome?.toFixed(2)}</span>
-        </p>
+      <div className={css.expenses}>
+        <span className={css.label}>Expenses:</span>
+        <span className={css.value}>
+          {formatNumber(expensesSummaryByPeriod)}
+        </span>
+      </div>
+      <div className={css.income}>
+        <span className={css.label}>Income:</span>
+        <span className={css.value}>{formatNumber(incomeSummaryByPeriod)}</span>
       </div>
     </div>
   );

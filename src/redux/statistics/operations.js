@@ -1,16 +1,83 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { setToken, api } from '../../configAPI/api';
 
-export const fetchStatistics = createAsyncThunk(
-  'statistics/fetch',
-  async ({ month, year }, thunkAPI) => {
+export const getTransactionsCategories = createAsyncThunk(
+  'transactions/categories',
+  async (_, thunkApi) => {
+    const savedToken = thunkApi.getState().auth.token;
+
+    if (!savedToken) {
+      return thunkApi.rejectWithValue('No token');
+    }
+
+    setToken(savedToken);
+
     try {
-      const response = await axios.get(
-        `/statistics?month=${month}&year=${year}`
-      );
-      return response.data;
+      const { data } = await api.get('/api/transaction-categories');
+      return data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return thunkApi.rejectWithValue(
+        error.message || 'Failed to fetch categories'
+      );
+    }
+  }
+);
+
+export const getExpenseSummaryByCategories = createAsyncThunk(
+  'transactions/summaryByCategories',
+  async ({ month, year }, thunkApi) => {
+    const savedToken = thunkApi.getState().auth.token;
+
+    if (!savedToken) {
+      return thunkApi.rejectWithValue('No token');
+    }
+
+    setToken(savedToken);
+
+    try {
+      let query = `api/transactions-summary/categories?year=${year}`;
+      if (typeof month === 'number') {
+        query += `&month=${month}`;
+      }
+
+      const { data } = await api.get(query);
+      return data.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(
+        error.message || 'Failed to fetch expense summary'
+      );
+    }
+  }
+);
+
+export const getIncomeAndExpenseSummaryByPeriod = createAsyncThunk(
+  'transactions/summaryByPeriod',
+  async ({ month, year }, thunkApi) => {
+    const savedToken = thunkApi.getState().auth.token;
+
+    if (!savedToken) {
+      return thunkApi.rejectWithValue('No token');
+    }
+
+    setToken(savedToken);
+
+    try {
+      let query = `api/transactions-summary-by-period?year=${year}`;
+      if (typeof month === 'number') {
+        query += `&month=${month}`;
+      }
+
+      const { data } = await api.get(query);
+      const { incomeSummaryByPeriod, expenseSummaryByPeriod } = data.data;
+
+      return {
+        incomeSummaryByPeriod,
+        expenseSummaryByPeriod,
+      };
+    } catch (error) {
+      return thunkApi.rejectWithValue(
+        error.message || 'Failed to fetch summary by period'
+      );
     }
   }
 );

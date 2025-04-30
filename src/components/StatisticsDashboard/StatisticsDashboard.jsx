@@ -1,49 +1,71 @@
-import styles from './StatisticsDashboard.module.css';
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from '@headlessui/react';
+import { months, years } from '../../components/StatisticsDashboard/constants';
+import css from './StatisticsDashboard.module.css';
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const years = Array.from(
-  { length: 10 },
-  (_, i) => new Date().getFullYear() - i
-);
-
-const StatisticsDashboard = ({ month, setMonth, year, setYear }) => {
+const StatisticsDashboard = ({
+  selectedMonth,
+  selectedYear,
+  onMonthChange,
+  onYearChange,
+}) => {
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.selector}>
-        <label>Month:</label>
-        <select value={month} onChange={e => setMonth(Number(e.target.value))}>
-          {months.map((name, idx) => (
-            <option key={idx} value={idx + 1}>
-              {name}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className={css.wrapper}>
+      {/* Month */}
+      <Listbox value={selectedMonth} onChange={onMonthChange}>
+        {({ open }) => (
+          <div className={`${css.dropdownWrapper} ${open ? css.open : ''}`}>
+            <ListboxButton className={css.dropdownButton}>
+              {selectedMonth}
+            </ListboxButton>
+            <ListboxOptions className={css.dropdownList}>
+              {months.map(month => (
+                <ListboxOption key={month} value={month} as="li">
+                  {({ selected }) => (
+                    <div
+                      className={`${css.dropdownItem} ${
+                        selected ? css.dropdownItemActive : ''
+                      }`}
+                    >
+                      {month}
+                    </div>
+                  )}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </div>
+        )}
+      </Listbox>
 
-      <div className={styles.selector}>
-        <label>Year:</label>
-        <select value={year} onChange={e => setYear(Number(e.target.value))}>
-          {years.map(y => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </select>
-      </div>
+      {/* Year */}
+      <Listbox value={selectedYear} onChange={onYearChange}>
+        {({ open }) => (
+          <div className={`${css.dropdownWrapper} ${open ? css.open : ''}`}>
+            <ListboxButton className={css.dropdownButton}>
+              {selectedYear}
+            </ListboxButton>
+            <ListboxOptions className={css.dropdownList}>
+              {years.map(year => (
+                <ListboxOption key={year} value={year} as="li">
+                  {({ selected }) => (
+                    <div
+                      className={`${css.dropdownItem} ${
+                        selected ? css.dropdownItemActive : ''
+                      }`}
+                    >
+                      {year}
+                    </div>
+                  )}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </div>
+        )}
+      </Listbox>
     </div>
   );
 };
