@@ -8,6 +8,8 @@ import styles from './LoginForm.module.css';
 import logo from '../../images/logo-mob.svg';
 import IconSvg from '../IconSvg/IconSvg';
 import { useTogglePassword } from '../../hooks/useTogglePassword';
+import { toast } from 'react-toastify';
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -24,8 +26,10 @@ const LoginForm = () => {
     onSubmit: async (values, { setSubmitting }) => {
       try {
         await dispatch(loginUserThunk(values)).unwrap();
+        toast.success('Welcome back!');
         navigate('/');
       } catch (error) {
+        toast.error('Login failed. Please check your credentials.');
         console.error('Login failed:', error);
       } finally {
         setSubmitting(false);
