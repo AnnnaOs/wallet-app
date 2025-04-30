@@ -50,9 +50,6 @@ const TransactionsItem = () => {
       {transactions.length !== 0 ? (
         <div>
           <div className={s.topBar}>
-            <p className={s.transactionCount}>
-              Всього транзакцій: {transactions.length}
-            </p>
             <div className={s.selectWrapper}>
               <label htmlFor="filterSelect" className={s.selectLabel}></label>
               <div className={s.selectContainer}>
@@ -62,13 +59,14 @@ const TransactionsItem = () => {
                   onChange={e => setFilterType(e.target.value)}
                   className={s.customSelect}
                 >
-                  <option value="All">🌐 Усі</option>
-                  <option value="Income">💰 Доходи</option>
-                  <option value="Expense">📉 Витрати</option>
+                  <option value="All">🌐 All</option>
+                  <option value="Income">💰 Income</option>
+                  <option value="Expense">📉 Expense</option>
                 </select>
                 <span className={s.selectArrow}></span>
               </div>
             </div>
+            <p className={s.transactionCount}>Total: {transactions.length}</p>
           </div>
           <div className={s.transactionsContainer}>
             {isMobile ? (
