@@ -1,22 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchCategories } from './operations.js';
 
 const initialState = {
-  isAddModalOpen: true,
+  categories: null,
+  status: 'idle',
+  error: null,
+  categoriesFetched: false, // Флаг для проверки, были ли категории загружены
 };
 
 const modalsSlice = createSlice({
-  name: 'modal',
+  name: 'categories',
   initialState,
-  reducers: {
-    openAddModal(state) {
-      state.isAddModalOpen = true;
-    },
-    closeAddModal() {
-      return initialState;
-    },
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(fetchCategories.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.categories = action.payload;
+        state.categoriesFetched = true; // Обновляем флаг
+      })
+      .addCase(fetchCategories.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 
-export const { openAddModal, closeAddModal } = modalsSlice.actions;
-
-export const modalsReducer = modalsSlice.reducer;
+export default modalsSlice.reducer;

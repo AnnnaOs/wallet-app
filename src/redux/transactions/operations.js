@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../../configAPI/api';
 
+
 // Отримання всіх транзакцій
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',

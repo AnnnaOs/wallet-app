@@ -1,19 +1,22 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { createTransaction } from '../../redux/transactions/operations.js';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createTransaction } from '../../redux/transactions/operations';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import style from './AddTransactionForm.module.css';
-import { api } from '../../configAPI/api.js';
-import IconSvg from '../IconSvg/IconSvg.jsx';
-import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
+import IconSvg from '../IconSvg/IconSvg';
+import CustomSelect from '../EditTransactionForm/CustomSelect';
 import { toast } from 'react-toastify';
 
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Выберіть тип транзакції'),
-  category: Yup.string().required('Виберіть категорію'),
+  category: Yup.string().when('transactionType', {
+    is: 'expense',
+    then: Yup.string().required('Виберіть категорію'),
+    otherwise: Yup.string().notRequired(),
+  }),
   sum: Yup.number()
     .typeError('Сумма должна быть числом')
     .required('Це поле обов`язкове')
@@ -29,21 +32,8 @@ const FeedbackSchema = Yup.object().shape({
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
-  const [categories, setCategories] = useState({ expenses: [], income: [] });
+  const categories = useSelector(state => state.modals.categories);
   const [activeType, setActiveType] = useState('expense');
-
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const { data } = await api.get('/categories');
-        setCategories(data);
-      } catch (error) {
-        console.error('Помилка при завантаженні категорій:', error);
-      }
-    }
-
-    fetchCategories();
-  }, []);
 
   const initialValues = {
     transactionType: 'expense',
@@ -134,11 +124,10 @@ const AddTransactionForm = ({ onClose }) => {
               <p className={style.picker}>Expense</p>
             </div>
 
-            {/* Категория */}
             {values.transactionType === 'expense' && (
               <div className={style.formFields}>
                 <CustomSelect
-                  options={categories.expenses || []}
+                  options={categories?.expenses || []}
                   value={values.category}
                   onChange={selected => setFieldValue('category', selected)}
                   placeholder="Select a category"
@@ -152,7 +141,6 @@ const AddTransactionForm = ({ onClose }) => {
             )}
 
             <div className={style.formRow}>
-              {/* Сумма */}
               <div className={style.formField}>
                 <Field
                   type="text"
@@ -167,7 +155,6 @@ const AddTransactionForm = ({ onClose }) => {
                 />
               </div>
 
-              {/* Дата */}
               <div className={style.formField}>
                 <div className={style.dateInputWrapper}>
                   <DatePicker
@@ -192,7 +179,6 @@ const AddTransactionForm = ({ onClose }) => {
               </div>
             </div>
 
-            {/* Комментарий */}
             <div className={style.formField}>
               <Field
                 type="text"
