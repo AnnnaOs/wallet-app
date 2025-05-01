@@ -13,7 +13,10 @@
 }
 
 .modal {
-  background: linear-gradient(117.84deg, #1e0e5e 2.84%, #471ca9 67.28%);
+  background: url('../../images/noimg-gradient-mobile.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 8px;
   outline: none;
   padding: 32px 20px;
