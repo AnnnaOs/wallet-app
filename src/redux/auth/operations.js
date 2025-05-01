@@ -75,7 +75,6 @@ export const editCurrentUserThunk = createAsyncThunk(
       const { data } = await api.patch(`/user/${id}`, updateData);
       return data;
     } catch (error) {
-      console.log(error.response?.data);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

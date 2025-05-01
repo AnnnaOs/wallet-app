@@ -1,10 +1,17 @@
-.wrapper {
-  height: 300px;
+.graphWrapper {
+  height: 88px;
   width: 100%;
+  position: relative;
 }
 
-@media (max-width: 767px) {
-  .wrapper {
-    height: 150px;
+@media (min-width: 768px) {
+  .graphWrapper {
+    height: 96px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .graphWrapper {
+    height: 225px;
   }
 }

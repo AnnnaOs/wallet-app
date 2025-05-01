@@ -1,8 +1,9 @@
 .navList {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 15px 65px;
+  /* align-items: center; */
+  /* padding: 15px 65px; */
+  padding: 12px 0;
   gap: 32px;
 }
 
@@ -34,10 +35,11 @@
 
 @media screen and (min-width: 768px) {
   .navList {
+    flex-direction: column;
     padding-top: 40px;
     padding-bottom: 28px;
-    padding-left: 32px;
-    display: block;
+    gap: 12px;
+    /* display: block; */
   }
 
   .navItem {
@@ -47,9 +49,9 @@
     justify-content: flex-start;
   }
 
-  .navItem:not(:last-child) {
+  /* .navItem:not(:last-child) {
     margin-bottom: 18px;
-  }
+  } */
 
   .iconNav {
     width: 18px;

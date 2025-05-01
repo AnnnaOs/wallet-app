@@ -1,15 +1,9 @@
 .wrapper {
-  /* height: 100%; */
-  max-height: 214px;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: rgba(74, 86, 226, 0.1);
-  @media only screen and (max-width: 767px) {
-    /* margin-top: 24px; */
-    margin: 24px auto;
-  }
+  width: 100%;
+  background-color: hsla(262, 94%, 39%, 0.571);
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(100px);
+  line-height: normal;
 }
 
 .table {
@@ -19,8 +13,12 @@
 }
 
 .mainRow {
-  background-color: hsla(266, 57%, 63%, 0.6);
+  background: rgba(255, 255, 255, 0.2);
   width: 100%;
+  padding: 13px 0;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .item {
@@ -28,15 +26,15 @@
   text-align: center;
 }
 
-@media (max-width: 1279px) {
+@media (min-width: 768px) {
   .wrapper {
-    height: 380px;
+    height: 214px;
     border-radius: 0px 0px 8px 8px;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .mainItem {
-    padding: 12px 20px;
+    padding: 12px 0;
   }
 
   .item {
@@ -47,6 +45,7 @@
 @media (min-width: 1280px) {
   .wrapper {
     width: 480px;
-    max-height: 380px;
+    /* max-height: 380px; */
+    height: 100%;
   }
 }

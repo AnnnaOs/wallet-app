@@ -107,9 +107,10 @@ th {
   width: 100%;
 }
 .tableWrapper {
-  width: 930px;
-  min-width: 600px;
-  padding-left: 60px;
+  /* width: 930px;
+  min-width: 600px; */
+  /* padding-left: 60px; */
+  width: 100%;
 }
 .td {
   font-size: 14px;

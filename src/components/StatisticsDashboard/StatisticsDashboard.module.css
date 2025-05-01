@@ -16,9 +16,9 @@
   justify-content: space-between;
   align-items: center;
   background: rgba(74, 86, 226, 0.1);
-  border: 1px solid #7771cc;
+  border: 1px solid var(--white-600);
   border-radius: 12px;
-  color: #fff;
+  color: var(--white);
   padding: 10px 16px;
   cursor: pointer;
   font-size: 16px;
