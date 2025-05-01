@@ -1,0 +1,7 @@
+.Toastify__toast {
+  background: var(--form-color);
+  color: var(--white);
+  border-left: 4px solid var(--icon-violet);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
