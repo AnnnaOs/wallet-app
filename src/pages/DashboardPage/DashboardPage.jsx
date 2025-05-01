@@ -1,37 +1,41 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
 
+import useResponsive from '../../hooks/useResponsive.js';
 import Header from '../../components/Header/Header.jsx';
 import Navigation from '../../components/Navigation/Navigation.jsx';
-// import HomeTab from '../HomeTab/HomeTab';
 import Currency from '../../components/Currency/Currency.jsx';
 import Balance from '../../components/Balance/Balance.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
-
 import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1279 });
-  const isDesktop = useMediaQuery({ minWidth: 1280 });
+  // const dispatch = useDispatch();
+  const { isMobile } = useResponsive();
 
   return (
     <>
       <Header />
-      <section className={styles.mainContainer}>
-        <div className={styles.navContainer}>
-          <div className={styles.navBalance}>
-            <Navigation />
-            <Balance />
+      <main>
+        <section className={styles.dashboardPage}>
+          <div className={styles.dashboardPageMenu}>
+            <div>
+              <div className={styles.navContainer}>
+                <Navigation />
+              </div>
+              <div className={styles.balanceContainer}>
+                {!isMobile && <Balance />}
+              </div>
+            </div>
+            <div className={styles.currencyContainer}>
+              {!isMobile && <Currency />}
+            </div>
           </div>
-          {(isTablet || isDesktop) && <Currency />}
-        </div>
-        <div className={styles.contentContainer}>
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
-        </div>
-      </section>
+        </section>
+      </main>
     </>
   );
 };

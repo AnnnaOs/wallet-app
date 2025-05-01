@@ -1,14 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateTransaction } from '../../redux/transactions/operations.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import style from './EditTransactionForm.module.css';
-import { api } from '../../configAPI/api.js';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from './CustomSelect.jsx';
+import { getCategories } from '../../redux/categories/selectors.js';
 
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Выберіть тип транзакції'),
@@ -28,25 +28,10 @@ const FeedbackSchema = Yup.object().shape({
 
 const EditTransactionForm = ({ transaction, onClose }) => {
   const dispatch = useDispatch();
-  const [categories, setCategories] = useState({ expenses: [], income: [] });
+  const categories = useSelector(getCategories);
   const [activeType, setActiveType] = useState(
     transaction.type === 'Income' ? 'income' : 'expense'
   );
-  // const [startDate, setStartDate] = useState(
-  //   new Date(transaction.transactionDate)
-  // );
-
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const { data } = await api.get('/categories');
-        setCategories(data);
-      } catch (error) {
-        console.error('Не вдалося завантажити категорії:', error);
-      }
-    }
-    fetchCategories();
-  }, []);
 
   const initialValues = {
     transactionType: transaction.type === 'Income' ? 'income' : 'expense',

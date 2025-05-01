@@ -45,7 +45,7 @@ const CurrencyChart = ({ data }) => {
   };
 
   return (
-    <div className={s.wrapper}>
+    <div className={s.graphWrapper}>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}

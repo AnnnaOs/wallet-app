@@ -1,9 +1,23 @@
+.dashboardPage {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
 @media screen and (min-width: 768px) {
-  .mainContainer {
+  .dashboardPage {
+    max-width: 768px;
     padding: 0 32px 20px 32px;
   }
 
-  .sideContainer {
+  .dashboardPageMenu {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 20px;
+  }
+
+  /* .sideContainer {
     display: flex;
     gap: 32px;
   }
@@ -15,32 +29,50 @@
     margin: 0 auto;
     padding: 0 32px;
   }
+} */
 }
 
 @media only screen and (min-width: 1280px) {
-  .mainContainer {
-    display: flex;
-    padding: 0;
+  .dashboardPage {
+    max-width: 1280px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 69px;
+    padding: 0 16px 0 0;
   }
 
-  .navContainer {
+  .dashboardPageMenu {
+    position: relative;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 0;
+    width: 480px;
+  }
+
+  /* .navContainer {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    /* height: 100vh; */
+    height: 100vh;
     position: relative;
     max-width: 480px;
     padding: 0;
     margin: 0;
-  }
+  } */
 
-  .navContainer::after {
+  .dashboardPageMenu::after {
     content: '';
     position: absolute;
+    top: 0;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 100vh;
+    /* width: 0; */
+    height: 100%;
+    /* border-right: 1px solid var(--white-60); */
+    filter: var(--drop-shadow);
+    /* right: 0;
+    top: 50%; */
+    /* transform: translateY(-50%);
+    height: 100vh; */
     width: 1px;
     box-shadow: 1px 4px 1px 0 rgba(0, 0, 0, 0.25);
     background-color: var(--white-600);
