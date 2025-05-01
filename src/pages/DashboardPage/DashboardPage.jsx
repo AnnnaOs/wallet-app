@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import useResponsive from '../../hooks/useResponsive.js';

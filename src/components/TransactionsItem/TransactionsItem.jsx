@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteTransaction,
-  fetchTransactions,
-} from '../../redux/transactions/operations';
+import { deleteTransaction } from '../../redux/transactions/operations';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { formatDate } from '../../utils/formatDate';
 import s from './TransactionsItem.module.css';
