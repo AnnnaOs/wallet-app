@@ -104,7 +104,8 @@
   .logoutModal {
     padding: 60px 117px;
     box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-    background: var(--form-color);
+    /* background: var(--form-color); */
+    background-image: url('../../images/gradient-tablet.webp');
     border-radius: 8px;
     max-width: 533px;
   }
