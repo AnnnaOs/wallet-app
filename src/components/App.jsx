@@ -13,6 +13,7 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
 import { setTokenFromStorage } from '../redux/auth/slice.js';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../styles/toastify-custom.css';
 
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
