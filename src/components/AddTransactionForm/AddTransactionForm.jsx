@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createTransaction } from '../../redux/transactions/operations.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -10,6 +10,7 @@ import { api } from '../../configAPI/api.js';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
 import { toast } from 'react-toastify';
+import { getCategories } from '../../redux/categories/selectors.js';
 
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Выберіть тип транзакції'),
@@ -29,21 +30,22 @@ const FeedbackSchema = Yup.object().shape({
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
-  const [categories, setCategories] = useState({ expenses: [], income: [] });
+  // const [categories, setCategories] = useState({ expenses: [], income: [] });
+  const categories = useSelector(getCategories);
   const [activeType, setActiveType] = useState('expense');
 
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const { data } = await api.get('/categories');
-        setCategories(data);
-      } catch (error) {
-        console.error('Помилка при завантаженні категорій:', error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchCategories() {
+  //     try {
+  //       const { data } = await api.get('/categories');
+  //       setCategories(data);
+  //     } catch (error) {
+  //       console.error('Помилка при завантаженні категорій:', error);
+  //     }
+  //   }
 
-    fetchCategories();
-  }, []);
+  //   fetchCategories();
+  // }, []);
 
   const initialValues = {
     transactionType: 'expense',

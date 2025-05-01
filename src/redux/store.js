@@ -15,6 +15,7 @@ import { currencyReducer } from './currency/slice';
 import { statisticsReducer } from './statistics/slice';
 import { modalsReducer } from './modals/slice';
 import { authReducer } from './auth/slice';
+import { categoriesReducer } from './categories/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -32,6 +33,12 @@ const currencyPersistConfig = {
   whitelist: ['currencies', 'lastRequestTime'],
 };
 
+const categoriesPersistConfig = {
+  key: 'categories',
+  storage,
+  whitelist: ['expenses', 'income'],
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
@@ -42,6 +49,7 @@ export const store = configureStore({
     ),
     statistics: statisticsReducer,
     modals: modalsReducer,
+    categories: persistReducer(categoriesPersistConfig, categoriesReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

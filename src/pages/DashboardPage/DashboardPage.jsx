@@ -1,9 +1,7 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import { fetchTransactions } from '../../redux/transactions/operations.js';
-import { getTransactionsCategories } from '../../redux/statistics/operations.js';
 import useResponsive from '../../hooks/useResponsive.js';
 import Header from '../../components/Header/Header.jsx';
 import Navigation from '../../components/Navigation/Navigation.jsx';
@@ -13,13 +11,8 @@ import Loader from '../../components/Loader/Loader.jsx';
 import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { isMobile } = useResponsive();
-
-  useEffect(() => {
-    dispatch(getTransactionsCategories());
-    dispatch(fetchTransactions());
-  }, [dispatch]);
 
   return (
     <>
