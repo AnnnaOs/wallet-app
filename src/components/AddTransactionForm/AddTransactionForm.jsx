@@ -86,11 +86,26 @@ const AddTransactionForm = ({ onClose }) => {
         {({ values, setFieldValue, resetForm }) => (
           <Form className={style.form}>
             <div className={style.switcher}>
-              <p className={style.picker}>Income</p>
+              <p
+                className={`${style.picker} ${
+                  values.transactionType === 'income'
+                    ? style.pickerIncomeActive
+                    : ''
+                }`}
+                onClick={() => {
+                  setActiveType('income');
+                  setFieldValue('transactionType', 'income');
+                  setFieldValue('category', 'Income');
+                }}
+              >
+                Income
+              </p>
               <div className={style.switchWrapper}>
                 <label
                   className={`${style.switchButton} ${
-                    values.transactionType === 'income' ? style.active : ''
+                    values.transactionType === 'income'
+                      ? style.incomeActive
+                      : ''
                   }`}
                 >
                   <Field
@@ -112,7 +127,9 @@ const AddTransactionForm = ({ onClose }) => {
                 </label>
                 <label
                   className={`${style.switchButton} ${
-                    values.transactionType === 'expense' ? style.active : ''
+                    values.transactionType === 'expense'
+                      ? style.expenseActive
+                      : ''
                   }`}
                 >
                   <Field
@@ -133,7 +150,20 @@ const AddTransactionForm = ({ onClose }) => {
                   />
                 </label>
               </div>
-              <p className={style.picker}>Expense</p>
+              <p
+                className={`${style.picker} ${
+                  values.transactionType === 'expense'
+                    ? style.pickerExpenseActive
+                    : ''
+                }`}
+                onClick={() => {
+                  setActiveType('expense');
+                  setFieldValue('transactionType', 'expense');
+                  setFieldValue('category', '');
+                }}
+              >
+                Expense
+              </p>
             </div>
 
             {/* Категория */}
@@ -165,7 +195,7 @@ const AddTransactionForm = ({ onClose }) => {
                 <ErrorMessage
                   name="sum"
                   component="span"
-                  className={style.msg}
+                  className={style.errorMessage}
                 />
               </div>
 
@@ -177,6 +207,7 @@ const AddTransactionForm = ({ onClose }) => {
                     onChange={date => setFieldValue('date', date)}
                     dateFormat="dd.MM.yyyy"
                     className={style.dateInput}
+                    calendarClassName={style.customCalendar}
                     maxDate={new Date()}
                   />
                   <IconSvg
@@ -199,7 +230,7 @@ const AddTransactionForm = ({ onClose }) => {
               <Field
                 type="text"
                 name="comment"
-                className={style.input}
+                className={style.inputComment}
                 placeholder="Comment"
               />
               <ErrorMessage
