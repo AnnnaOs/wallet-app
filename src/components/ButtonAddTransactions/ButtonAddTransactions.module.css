@@ -1,4 +1,4 @@
-.addBtn {
+.addTransactionsBtn {
   position: fixed;
   right: 40px;
   bottom: 40px;
@@ -14,15 +14,10 @@
   transition: transform 0.3s, background-color 0.3s;
 }
 
-.addBtn:hover {
+.addTransactionsBtn:hover {
   transform: scale(1.05);
   /* box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4); */
-  background-image: linear-gradient(
-    to right,
-    #7000ff 0%,
-    #9e40ba 31%,
-    #ffc727 100%
-  );
+  background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
   background-size: 200%;
   background-position: right center;
 }
@@ -32,7 +27,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .addBtn {
+  .addTransactionsBtn {
     right: 20px;
     bottom: 20px;
   }

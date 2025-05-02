@@ -12,13 +12,8 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen} className={style.addBtn}>
-        <IconSvg
-          className={style.plusIcon}
-          width={20}
-          height={20}
-          name="icon-plus"
-        />
+      <button type="button" onClick={handleOpen} className={style.addTransactionsBtn}>
+        <IconSvg className={style.plusIcon} width={20} height={20} name="icon-plus" />
       </button>
 
       <ModalAddTransaction isOpen={isModalOpen} onClose={handleClose} />

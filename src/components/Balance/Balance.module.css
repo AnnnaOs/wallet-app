@@ -4,7 +4,7 @@
   backdrop-filter: blur(50px);
   width: 280px;
   height: 80px;
-  margin: 0 auto 12px;
+  margin: 15px auto;
   padding: 8px 0 12px 32px;
   display: flex;
   flex-direction: column;

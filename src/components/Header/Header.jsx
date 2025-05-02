@@ -29,7 +29,7 @@ const Header = () => {
 
         <div className={styles.userBlock}>
           <span className={styles.username}>{username || 'Name'}</span>
-          <button onClick={openModal} className={styles.exitBtn}>
+          <button type="button" onClick={openModal} className={styles.exitAppBtn}>
             <IconSvg className={styles.icon} width={18} height={18} name="icon-exit" />
             <span className={styles.exitText}>Exit</span>
           </button>

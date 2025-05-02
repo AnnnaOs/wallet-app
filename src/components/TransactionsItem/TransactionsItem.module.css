@@ -141,13 +141,14 @@ th {
 }
 
 .emptyText {
+  width: 320px;
   text-align: center;
   font-size: 18px;
   color: #9e9e9e;
   margin-top: 40px;
 }
 .transactionsContainer {
-  max-height: 450px;
+  /* max-height: 450px; */
   overflow-y: auto;
 }
 
@@ -179,6 +180,10 @@ th {
   margin-bottom: 16px;
 }
 @media (min-width: 768px) {
+  .emptyText {
+    width: 600px;
+  }
+
   .topBar {
     display: flex;
     justify-content: end;
@@ -199,9 +204,9 @@ th {
   .table {
     margin: 0;
   }
-  .transactionsContainer {
+  /* .transactionsContainer {
     max-height: 460px;
-  }
+  } */
 }
 /* ------------------------------ */
 .selectWrapper {
@@ -223,23 +228,25 @@ th {
   width: 100%;
   appearance: none;
   padding: 10px 36px 10px 12px;
-  background-color: #1c1c1e;
+  /* background-color: #1c1c1e; */
+  background-color: rgba(82, 59, 126, 0.6);
   color: #fff;
   font-size: 14px;
-  border: 1px solid #6a0dad;
+  /* border: 1px solid #6a0dad; */
+  border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .customSelect:hover {
-  border-color: #4b4bf9;
+  border-color: #6a0dad;
 }
 
 .customSelect:focus {
   outline: none;
-  border-color: #4b4bf9;
-  box-shadow: 0 0 0 2px rgba(75, 75, 249, 0.4);
+  border-color: #6a0dad;
+  box-shadow: 0 0 0 2px #6a0dad;
 }
 
 .selectArrow {
