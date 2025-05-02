@@ -20,23 +20,20 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <img src={logo} alt="Money Guard logo" className={styles.logoIcon} />
-        <p className={styles.logoText}>Money Guard</p>
-      </div>
+    <header className={styles.headerWrap}>
+      <div className={styles.header}>
+        <div className={styles.logo}>
+          <img src={logo} alt="Money Guard logo" className={styles.logoIcon} />
+          <p className={styles.logoText}>Money Guard</p>
+        </div>
 
-      <div className={styles.userBlock}>
-        <span className={styles.username}>{username || 'Name'}</span>
-        <button onClick={openModal} className={styles.exitBtn}>
-          <IconSvg
-            className={styles.icon}
-            width={18}
-            height={18}
-            name="icon-exit"
-          />
-          <span className={styles.exitText}>Exit</span>
-        </button>
+        <div className={styles.userBlock}>
+          <span className={styles.username}>{username || 'Name'}</span>
+          <button onClick={openModal} className={styles.exitBtn}>
+            <IconSvg className={styles.icon} width={18} height={18} name="icon-exit" />
+            <span className={styles.exitText}>Exit</span>
+          </button>
+        </div>
       </div>
 
       {isModalOpen && <LogoutModal isOpen={isModalOpen} onClose={closeModal} />}
