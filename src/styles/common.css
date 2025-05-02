@@ -15,29 +15,28 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   color: var(--white);
   background-color: var(--main-background);
-
   background-image: url('../images/noimg-gradient-desktop.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 
-  @media only screen and (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     body {
       background-image: url('../images/noimg-gradient-mobile.webp');
     }
   }
 
-  @media only screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     body {
       background-image: url('../images/noimg-gradient-tablet.webp');
     }
   }
 
-  @media only screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     body {
       background-image: url('../images/noimg-gradient-desktop.webp');
     }

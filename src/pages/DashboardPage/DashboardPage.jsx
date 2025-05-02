@@ -8,6 +8,9 @@ import Currency from '../../components/Currency/Currency.jsx';
 import Balance from '../../components/Balance/Balance.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
 import styles from './DashboardPage.module.css';
+import LogoutModal from '../../components/LogoutModal/LogoutModal.jsx';
+import ModalEditTransaction from '../../components/ModalEditTransaction/ModalEditTransaction';
+import ModalAddTransaction from '../../components/ModalAddTransaction/ModalAddTransaction';
 
 const DashboardPage = () => {
   // const dispatch = useDispatch();
@@ -23,17 +26,16 @@ const DashboardPage = () => {
               <div className={styles.navContainer}>
                 <Navigation />
               </div>
-              <div className={styles.balanceContainer}>
-                {!isMobile && <Balance />}
-              </div>
+              <div className={styles.balanceContainer}>{!isMobile && <Balance />}</div>
             </div>
-            <div className={styles.currencyContainer}>
-              {!isMobile && <Currency />}
-            </div>
+            <div className={styles.currencyContainer}>{!isMobile && <Currency />}</div>
           </div>
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
+          <LogoutModal />
+          <ModalEditTransaction />
+          <ModalAddTransaction />
         </section>
       </main>
     </>

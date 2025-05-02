@@ -23,7 +23,7 @@
   margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .statistics {
     padding: 0;
     display: flex;
@@ -52,7 +52,7 @@
   }
 }
 
-@media (min-width: 1280px) {
+@media screen and (min-width: 1280px) {
   .statistics {
     padding-top: 32px;
   }

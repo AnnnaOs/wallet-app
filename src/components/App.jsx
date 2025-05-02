@@ -1,32 +1,27 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-import { selectIsRefreshing } from '../redux/auth/selectors';
+import { initializeToken } from '../configAPI/api.js';
 import { refreshThunk } from '../redux/auth/operations';
-import { initializeToken, setToken } from '../configAPI/api.js';
+import { selectIsRefreshing } from '../redux/auth/selectors';
+import { setTokenFromStorage } from '../redux/auth/slice.js';
 import useResponsive from '../hooks/useResponsive.js';
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Loader from './Loader/Loader';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
-import { setTokenFromStorage } from '../redux/auth/slice.js';
-import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/toastify-custom.css';
 
-const DashboardPage = lazy(() =>
-  import('../pages/DashboardPage/DashboardPage')
-);
-const StatisticsTab = lazy(() =>
-  import('../pages/StatisticsTab/StatisticsTab')
-);
+const DashboardPage = lazy(() => import('../pages/DashboardPage/DashboardPage'));
+const StatisticsTab = lazy(() => import('../pages/StatisticsTab/StatisticsTab'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const HomeTab = lazy(() => import('../pages/HomeTab/HomeTab'));
 const CurrencyTab = lazy(() => import('../pages/CurrencyTab/CurrencyTab'));
-const RegistrationPage = lazy(() =>
-  import('../pages/RegistrationPage/RegistrationPage')
-);
+const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,7 +32,6 @@ const App = () => {
     initializeToken();
     const token = localStorage.getItem('authToken');
     if (token) {
-      // setToken(token);
       dispatch(setTokenFromStorage(token));
       dispatch(refreshThunk());
     }
@@ -59,12 +53,8 @@ const App = () => {
           >
             <Route index element={<HomeTab />} />
             <Route path="statistics" element={<StatisticsTab />} />
-            <Route
-              path="currency"
-              element={isMobile ? <CurrencyTab /> : <Navigate to="/" />}
-            />
+            <Route path="currency" element={isMobile ? <CurrencyTab /> : <Navigate to="/" />} />
           </Route>
-
           <Route
             path="/login"
             element={
@@ -73,7 +63,6 @@ const App = () => {
               </RestrictedRoute>
             }
           />
-
           <Route
             path="/register"
             element={
@@ -82,7 +71,6 @@ const App = () => {
               </RestrictedRoute>
             }
           />
-
           {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

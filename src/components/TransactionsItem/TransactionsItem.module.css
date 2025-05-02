@@ -23,12 +23,7 @@
 
 .deleteBtn:hover {
   transform: scale(1.05);
-  background-image: linear-gradient(
-    to right,
-    #7000ff 0%,
-    #9e40ba 31%,
-    #ffc727 100%
-  );
+  background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
   background-size: 200%;
   background-position: right center;
 }
@@ -121,7 +116,7 @@ th {
   padding: 12px 18px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .td:last-child {
