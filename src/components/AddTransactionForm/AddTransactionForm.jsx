@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTransaction } from '../../redux/transactions/operations.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import style from './AddTransactionForm.module.css';
-import { api } from '../../configAPI/api.js';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
 import { toast } from 'react-toastify';
@@ -15,17 +14,9 @@ import { getCategories } from '../../redux/categories/selectors.js';
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Выберіть тип транзакції'),
   category: Yup.string().required('Виберіть категорію'),
-  sum: Yup.number()
-    .typeError('Сумма должна быть числом')
-    .required('Це поле обов`язкове')
-    .positive('Сумма должна быть положительною')
-    .max(1000000, 'Слишком велика сума!'),
+  sum: Yup.number().typeError('Сумма должна быть числом').required('Це поле обов`язкове').positive('Сумма должна быть положительною').max(1000000, 'Слишком велика сума!'),
   date: Yup.date().required('Виберіть дату'),
-  comment: Yup.string()
-    .min(3, 'Занадто коротко!')
-    .max(20, 'Занадто довго!')
-    .required('Обовʼязково')
-    .trim('Не повинно бути пустим!'),
+  comment: Yup.string().min(3, 'Занадто коротко!').max(20, 'Занадто довго!').required('Обовʼязково').trim('Не повинно бути пустим!'),
 });
 
 const AddTransactionForm = ({ onClose }) => {
@@ -58,8 +49,7 @@ const AddTransactionForm = ({ onClose }) => {
   const handleSubmit = async (values, actions) => {
     const newTransaction = {
       type: values.transactionType === 'income' ? 'Income' : 'Expense',
-      category:
-        values.transactionType === 'income' ? 'Income' : values.category,
+      category: values.transactionType === 'income' ? 'Income' : values.category,
       sum: values.sum,
       date: values.date,
       comment: values.comment,
@@ -78,20 +68,12 @@ const AddTransactionForm = ({ onClose }) => {
 
   return (
     <div className={style.modal}>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={FeedbackSchema}
-        onSubmit={handleSubmit}
-      >
+      <Formik initialValues={initialValues} validationSchema={FeedbackSchema} onSubmit={handleSubmit}>
         {({ values, setFieldValue, resetForm }) => (
           <Form className={style.form}>
             <div className={style.switcher}>
               <p
-                className={`${style.picker} ${
-                  values.transactionType === 'income'
-                    ? style.pickerIncomeActive
-                    : ''
-                }`}
+                className={`${style.picker} ${values.transactionType === 'income' ? style.pickerIncomeActive : ''}`}
                 onClick={() => {
                   setActiveType('income');
                   setFieldValue('transactionType', 'income');
@@ -101,13 +83,7 @@ const AddTransactionForm = ({ onClose }) => {
                 Income
               </p>
               <div className={style.switchWrapper}>
-                <label
-                  className={`${style.switchButton} ${
-                    values.transactionType === 'income'
-                      ? style.incomeActive
-                      : ''
-                  }`}
-                >
+                <label className={`${style.switchButton} ${values.transactionType === 'income' ? style.incomeActive : ''}`}>
                   <Field
                     type="radio"
                     name="transactionType"
@@ -118,20 +94,9 @@ const AddTransactionForm = ({ onClose }) => {
                       setFieldValue('category', 'Income');
                     }}
                   />
-                  <IconSvg
-                    className={style.icon}
-                    width={20}
-                    height={20}
-                    name="icon-plus"
-                  />
+                  <IconSvg className={style.icon} width={20} height={20} name="icon-plus" />
                 </label>
-                <label
-                  className={`${style.switchButton} ${
-                    values.transactionType === 'expense'
-                      ? style.expenseActive
-                      : ''
-                  }`}
-                >
+                <label className={`${style.switchButton} ${values.transactionType === 'expense' ? style.expenseActive : ''}`}>
                   <Field
                     type="radio"
                     name="transactionType"
@@ -142,20 +107,11 @@ const AddTransactionForm = ({ onClose }) => {
                       setFieldValue('category', '');
                     }}
                   />
-                  <IconSvg
-                    className={style.icon}
-                    width={20}
-                    height={20}
-                    name="icon-minus"
-                  />
+                  <IconSvg className={style.icon} width={20} height={20} name="icon-minus" />
                 </label>
               </div>
               <p
-                className={`${style.picker} ${
-                  values.transactionType === 'expense'
-                    ? style.pickerExpenseActive
-                    : ''
-                }`}
+                className={`${style.picker} ${values.transactionType === 'expense' ? style.pickerExpenseActive : ''}`}
                 onClick={() => {
                   setActiveType('expense');
                   setFieldValue('transactionType', 'expense');
@@ -175,28 +131,15 @@ const AddTransactionForm = ({ onClose }) => {
                   onChange={selected => setFieldValue('category', selected)}
                   placeholder="Select a category"
                 />
-                <ErrorMessage
-                  name="category"
-                  component="span"
-                  className={style.errorMessage}
-                />
+                <ErrorMessage name="category" component="span" className={style.errorMessage} />
               </div>
             )}
 
             <div className={style.formRow}>
               {/* Сумма */}
               <div className={style.formField}>
-                <Field
-                  type="text"
-                  name="sum"
-                  className={style.input}
-                  placeholder="0.00"
-                />
-                <ErrorMessage
-                  name="sum"
-                  component="span"
-                  className={style.errorMessage}
-                />
+                <Field type="text" name="sum" className={style.input} placeholder="0.00" />
+                <ErrorMessage name="sum" component="span" className={style.errorMessage} />
               </div>
 
               {/* Дата */}
@@ -207,37 +150,20 @@ const AddTransactionForm = ({ onClose }) => {
                     onChange={date => setFieldValue('date', date)}
                     dateFormat="dd.MM.yyyy"
                     className={style.dateInput}
-                    calendarClassName={style.customCalendar}
+                    calendarClassName={style.calendarContainer}
                     maxDate={new Date()}
+                    dayClassName={date => (date.getDay() === 0 || date.getDay() === 6 ? style.weekendDay : undefined)}
                   />
-                  <IconSvg
-                    className={style.dateIcon}
-                    name="icon-calendar"
-                    width={24}
-                    height={24}
-                  />
+                  <IconSvg className={style.dateIcon} name="icon-calendar" width={24} height={24} />
                 </div>
-                <ErrorMessage
-                  name="date"
-                  component="div"
-                  className={style.errorMessage}
-                />
+                <ErrorMessage name="date" component="div" className={style.errorMessage} />
               </div>
             </div>
 
             {/* Комментарий */}
             <div className={style.formField}>
-              <Field
-                type="text"
-                name="comment"
-                className={style.inputComment}
-                placeholder="Comment"
-              />
-              <ErrorMessage
-                name="comment"
-                component="span"
-                className={style.errorMessage}
-              />
+              <Field type="text" name="comment" className={style.inputComment} placeholder="Comment" />
+              <ErrorMessage name="comment" component="span" className={style.errorMessage} />
             </div>
 
             <div className={style.buttonGroup}>

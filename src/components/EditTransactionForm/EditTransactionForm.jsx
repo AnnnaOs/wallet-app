@@ -13,25 +13,15 @@ import { getCategories } from '../../redux/categories/selectors.js';
 const FeedbackSchema = Yup.object().shape({
   transactionType: Yup.string().required('Выберіть тип транзакції'),
   category: Yup.string().required('Виберіть категорію'),
-  sum: Yup.number()
-    .typeError('Сумма должна быть числом')
-    .required('Це поле обов`язкове')
-    .positive('Сумма должна быть положительною')
-    .max(1000000, 'Слишком велика сума!'),
+  sum: Yup.number().typeError('Сумма должна быть числом').required('Це поле обов`язкове').positive('Сумма должна быть положительною').max(1000000, 'Слишком велика сума!'),
   date: Yup.date().required('Виберіть дату'),
-  comment: Yup.string()
-    .min(3, 'Занадто коротко!')
-    .max(20, 'Занадто довго!')
-    .required('Обовʼязково')
-    .trim('Не повинно бути пустим!'),
+  comment: Yup.string().min(3, 'Занадто коротко!').max(20, 'Занадто довго!').required('Обовʼязково').trim('Не повинно бути пустим!'),
 });
 
 const EditTransactionForm = ({ transaction, onClose }) => {
   const dispatch = useDispatch();
   const categories = useSelector(getCategories);
-  const [activeType, setActiveType] = useState(
-    transaction.type === 'Income' ? 'income' : 'expense'
-  );
+  const [activeType, setActiveType] = useState(transaction.type === 'Income' ? 'income' : 'expense');
 
   const initialValues = {
     transactionType: transaction.type === 'Income' ? 'income' : 'expense',
@@ -45,8 +35,7 @@ const EditTransactionForm = ({ transaction, onClose }) => {
     const updatedTransaction = {
       id: transaction._id,
       type: values.transactionType === 'income' ? 'Income' : 'Expense',
-      category:
-        values.transactionType === 'income' ? 'Income' : values.category,
+      category: values.transactionType === 'income' ? 'Income' : values.category,
       sum: values.sum,
       date: values.date,
       comment: values.comment,
@@ -59,20 +48,13 @@ const EditTransactionForm = ({ transaction, onClose }) => {
 
   return (
     <div className={style.formContainer}>
-      <Formik
-        validationSchema={FeedbackSchema}
-        initialValues={initialValues}
-        enableReinitialize
-        onSubmit={handleSubmit}
-      >
+      <Formik validationSchema={FeedbackSchema} initialValues={initialValues} enableReinitialize onSubmit={handleSubmit}>
         {({ values, setFieldValue }) => (
           <Form className={style.form}>
             <div className={style.typeSelector}>
               <button
                 type="button"
-                className={`${style.typeButton} ${
-                  activeType === 'income' ? style.activeIncome : ''
-                }`}
+                className={`${style.typeButton} ${activeType === 'income' ? style.activeIncome : ''}`}
                 onClick={() => {
                   setActiveType('income');
                   setFieldValue('transactionType', 'income');
@@ -83,9 +65,7 @@ const EditTransactionForm = ({ transaction, onClose }) => {
               <span className={style.typeDivider}>/</span>
               <button
                 type="button"
-                className={`${style.typeButton} ${
-                  activeType === 'expense' ? style.activeExpense : ''
-                }`}
+                className={`${style.typeButton} ${activeType === 'expense' ? style.activeExpense : ''}`}
                 onClick={() => {
                   setActiveType('expense');
                   setFieldValue('transactionType', 'expense');
@@ -101,32 +81,17 @@ const EditTransactionForm = ({ transaction, onClose }) => {
                   <CustomSelect
                     options={categories.expenses || []}
                     value={values.category}
-                    onChange={selectedCategory =>
-                      setFieldValue('category', selectedCategory)
-                    }
+                    onChange={selectedCategory => setFieldValue('category', selectedCategory)}
                     placeholder="Select a category"
                   />
-                  <ErrorMessage
-                    name="category"
-                    component="div"
-                    className={style.errorMessage}
-                  />
+                  <ErrorMessage name="category" component="div" className={style.errorMessage} />
                 </div>
               )}
 
               <div className={style.formRow}>
                 <div className={style.formField}>
-                  <Field
-                    type="text"
-                    name="sum"
-                    placeholder="0.00"
-                    className={style.input}
-                  />
-                  <ErrorMessage
-                    name="sum"
-                    component="div"
-                    className={style.errorMessage}
-                  />
+                  <Field type="text" name="sum" placeholder="0.00" className={style.input} />
+                  <ErrorMessage name="sum" component="div" className={style.errorMessage} />
                 </div>
 
                 <div className={style.formField}>
@@ -136,35 +101,19 @@ const EditTransactionForm = ({ transaction, onClose }) => {
                       onChange={date => setFieldValue('date', date)}
                       dateFormat="dd.MM.yyyy"
                       className={style.dateInput}
+                      calendarClassName={style.calendarContainer}
                       maxDate={new Date()}
+                      dayClassName={date => (date.getDay() === 0 || date.getDay() === 6 ? style.weekendDay : undefined)}
                     />
-                    <IconSvg
-                      className={style.dateIcon}
-                      name="icon-calendar"
-                      width={24}
-                      height={24}
-                    />
+                    <IconSvg className={style.dateIcon} name="icon-calendar" width={24} height={24} />
                   </div>
-                  <ErrorMessage
-                    name="date"
-                    component="div"
-                    className={style.errorMessage}
-                  />
+                  <ErrorMessage name="date" component="div" className={style.errorMessage} />
                 </div>
               </div>
 
               <div className={style.formField}>
-                <Field
-                  type="text"
-                  name="comment"
-                  placeholder="Comment"
-                  className={style.input}
-                />
-                <ErrorMessage
-                  name="comment"
-                  component="div"
-                  className={style.errorMessage}
-                />
+                <Field type="text" name="comment" placeholder="Comment" className={style.input} />
+                <ErrorMessage name="comment" component="div" className={style.errorMessage} />
               </div>
             </div>
 
@@ -172,11 +121,7 @@ const EditTransactionForm = ({ transaction, onClose }) => {
               <button type="submit" className={style.saveButton}>
                 SAVE
               </button>
-              <button
-                type="button"
-                onClick={onClose}
-                className={style.cancelButton}
-              >
+              <button type="button" onClick={onClose} className={style.cancelButton}>
                 CANCEL
               </button>
             </div>
