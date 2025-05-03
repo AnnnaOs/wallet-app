@@ -123,47 +123,49 @@ const AddTransactionForm = ({ onClose }) => {
             </div>
 
             {/* Категория */}
-            {values.transactionType === 'expense' && (
-              <div className={style.formFields}>
-                <CustomSelect
-                  options={categories.expenses || []}
-                  value={values.category}
-                  onChange={selected => setFieldValue('category', selected)}
-                  placeholder="Select a category"
-                />
-                <ErrorMessage name="category" component="span" className={style.errorMessage} />
-              </div>
-            )}
-
-            <div className={style.formRow}>
-              {/* Сумма */}
-              <div className={style.formField}>
-                <Field type="text" name="sum" className={style.input} placeholder="0.00" />
-                <ErrorMessage name="sum" component="span" className={style.errorMessage} />
-              </div>
-
-              {/* Дата */}
-              <div className={style.formField}>
-                <div className={style.dateInputWrapper}>
-                  <DatePicker
-                    selected={values.date}
-                    onChange={date => setFieldValue('date', date)}
-                    dateFormat="dd.MM.yyyy"
-                    className={style.dateInput}
-                    calendarClassName={style.calendarContainer}
-                    maxDate={new Date()}
-                    dayClassName={date => (date.getDay() === 0 || date.getDay() === 6 ? style.weekendDay : undefined)}
+            <div className={style.formFields}>
+              {values.transactionType === 'expense' && (
+                <div className={style.formField}>
+                  <CustomSelect
+                    options={categories.expenses || []}
+                    value={values.category}
+                    onChange={selected => setFieldValue('category', selected)}
+                    placeholder="Select a category"
                   />
-                  <IconSvg className={style.dateIcon} name="icon-calendar" width={24} height={24} />
+                  <ErrorMessage name="category" component="span" className={style.errorMessage} />
                 </div>
-                <ErrorMessage name="date" component="div" className={style.errorMessage} />
-              </div>
-            </div>
+              )}
 
-            {/* Комментарий */}
-            <div className={style.formField}>
-              <Field type="text" name="comment" className={style.inputComment} placeholder="Comment" />
-              <ErrorMessage name="comment" component="span" className={style.errorMessage} />
+              <div className={style.formRow}>
+                {/* Сумма */}
+                <div className={style.formField}>
+                  <Field type="text" name="sum" className={style.input} placeholder="0.00" />
+                  <ErrorMessage name="sum" component="span" className={style.errorMessage} />
+                </div>
+
+                {/* Дата */}
+                <div className={style.formField}>
+                  <div className={style.dateInputWrapper}>
+                    <DatePicker
+                      selected={values.date}
+                      onChange={date => setFieldValue('date', date)}
+                      dateFormat="dd.MM.yyyy"
+                      className={style.dateInput}
+                      calendarClassName={style.calendarContainer}
+                      maxDate={new Date()}
+                      dayClassName={date => (date.getDay() === 0 || date.getDay() === 6 ? style.weekendDay : undefined)}
+                    />
+                    <IconSvg className={style.dateIcon} name="icon-calendar" width={24} height={24} />
+                  </div>
+                  <ErrorMessage name="date" component="div" className={style.errorMessage} />
+                </div>
+              </div>
+
+              {/* Комментарий */}
+              <div className={style.formField}>
+                <Field type="text" name="comment" className={style.inputComment} placeholder="Comment" />
+                <ErrorMessage name="comment" component="span" className={style.errorMessage} />
+              </div>
             </div>
 
             <div className={style.buttonGroup}>
