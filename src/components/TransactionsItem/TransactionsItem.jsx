@@ -182,9 +182,11 @@ const TransactionsItem = () => {
           </div>
         </div>
       ) : (
-        <motion.p className={s.emptyText} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          У вас ще немає транзакцій 📝
-        </motion.p>
+        <div className={s.emptyTextWrap}>
+          <motion.p className={s.emptyText} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+            У вас ще немає транзакцій 📝
+          </motion.p>
+        </div>
       )}
 
       {selectedTransaction && <ModalEditTransaction isOpen={isModalOpen} onClose={closeEditModal} transaction={selectedTransaction} />}

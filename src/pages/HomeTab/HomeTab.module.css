@@ -1,6 +1,7 @@
 @media screen and (min-width: 768px) {
   .homeTabPageWrap {
     padding-top: 10px;
+    display: flex;
   }
 
   .container {
@@ -12,6 +13,6 @@
 @media screen and (min-width: 1280px) {
   .container {
     max-width: 731px;
-    padding: 0 16px;
+    padding: 0;
   }
 }
