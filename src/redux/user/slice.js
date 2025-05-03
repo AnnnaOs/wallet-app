@@ -18,7 +18,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchCurrentUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.data; // або action.payload.data.user
+        state.user = action.payload.data;
       })
       .addCase(fetchCurrentUserThunk.rejected, state => {
         state.isLoading = false;

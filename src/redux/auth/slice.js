@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  refreshThunk,
-  registerUserThunk,
-  logoutThunk,
-  loginUserThunk,
-} from './operations';
+import { refreshThunk, registerUserThunk, logoutThunk, loginUserThunk } from './operations';
 
 const initialState = {
   user: {
@@ -29,7 +24,6 @@ const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      // Обработка для refreshThunk (получение текущего пользователя)
       .addCase(refreshThunk.pending, state => {
         state.isRefreshing = true;
         state.isLoggedIn = true;
@@ -45,8 +39,6 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isAuthError = payload || 'Ошибка авторизации';
       })
-
-      // Обработка для registerUserThunk (регистрация)
       .addCase(registerUserThunk.pending, state => {
         state.isLoading = true;
         state.isAuthError = null;
@@ -62,8 +54,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isAuthError = payload;
       })
-
-      // Обработка для loginUserThunk (вход)
       .addCase(loginUserThunk.pending, state => {
         state.isLoading = true;
         state.isAuthError = null;
@@ -79,8 +69,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isAuthError = payload;
       })
-
-      // Обработка для logoutThunk (выход)
       .addCase(logoutThunk.fulfilled, () => {
         return initialState;
       });

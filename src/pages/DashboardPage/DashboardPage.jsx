@@ -13,7 +13,6 @@ import ModalEditTransaction from '../../components/ModalEditTransaction/ModalEdi
 import ModalAddTransaction from '../../components/ModalAddTransaction/ModalAddTransaction';
 
 const DashboardPage = () => {
-  // const dispatch = useDispatch();
   const { isMobile } = useResponsive();
 
   return (

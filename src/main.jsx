@@ -8,7 +8,7 @@ import App from './components/App.jsx';
 import 'modern-normalize';
 import './index.css';
 import { initializeToken } from './configAPI/api';
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 
 initializeToken();
 

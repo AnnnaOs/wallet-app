@@ -1,11 +1,5 @@
-// === slice.js ===
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchTransactions,
-  createTransaction,
-  updateTransaction,
-  deleteTransaction,
-} from './operations';
+import { fetchTransactions, createTransaction, updateTransaction, deleteTransaction } from './operations';
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -33,17 +27,13 @@ const transactionsSlice = createSlice({
         state.transactions.push(action.payload);
       })
       .addCase(updateTransaction.fulfilled, (state, action) => {
-        const index = state.transactions.findIndex(
-          t => t._id === action.payload._id
-        );
+        const index = state.transactions.findIndex(t => t._id === action.payload._id);
         if (index !== -1) {
           state.transactions[index] = action.payload;
         }
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
-        state.transactions = state.transactions.filter(
-          transaction => transaction._id !== action.payload
-        );
+        state.transactions = state.transactions.filter(transaction => transaction._id !== action.payload);
       })
       .addCase(deleteTransaction.rejected, (state, action) => {
         state.error = action.payload;

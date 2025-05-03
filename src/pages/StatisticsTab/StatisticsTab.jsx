@@ -1,26 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectStatLoading,
-  selectStatError,
-  selectSummary,
-  selectIncomeSummaryByPeriod,
-  selectExpenseSummaryByPeriod,
-} from '../../redux/statistics/selectors';
-import {
-  getExpenseSummaryByCategories,
-  getIncomeAndExpenseSummaryByPeriod,
-} from '../../redux/statistics/operations';
 
+import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
+import { getExpenseSummaryByCategories, getIncomeAndExpenseSummaryByPeriod } from '../../redux/statistics/operations';
+import { selectStatLoading, selectStatError, selectSummary, selectIncomeSummaryByPeriod, selectExpenseSummaryByPeriod } from '../../redux/statistics/selectors';
 import Chart from '../../components/Chart/Chart';
-import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
-import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
 import Loader from '../../components/Loader/Loader';
-import { months } from '../..//components/StatisticsDashboard/constants';
+import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
+import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
+import { months } from '../../components/StatisticsDashboard/constants';
 
 import css from './StatisticsTab.module.css';
-import { useNavigate } from 'react-router-dom';
-import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 const StatisticsTab = () => {
   const dispatch = useDispatch();
@@ -52,10 +43,7 @@ const StatisticsTab = () => {
       const yearNumber = Number(year);
       const monthIndex = months.indexOf(monthName);
 
-      const period =
-        monthName === 'All month'
-          ? { year: yearNumber }
-          : { month: monthIndex, year: yearNumber };
+      const period = monthName === 'All month' ? { year: yearNumber } : { month: monthIndex, year: yearNumber };
 
       dispatch(getExpenseSummaryByCategories(period));
       dispatch(getIncomeAndExpenseSummaryByPeriod(period));
@@ -71,14 +59,6 @@ const StatisticsTab = () => {
   const handleYearChange = year => {
     setSelectedYear(year);
   };
-
-  // if (error) {
-  //   return (
-  //     <div className={css.statistics}>
-  //       <p className={css.error}>{error}</p>
-  //     </div>
-  //   );
-  // }
 
   if (error) {
     if (error === 'No token') {
@@ -106,27 +86,15 @@ const StatisticsTab = () => {
       <div>
         <h2 className={css.statisticsTitle}>Statistics</h2>
         <div className={css.chart}>
-          <Chart
-            summary={summary || []}
-            expensesSummaryByPeriod={expensesSummaryByPeriod || 0}
-          />
+          <Chart summary={summary || []} expensesSummaryByPeriod={expensesSummaryByPeriod || 0} />
         </div>
       </div>
 
       <div className={css.statisticsData}>
         <div className={css.statisticsDashboard}>
-          <StatisticsDashboard
-            selectedMonth={selectedMonth}
-            selectedYear={selectedYear}
-            onMonthChange={handleMonthChange}
-            onYearChange={handleYearChange}
-          />
+          <StatisticsDashboard selectedMonth={selectedMonth} selectedYear={selectedYear} onMonthChange={handleMonthChange} onYearChange={handleYearChange} />
         </div>
-        <StatisticsTable
-          summary={summary || []}
-          incomeSummaryByPeriod={incomeSummaryByPeriod || 0}
-          expensesSummaryByPeriod={expensesSummaryByPeriod || 0}
-        />
+        <StatisticsTable summary={summary || []} incomeSummaryByPeriod={incomeSummaryByPeriod || 0} expensesSummaryByPeriod={expensesSummaryByPeriod || 0} />
       </div>
     </div>
   );

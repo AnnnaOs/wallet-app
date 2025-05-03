@@ -18,10 +18,6 @@ const TransactionsItem = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [filterType, setFilterType] = useState('All');
 
-  // useEffect(() => {
-  //   dispatch(fetchTransactions());
-  // }, [dispatch]);
-
   const formatSum = sum => {
     return new Intl.NumberFormat('uk-UA', {
       minimumFractionDigits: 2,
