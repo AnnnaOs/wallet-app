@@ -200,15 +200,56 @@ th {
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
 
+.topBar {
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .transactionsContainer {
+    max-height: 682px;
+  }
+  .tableWrapper {
+    width: 704px;
+  }
+
+  .topBar {
+    display: flex;
+    justify-content: end;
+    gap: 25px;
+    align-items: center;
+  }
+  .transactionCount {
+    margin-top: 0;
+  }
+}
+.transactionCount {
+  font-size: 16px;
+  color: var(--white-600);
+  text-align: center;
+  margin-top: 10px;
+}
+@media (min-width: 1280px) {
+  .emptyTextWrap {
+    width: 715px;
+  }
+
+  .tableWrapper {
+    width: 715px;
+  }
+
+  .table {
+    margin: 0;
+  }
+  .transactionsContainer {
+    max-height: 560px;
+  }
+}
+/* ------------------------------ */
+
 /* ⬇️ Селект */
 .selectWrapper {
   display: flex;
   justify-content: center;
-}
-
-.selectLabel {
-  color: #fff;
-  font-size: 14px;
 }
 
 .selectContainer {
