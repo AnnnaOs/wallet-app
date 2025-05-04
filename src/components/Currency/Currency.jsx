@@ -4,10 +4,7 @@ import clsx from 'clsx';
 
 import CurrencyChart from './CurrencyChart/CurrencyChart';
 
-import {
-  selectCurrencies,
-  selectLastRequestTime,
-} from '../../redux/currency/selectors';
+import { selectCurrencies, selectLastRequestTime } from '../../redux/currency/selectors';
 import { fetchCurrencies } from '../../redux/currency/operations';
 import s from './Currency.module.css';
 
@@ -76,21 +73,13 @@ const Currency = () => {
         <tbody>
           <tr className={s.row}>
             <td className={s.item}>USD</td>
-            <td className={s.item}>
-              {currencies[0]?.rateBuy.toFixed(2) ?? 'no data'}
-            </td>
-            <td className={s.item}>
-              {currencies[0]?.rateSell.toFixed(2) ?? 'no data'}
-            </td>
+            <td className={s.item}>{currencies[0]?.rateBuy.toFixed(2) ?? 'no data'}</td>
+            <td className={s.item}>{currencies[0]?.rateSell.toFixed(2) ?? 'no data'}</td>
           </tr>
           <tr className={s.row}>
             <td className={s.item}>EUR</td>
-            <td className={s.item}>
-              {currencies[1]?.rateBuy.toFixed(2) ?? 'no data'}
-            </td>
-            <td className={s.item}>
-              {currencies[1]?.rateSell.toFixed(2) ?? 'no data'}
-            </td>
+            <td className={s.item}>{currencies[1]?.rateBuy.toFixed(2) ?? 'no data'}</td>
+            <td className={s.item}>{currencies[1]?.rateSell.toFixed(2) ?? 'no data'}</td>
           </tr>
         </tbody>
       </table>

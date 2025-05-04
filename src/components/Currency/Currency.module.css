@@ -1,10 +1,12 @@
 .wrapper {
   width: 100%;
   background-color: hsla(262, 94%, 39%, 0.571);
-  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(100px);
   line-height: normal;
-  margin-top: 27px;
+  height: 214px;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
 }
 
 .table {
@@ -14,40 +16,52 @@
 }
 
 .mainRow {
-  background: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
-  padding: 13px 0;
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
 }
 
 .item {
-  padding: 16px 25px;
+  padding: 8px 20px 4px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mainItem {
+  padding: 13px 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 @media (min-width: 768px) {
   .wrapper {
-    height: 214px;
-    border-radius: 0px 0px 8px 8px;
+    width: 336px;
     margin-top: 0;
-    /* overflow: hidden; */
-  }
-
-  .mainItem {
-    padding: 12px 0;
   }
 
   .item {
     padding: 8px 20px 6px;
+  }
+
+  .mainItem {
+    padding: 13px 0;
   }
 }
 
 @media (min-width: 1280px) {
   .wrapper {
     width: 480px;
-    /* max-height: 380px; */
-    height: 100%;
+    height: 380px;
+    border-radius: 0;
+  }
+
+  .item {
+    padding: 24px 50px;
+  }
+
+  .mainItem {
+    padding: 16px 50px;
   }
 }
