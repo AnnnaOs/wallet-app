@@ -4,10 +4,12 @@ import { logoutThunk } from '../../redux/auth/operations.js';
 import styles from './LogoutModal.module.css';
 import logo from '../../images/logo-mob.svg';
 import { toast } from 'react-toastify';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
 
 const LogoutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useBodyScrollLock(isOpen);
 
   const handleLogout = async () => {
     try {
@@ -27,13 +29,7 @@ const LogoutModal = ({ isOpen, onClose }) => {
       <div className={styles.logoutModal}>
         {/* Додаємо новий клас */}
         <div className={styles.logoWrapper}>
-          <img
-            src={logo}
-            alt="Wallet Logo"
-            width="36"
-            height="36"
-            className={styles.logoIcon}
-          />
+          <img src={logo} alt="Wallet Logo" width="36" height="36" className={styles.logoIcon} />
           <h2 className={styles.logoText}>Money Guard</h2>
         </div>
 

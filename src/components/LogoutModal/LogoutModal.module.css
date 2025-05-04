@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  top: 60px;
 }
 
 .logoutModal {
@@ -98,6 +99,7 @@
     background: transparent;
     backdrop-filter: blur(7px);
     box-shadow: none;
+    top: 0;
   }
 
   .logoutModal {

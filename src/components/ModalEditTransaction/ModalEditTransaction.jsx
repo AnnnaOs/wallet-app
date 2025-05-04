@@ -6,11 +6,13 @@ import { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader.jsx';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import useResponsive from '../../hooks/useResponsive.js';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
 
 Modal.setAppElement('#root');
 const ModalEditTransaction = ({ isOpen, onClose, transaction }) => {
   const { isMobile } = useResponsive();
   const [isLoading, setIsLoading] = useState(true);
+  useBodyScrollLock(isOpen);
 
   useEffect(() => {
     if (isOpen) {
@@ -25,13 +27,7 @@ const ModalEditTransaction = ({ isOpen, onClose, transaction }) => {
   }, [isOpen]);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={style.modal}
-      overlayClassName={style.backdrop}
-      contentLabel="Edit Transaction Modal"
-    >
+    <Modal isOpen={isOpen} onRequestClose={onClose} className={style.modal} overlayClassName={style.backdrop} contentLabel="Edit Transaction Modal">
       <div className={style.modalEllipse}>
         <div className={style.modalHeader}>
           <h2 className={style.modalTitle}>Edit transaction</h2>
