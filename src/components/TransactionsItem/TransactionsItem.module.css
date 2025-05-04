@@ -155,7 +155,7 @@ th {
   /* margin-top: 40px; */
 }
 .transactionsContainer {
-  /* max-height: 450px; */
+  /* max-height: 560px; */
   overflow-y: auto;
 }
 
@@ -187,6 +187,9 @@ th {
   margin-bottom: 16px;
 }
 @media (min-width: 768px) {
+  .transactionsContainer {
+    max-height: 682px;
+  }
   .tableWrapper {
     width: 704px;
   }
@@ -219,9 +222,9 @@ th {
   .table {
     margin: 0;
   }
-  /* .transactionsContainer {
-    max-height: 460px;
-  } */
+  .transactionsContainer {
+    max-height: 560px;
+  }
 }
 /* ------------------------------ */
 .selectWrapper {
@@ -229,50 +232,7 @@ th {
   justify-content: center;
 }
 
-.selectLabel {
-  color: #fff;
-  font-size: 14px;
-}
-
 .selectContainer {
   position: relative;
   width: 160px;
-}
-
-.customSelect {
-  width: 100%;
-  appearance: none;
-  padding: 10px 36px 10px 12px;
-  /* background-color: #1c1c1e; */
-  background-color: rgba(82, 59, 126, 0.6);
-  color: #fff;
-  font-size: 14px;
-  /* border: 1px solid #6a0dad; */
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.customSelect:hover {
-  border-color: #6a0dad;
-}
-
-.customSelect:focus {
-  outline: none;
-  border-color: #6a0dad;
-  box-shadow: 0 0 0 2px #6a0dad;
-}
-
-.selectArrow {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  pointer-events: none;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: center;
 }

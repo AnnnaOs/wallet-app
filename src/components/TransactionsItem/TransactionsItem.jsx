@@ -8,6 +8,7 @@ import IconSvg from '../IconSvg/IconSvg';
 import useResponsive from '../../hooks/useResponsive';
 import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction.jsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
 
 const TransactionsItem = () => {
   const dispatch = useDispatch();
@@ -48,12 +49,7 @@ const TransactionsItem = () => {
                 Filter by type
               </label>
               <div className={s.selectContainer}>
-                <select id="filterSelect" value={filterType} onChange={e => setFilterType(e.target.value)} className={s.customSelect}>
-                  <option value="All">All</option>
-                  <option value="Income">Income</option>
-                  <option value="Expense">Expense</option>
-                </select>
-                <span className={s.selectArrow}></span>
+                <CustomSelect options={['All', 'Income', 'Expense']} value={filterType} onChange={value => setFilterType(value)} placeholder="Select type" />
               </div>
             </div>
             <p className={s.transactionCount}>Total: {transactions.length}</p>
