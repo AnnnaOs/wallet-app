@@ -148,13 +148,14 @@
   left: 0;
   right: 0;
   margin-top: 4px;
+  max-height: 330px;
+  overflow-y: auto;
   background: linear-gradient(360deg, rgba(83, 61, 186, 0.7) 0%, rgba(80, 48, 154, 0.7) 35.94%, rgba(106, 70, 165, 0.7) 61.04%, rgba(133, 93, 175, 0.7) 100%);
   backdrop-filter: blur(100px);
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
   z-index: 10;
-
   transform-origin: top center;
   animation: dropdownAppear 0.3s ease forwards;
 }
