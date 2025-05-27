@@ -1,85 +1,64 @@
-import { useState } from 'react';
 import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 
 import useResponsive from '../../../hooks/useResponsive.js';
-import s from './CurrencyChart.module.css';
 
-const CurrencyChart = ({ data }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const { isDesktop } = useResponsive();
+const CustomDot = ({ cx, cy, index }) => {
+  if (index !== 1 && index !== 3) return null;
+  return <circle cx={cx} cy={cy} r={5} stroke="#FF868D" strokeWidth={1} fill="#563EAF" />;
+};
 
-  const renderCustomDot = props => {
-    const { cx, cy, index, payload } = props;
-    if (payload && payload.showDot) {
-      const isHovered = index === hoveredIndex;
-      return (
-        <g
-          key={`dot-${index}`}
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <circle
-            cx={cx}
-            cy={cy}
-            r={isHovered ? 6 : 4}
-            fill="#FF6596"
-            stroke="#FF6596"
-            strokeWidth={1}
-          />
-          <circle cx={cx} cy={cy} r={isHovered ? 4 : 3} fill="#563EAF" />
-          {isDesktop && (
-            <text
-              x={cx}
-              y={cy - 15}
-              textAnchor="middle"
-              fill="#FF6596"
-              fontSize="12px"
-            >
-              {payload.uv}
-            </text>
-          )}
-        </g>
-      );
-    }
-    return null;
-  };
-
+const CustomLabel = ({ x, y, value, index }) => {
+  if (index !== 1 && index !== 3) return null;
+  if (typeof y !== 'number' || isNaN(y)) return null;
+  const num = typeof value === 'number' ? value : parseFloat(value);
   return (
-    <div className={s.graphWrapper}>
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart
-          data={data}
-          margin={{ top: isDesktop ? 10 : 0, right: 0, left: 0, bottom: 0 }}
-        >
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#6E78E8" stopOpacity={0.8} />
-              <stop offset="100%" stopColor="#6E78E8" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <Area
-            type="monotone"
-            dataKey="uv"
-            stroke="none"
-            fillOpacity={1}
-            fill="url(#colorUv)"
-            dot={false}
-            activeDot={false}
-            transform={isDesktop ? 'translate(0, 20)' : 'translate(0, 10)'}
-          />
-          <Area
-            type="monotone"
-            dataKey="uv"
-            stroke="#FF6596"
-            strokeWidth={2}
-            fill="none"
-            dot={renderCustomDot}
-            activeDot={false}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
+    <text x={x} y={y - 10} fill="#FF868D" fontSize={12} textAnchor="middle">
+      {num.toFixed(2)}
+    </text>
   );
 };
 
-export default CurrencyChart;
+function Chart({ data, height, showLabel }) {
+  return (
+    <ResponsiveContainer width="100%" minHeight={height}>
+      <AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+        <defs>
+          <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+            <stop stopColor="white" />
+            <stop offset="0.374892" stopColor="white" stopOpacity="0.536458" />
+            <stop offset="0.6091" stopColor="white" stopOpacity="0.269957" />
+            <stop offset="0.766012" stopColor="white" stopOpacity="0.151176" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        <Area type="monotone" dataKey="adjusted" stroke="none" fill="url(#gradient)" isAnimationActive={false} />
+        <Area
+          type="monotone"
+          dataKey="value"
+          stroke="#FF868D"
+          strokeWidth={1}
+          fill="none"
+          dot={<CustomDot />}
+          label={showLabel ? <CustomLabel /> : null}
+          isAnimationActive={false}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+}
+
+export default function CurrencyChart({ data }) {
+  const { isMobile, isTablet, isDesktop } = useResponsive();
+
+  const enhancedData = data.map(d => ({
+    ...d,
+    adjusted: d.value - 5,
+  }));
+
+  if (isDesktop) return <Chart data={enhancedData} height={183} showLabel={true} />;
+  if (isTablet) return <Chart data={enhancedData} height={90} showLabel={true} />;
+  if (isMobile) return <Chart data={enhancedData} height={80} showLabel={false} />;
+
+  return null;
+}

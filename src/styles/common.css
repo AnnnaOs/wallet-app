@@ -23,28 +23,35 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+}
 
-  @media screen and (max-width: 767px) {
-    body {
-      background-image: url('../images/noimg-gradient-mobile.webp');
-    }
+@media screen and (max-width: 767px) {
+  body {
+    background-image: url('../images/bg-dashboard-mob.webp');
   }
+}
 
-  @media screen and (min-width: 768px) {
-    body {
-      background-image: url('../images/noimg-gradient-tablet.webp');
-    }
+@media screen and (min-width: 768px) {
+  body {
+    background-image: url('../images/noimg-gradient-tablet.webp');
   }
+}
 
-  @media screen and (min-width: 1280px) {
-    body {
-      background-image: url('../images/noimg-gradient-desktop.webp');
-    }
+@media screen and (min-width: 1280px) {
+  body {
+    background-image: url('../images/noimg-gradient-desktop.webp');
   }
+}
 
-  main {
-    flex-grow: 1;
-  }
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: var(--white-400);
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+main {
+  flex-grow: 1;
 }
 
 .sr-only {
