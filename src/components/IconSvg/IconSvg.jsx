@@ -1,11 +1,11 @@
 import Icons from '../../images/icons.svg';
 
-const IconSvg = ({ className, width, height, name }) => {
+const Icon = ({ className, width, height, name }) => {
   return (
     <svg className={className} width={width} height={height}>
-      <use href={`${Icons}#${name}`}></use>
+      <use href={`${Icons}#${name}`} />
     </svg>
   );
 };
 
-export default IconSvg;
+export default Icon;
