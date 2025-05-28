@@ -2,6 +2,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { initializeToken } from '../configAPI/api.js';
 import { refreshThunk } from '../redux/auth/operations';
@@ -11,9 +12,7 @@ import useResponsive from '../hooks/useResponsive.js';
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Loader from './Loader/Loader';
-import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
 
-import 'react-toastify/dist/ReactToastify.css';
 import '../styles/toastify-custom.css';
 
 const DashboardPage = lazy(() => import('../pages/DashboardPage/DashboardPage'));
@@ -72,7 +71,7 @@ const App = () => {
             }
           />
           {/* 404 */}
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<DashboardPage />} />
         </Routes>
       </Suspense>
       <ToastContainer position="top-right" autoClose={3000} />

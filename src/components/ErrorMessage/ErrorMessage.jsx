@@ -1,8 +1,7 @@
-
 import { ToastContainer, toast } from 'react-toastify';
 
-function ErrorMessage(){
-  const notify = () => toast("Something wrong!");
+function ErrorMessage() {
+  const notify = () => toast('Something wrong!');
 
   return (
     <div>

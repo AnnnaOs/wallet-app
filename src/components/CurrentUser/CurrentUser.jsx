@@ -1,7 +1,5 @@
-import s from './CurrentUser.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-
 import { MdMarkEmailRead } from "react-icons/md";
 import { FaUser, FaUserEdit } from "react-icons/fa";
 import { MdAccountBalanceWallet } from "react-icons/md";
@@ -12,6 +10,7 @@ import { fetchCurrentUserThunk, editCurrentUserThunk } from '../../redux/user/op
 
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import s from './CurrentUser.module.css';
 
 const CurrentUser = () => {
   const dispatch = useDispatch();

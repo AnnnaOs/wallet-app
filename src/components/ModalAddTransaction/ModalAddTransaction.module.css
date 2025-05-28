@@ -1,31 +1,33 @@
 .backdrop {
+  backdrop-filter: blur(7px);
+  background: rgba(34, 13, 91, 0.23);
   position: fixed;
-  top: 60px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(34, 13, 91, 0.23);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(7px);
 }
 
 .modal {
-  background: url('../../images/noimg-gradient-mobile.webp');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+  border: none;
   border-radius: 8px;
-  outline: none;
-  padding: 32px 20px;
-  width: 100%;
-  max-width: 540px;
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 700;
   backdrop-filter: blur(100px);
-
-  /* Адаптив */
 }
 
 .modalHeader {
@@ -50,6 +52,7 @@
   border: 0;
   stroke: #fbfbfb;
   transition: transform 0.3s ease, fill 0.3s ease;
+
   &:hover,
   &:focus {
     transform: scale(1.1);
@@ -65,12 +68,16 @@
 
 @media screen and (min-width: 768px) {
   .backdrop {
-    top: 0;
+    background-color: rgba(34, 13, 91, 0.396);
   }
+
   .modal {
-    padding: 40px 73px;
     width: 540px;
+    max-height: 650px;
+    padding: 40px 73px;
+    background-color: rgba(255, 255, 255, 0.196);
   }
+
   .modalHeader {
     margin-bottom: 40px;
   }

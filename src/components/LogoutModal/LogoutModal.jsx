@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutThunk } from '../../redux/auth/operations.js';
 import styles from './LogoutModal.module.css';
-import logo from '../../images/logo-mob.svg';
+import logo from '../../images/logo.svg';
 import { toast } from 'react-toastify';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
 
@@ -27,9 +27,8 @@ const LogoutModal = ({ isOpen, onClose }) => {
   return (
     <div className={styles.logoutOverlay}>
       <div className={styles.logoutModal}>
-        {/* Додаємо новий клас */}
         <div className={styles.logoWrapper}>
-          <img src={logo} alt="Wallet Logo" width="36" height="36" className={styles.logoIcon} />
+          <img src={logo} alt="Wallet Logo" className={styles.logoIcon} />
           <h2 className={styles.logoText}>Money Guard</h2>
         </div>
 
