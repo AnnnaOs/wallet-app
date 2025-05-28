@@ -1,4 +1,3 @@
-// import PasswordStrengthBar from 'react-password-strength-bar-with-style-item';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import style from './ProgressBar.module.css';
 

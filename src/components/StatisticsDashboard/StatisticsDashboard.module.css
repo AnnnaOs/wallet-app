@@ -77,7 +77,7 @@
   padding: 10px 16px;
   cursor: pointer;
   color: var(--white-second);
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .dropdownItem:hover,

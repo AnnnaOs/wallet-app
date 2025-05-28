@@ -1,4 +1,3 @@
-// src/api/api.js
 import axios from 'axios';
 import { refreshAccessToken } from '../redux/auth/operations';
 

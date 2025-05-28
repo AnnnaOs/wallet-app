@@ -1,42 +1,27 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createTransaction } from '../../redux/transactions/operations.js';
+import { toast } from 'react-toastify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import style from './AddTransactionForm.module.css';
+
+import { getCategories } from '../../redux/categories/selectors.js';
+import { createTransaction } from '../../redux/transactions/operations.js';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
-import { toast } from 'react-toastify';
-import { getCategories } from '../../redux/categories/selectors.js';
+import style from './AddTransactionForm.module.css';
 
 const FeedbackSchema = Yup.object().shape({
-  transactionType: Yup.string().required('Выберіть тип транзакції'),
+  transactionType: Yup.string().required('Виберіть тип транзакції'),
   category: Yup.string().required('Виберіть категорію'),
-  sum: Yup.number().typeError('Сумма должна быть числом').required('Це поле обов`язкове').positive('Сумма должна быть положительною').max(1000000, 'Слишком велика сума!'),
+  sum: Yup.number().typeError('Має бути число').required('Це поле обов`язкове').positive().max(1000000),
   date: Yup.date().required('Виберіть дату'),
-  comment: Yup.string().min(3, 'Занадто коротко!').max(20, 'Занадто довго!').required('Обовʼязково').trim('Не повинно бути пустим!'),
+  comment: Yup.string().min(3, 'Занадто коротко!').max(20, 'Занадто довго!').required('Обовʼязково'),
 });
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
-  // const [categories, setCategories] = useState({ expenses: [], income: [] });
   const categories = useSelector(getCategories);
-  const [activeType, setActiveType] = useState('expense');
-
-  // useEffect(() => {
-  //   async function fetchCategories() {
-  //     try {
-  //       const { data } = await api.get('/categories');
-  //       setCategories(data);
-  //     } catch (error) {
-  //       console.error('Помилка при завантаженні категорій:', error);
-  //     }
-  //   }
-
-  //   fetchCategories();
-  // }, []);
 
   const initialValues = {
     transactionType: 'expense',
@@ -75,7 +60,6 @@ const AddTransactionForm = ({ onClose }) => {
               <p
                 className={`${style.picker} ${values.transactionType === 'income' ? style.pickerIncomeActive : ''}`}
                 onClick={() => {
-                  setActiveType('income');
                   setFieldValue('transactionType', 'income');
                   setFieldValue('category', 'Income');
                 }}
@@ -90,7 +74,6 @@ const AddTransactionForm = ({ onClose }) => {
                     value="income"
                     className={style.hiddenRadio}
                     onClick={() => {
-                      setActiveType('income');
                       setFieldValue('category', 'Income');
                     }}
                   />
@@ -103,7 +86,6 @@ const AddTransactionForm = ({ onClose }) => {
                     value="expense"
                     className={style.hiddenRadio}
                     onClick={() => {
-                      setActiveType('expense');
                       setFieldValue('category', '');
                     }}
                   />
@@ -113,7 +95,6 @@ const AddTransactionForm = ({ onClose }) => {
               <p
                 className={`${style.picker} ${values.transactionType === 'expense' ? style.pickerExpenseActive : ''}`}
                 onClick={() => {
-                  setActiveType('expense');
                   setFieldValue('transactionType', 'expense');
                   setFieldValue('category', '');
                 }}
@@ -122,7 +103,6 @@ const AddTransactionForm = ({ onClose }) => {
               </p>
             </div>
 
-            {/* Категория */}
             <div className={style.formFields}>
               {values.transactionType === 'expense' && (
                 <div className={style.formField}>
@@ -137,13 +117,11 @@ const AddTransactionForm = ({ onClose }) => {
               )}
 
               <div className={style.formRow}>
-                {/* Сумма */}
                 <div className={style.formField}>
                   <Field type="text" name="sum" className={style.input} placeholder="0.00" />
                   <ErrorMessage name="sum" component="span" className={style.errorMessage} />
                 </div>
 
-                {/* Дата */}
                 <div className={style.formField}>
                   <div className={style.dateInputWrapper}>
                     <DatePicker
@@ -161,7 +139,6 @@ const AddTransactionForm = ({ onClose }) => {
                 </div>
               </div>
 
-              {/* Комментарий */}
               <div className={style.formField}>
                 <Field type="text" name="comment" className={style.inputComment} placeholder="Comment" />
                 <ErrorMessage name="comment" component="span" className={style.errorMessage} />

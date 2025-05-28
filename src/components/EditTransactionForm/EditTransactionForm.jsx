@@ -1,21 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTransaction } from '../../redux/transactions/operations.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import style from './EditTransactionForm.module.css';
+
+import { updateTransaction } from '../../redux/transactions/operations.js';
+import { getCategories } from '../../redux/categories/selectors.js';
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from './CustomSelect.jsx';
-import { getCategories } from '../../redux/categories/selectors.js';
+import style from './EditTransactionForm.module.css';
 
 const FeedbackSchema = Yup.object().shape({
-  transactionType: Yup.string().required('Выберіть тип транзакції'),
+  transactionType: Yup.string().required('Виберіть тип транзакції'),
   category: Yup.string().required('Виберіть категорію'),
-  sum: Yup.number().typeError('Сумма должна быть числом').required('Це поле обов`язкове').positive('Сумма должна быть положительною').max(1000000, 'Слишком велика сума!'),
+  sum: Yup.number().typeError('Має бути число').required('Це поле обов`язкове').positive().max(1000000),
   date: Yup.date().required('Виберіть дату'),
-  comment: Yup.string().min(3, 'Занадто коротко!').max(20, 'Занадто довго!').required('Обовʼязково').trim('Не повинно бути пустим!'),
+  comment: Yup.string().min(3, 'Занадто коротко!').max(20, 'Занадто довго!').required('Обовʼязково'),
 });
 
 const EditTransactionForm = ({ transaction, onClose }) => {

@@ -16,7 +16,6 @@
 
 .addTransactionsBtn:hover {
   transform: scale(1.05);
-  /* box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4); */
   background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
   background-size: 200%;
   background-position: right center;

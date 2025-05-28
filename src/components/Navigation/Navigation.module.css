@@ -1,8 +1,6 @@
 .navList {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  /* padding: 15px 65px; */
   padding-top: 15px;
   gap: 32px;
 }
@@ -39,7 +37,6 @@
     padding-top: 40px;
     padding-bottom: 28px;
     gap: 12px;
-    /* display: block; */
   }
 
   .navItem {
@@ -48,10 +45,6 @@
     align-items: center;
     justify-content: flex-start;
   }
-
-  /* .navItem:not(:last-child) {
-    margin-bottom: 18px;
-  } */
 
   .iconNav {
     width: 18px;

@@ -1,7 +1,3 @@
-@import '../../styles/variables.css';
-@import '../../styles/fonts.css';
-@import '../../styles/reset.css';
-
 .wrapper {
   min-height: 100vh;
   display: flex;
@@ -18,10 +14,12 @@
   width: 100%;
   max-width: 320px;
   padding: 0 20px;
-  
+
 }
 
 .logo {
+  width: 26px;
+  height: 26px;
   margin: 0 auto;
   display: block;
 }
@@ -124,15 +122,15 @@
 
 .button:hover,
 .button:focus {
-    transform: scale(1.05);
-    background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
-    background-size: 200%;
-    background-position: right center;
-    transition: all 1s ease 0s;
+  transform: scale(1.05);
+  background-image: linear-gradient(to right, #7000ff 0%, #9e40ba 31%, #ffc727 100%);
+  background-size: 200%;
+  background-position: right center;
+  transition: all 1s ease 0s;
 }
 
 .button:active {
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 .button:disabled {
@@ -162,11 +160,11 @@
 
 .link:hover,
 .link:focus {
-    transform: scale(1.05);
-    background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(98, 63, 139) 31%, rgb(255, 255, 255) 100%);
-    background-size: 200%;
-    background-position: right center;
-    transition: all 1s ease 0s;
+  transform: scale(1.05);
+  background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(98, 63, 139) 31%, rgb(255, 255, 255) 100%);
+  background-size: 200%;
+  background-position: right center;
+  transition: all 1s ease 0s;
 }
 
 .formError {
@@ -236,7 +234,8 @@
 /* desc stylec */
 @media (min-width: 1280px) {
   .wrapper {
-    background-image: url('../../images/gradient-login-desk.webp'), url('../../images/gradient-desktop.webp');;
+    background-image: url('../../images/gradient-login-desk.webp'), url('../../images/gradient-desktop.webp');
+    ;
     background-repeat: no-repeat;
   }
 
@@ -248,11 +247,11 @@
 
 /* Стилі для перевизначення автозаповнення */
 .input:-webkit-autofill,
-.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #fff !important; 
-  -webkit-box-shadow: 0 0 0 1000px transparent inset !important; 
-  transition: background-color 5000s ease-in-out 0s; 
+  -webkit-text-fill-color: #fff !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 @keyframes autofill {

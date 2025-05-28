@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { deleteTransaction } from '../../redux/transactions/operations';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { formatDate } from '../../utils/formatDate';
-import s from './TransactionsItem.module.css';
-import IconSvg from '../IconSvg/IconSvg';
 import useResponsive from '../../hooks/useResponsive';
+import IconSvg from '../IconSvg/IconSvg';
 import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction.jsx';
-import { AnimatePresence, motion } from 'framer-motion';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
+import s from './TransactionsItem.module.css';
 
 const TransactionsItem = () => {
   const dispatch = useDispatch();

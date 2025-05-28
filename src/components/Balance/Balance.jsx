@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import s from './Balance.module.css';
 
 import { selectAllTransactions } from '../../redux/transactions/selectors';
+import s from './Balance.module.css';
 
 const Balance = () => {
   const transaction = useSelector(selectAllTransactions);
@@ -12,10 +12,6 @@ const Balance = () => {
       return acc - transaction.sum;
     }
   }, 0);
-
-  // useEffect(() => {
-  //   dispatch(fetchTransactions());
-  // }, [dispatch]);
 
   return (
     <div className={s.balanceWrapper}>

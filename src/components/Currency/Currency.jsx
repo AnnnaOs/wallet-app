@@ -2,10 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 
-import CurrencyChart from './CurrencyChart/CurrencyChart';
-
 import { selectCurrencies, selectLastRequestTime } from '../../redux/currency/selectors';
 import { fetchCurrencies } from '../../redux/currency/operations';
+import CurrencyChart from './CurrencyChart/CurrencyChart';
 import s from './Currency.module.css';
 
 const Currency = () => {

@@ -1,7 +1,3 @@
-@import '../../styles/variables.css';
-@import '../../styles/fonts.css';
-@import '../../styles/reset.css';
-
 .logoutOverlay {
   position: fixed;
   inset: 0;
@@ -28,11 +24,6 @@
 
 .logoWrapper {
   display: none;
-}
-
-.logoIcon {
-  width: 26px;
-  height: 26px;
 }
 
 .logoText {

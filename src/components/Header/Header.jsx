@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import styles from './Header.module.css';
-import LogoutModal from '../LogoutModal/LogoutModal';
+
 import logo from '../../images/logo.svg';
-import IconSvg from '../../components/IconSvg/IconSvg.jsx';
+import LogoutModal from '../LogoutModal/LogoutModal';
+import IconSvg from '../IconSvg/IconSvg.jsx';
+import styles from './Header.module.css';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
