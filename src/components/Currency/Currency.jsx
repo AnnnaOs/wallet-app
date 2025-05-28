@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrencyData, selectCurrencyLoading } from '../../redux/currency/selectors';
 import { getCurrency } from '../../redux/currency/operations';
-// import useResponsive from '../../hooks/useResponsive';
 import CurrencyChart from './CurrencyChart/CurrencyChart';
 import s from './Currency.module.css';
 
 const Currency = () => {
-  // const { isTablet } = useResponsive();
   const dispatch = useDispatch();
   const currencyData = useSelector(selectCurrencyData);
   const isLoading = useSelector(selectCurrencyLoading);

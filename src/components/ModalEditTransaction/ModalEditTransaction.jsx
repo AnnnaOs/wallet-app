@@ -1,12 +1,12 @@
 import Modal from 'react-modal';
-import EditTransactionForm from '../EditTransactionForm/EditTransactionForm.jsx';
-// import { useEffect } from 'react';
-import style from './ModalEditTransaction.module.css';
 import { useEffect, useState } from 'react';
-import Loader from '../Loader/Loader.jsx';
-import IconSvg from '../IconSvg/IconSvg.jsx';
+
 import useResponsive from '../../hooks/useResponsive.js';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
+import EditTransactionForm from '../EditTransactionForm/EditTransactionForm.jsx';
+import Loader from '../Loader/Loader.jsx';
+import IconSvg from '../IconSvg/IconSvg.jsx';
+import style from './ModalEditTransaction.module.css';
 
 Modal.setAppElement('#root');
 const ModalEditTransaction = ({ isOpen, onClose, transaction }) => {
@@ -17,7 +17,7 @@ const ModalEditTransaction = ({ isOpen, onClose, transaction }) => {
   useEffect(() => {
     if (isOpen) {
       setIsLoading(true);
-      // Імітація завантаження даних
+      
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 1000);

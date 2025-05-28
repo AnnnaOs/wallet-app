@@ -186,13 +186,9 @@
   padding: 0;
 }
 
-/* Tablet styles */
 @media (min-width: 768px) {
   .wrapper {
-    background-image: url('../../images/gradient-login-tab.webp'), url('../../images/gradient-tablet.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-image: url('../../images/gradient-login-tab.webp');
   }
 
   .container {
@@ -201,7 +197,9 @@
     border-radius: 8px;
     backdrop-filter: blur(100px);
     box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-    background: rgba(255, 255, 255, 0.1);
+    background-color: var(--form-color);
+    background-image: url('../../images/ellipse-login.webp');
+    background-position: center;
   }
 
   .logo {
@@ -231,12 +229,9 @@
   }
 }
 
-/* desc stylec */
 @media (min-width: 1280px) {
   .wrapper {
-    background-image: url('../../images/gradient-login-desk.webp'), url('../../images/gradient-desktop.webp');
-    ;
-    background-repeat: no-repeat;
+    background-image: url('../../images/gradient-login-desk.webp');
   }
 
   .input {
@@ -244,8 +239,6 @@
   }
 }
 
-
-/* Стилі для перевизначення автозаповнення */
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus {

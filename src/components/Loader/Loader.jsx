@@ -1,4 +1,5 @@
 import { RotatingTriangles } from 'react-loader-spinner';
+
 import style from './Loader.module.css';
 
 function Loader() {

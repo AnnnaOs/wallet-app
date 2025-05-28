@@ -1,11 +1,13 @@
 import Modal from 'react-modal';
-import style from './ModalAddTransaction.module.css';
 import { useEffect, useState } from 'react';
-import Loader from '../Loader/Loader.jsx';
-import IconSvg from '../IconSvg/IconSvg.jsx';
+
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
 import useResponsive from '../../hooks/useResponsive.js';
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm.jsx';
-import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js'; // 🔽 імпортуй хук
+import Loader from '../Loader/Loader.jsx';
+import IconSvg from '../IconSvg/IconSvg.jsx';
+
+import style from './ModalAddTransaction.module.css';
 
 Modal.setAppElement('#root');
 
