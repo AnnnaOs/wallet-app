@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { useTogglePassword } from '../../hooks/useTogglePassword';
 import { loginUserThunk } from '../../redux/auth/operations';
 import { selectIsAuthError, selectIsLoading } from '../../redux/auth/selectors';
 import { loginSchema } from '../../validationSchemas/validationSchemas';
-import styles from './LoginForm.module.css';
-import logo from '../../images/logo-mob.svg';
-import IconSvg from '../IconSvg/IconSvg';
-import { useTogglePassword } from '../../hooks/useTogglePassword';
-import { toast } from 'react-toastify';
 
+import logo from '../../images/logo.svg';
+import IconSvg from '../IconSvg/IconSvg';
+import styles from './LoginForm.module.css';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -39,22 +40,16 @@ const LoginForm = () => {
 
   const { visible: showPassword, toggle: togglePassword } = useTogglePassword();
 
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <img src={logo} alt="Wallet Logo" className={styles.logo} />
-        <h1 className={styles.title}>Money Guard</h1>
+        <h2 className={styles.title}>Money Guard</h2>
 
         <form onSubmit={formik.handleSubmit} className={styles.form} noValidate>
           <div className={styles.inputGroup}>
             <div className={styles.inputContainer}>
-              <IconSvg
-                className={styles.inputIcon}
-                width={24}
-                height={24}
-                name="icon-email"
-              />
+              <IconSvg className={styles.inputIcon} width={24} height={24} name="icon-email" />
               <input
                 type="email"
                 name="email"
@@ -66,19 +61,12 @@ const LoginForm = () => {
                 value={formik.values.email}
               />
             </div>
-            {formik.touched.email && formik.errors.email && (
-              <span className={styles.error}>{formik.errors.email}</span>
-            )}
+            {formik.touched.email && formik.errors.email && <span className={styles.error}>{formik.errors.email}</span>}
           </div>
 
           <div className={styles.inputGroup}>
             <div className={styles.inputContainer}>
-              <IconSvg
-                className={styles.inputIcon}
-                width={24}
-                height={24}
-                name="icon-lock"
-              />
+              <IconSvg className={styles.inputIcon} width={24} height={24} name="icon-lock" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
@@ -89,27 +77,14 @@ const LoginForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
-              <button
-                type="button"
-                className={styles.eyeButton}
-                onClick={togglePassword}>
-                <IconSvg
-                  width={18}
-                  height={18}
-                  name={showPassword ? 'icon-eye' : 'icon-eye-blocked'}
-                />
+              <button type="button" className={styles.eyeButton} onClick={togglePassword}>
+                <IconSvg width={18} height={18} name={showPassword ? 'icon-eye' : 'icon-eye-blocked'} />
               </button>
             </div>
-            {formik.touched.password && formik.errors.password && (
-              <span className={styles.error}>{formik.errors.password}</span>
-            )}
+            {formik.touched.password && formik.errors.password && <span className={styles.error}>{formik.errors.password}</span>}
           </div>
 
-          <button
-            type="submit"
-            className={styles.button}
-            disabled={isLoading || formik.isSubmitting}
-          >
+          <button type="submit" className={styles.button} disabled={isLoading || formik.isSubmitting}>
             {isLoading ? 'Signing in...' : 'Log In'}
           </button>
 

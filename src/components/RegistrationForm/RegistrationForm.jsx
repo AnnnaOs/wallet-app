@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { registerUserThunk } from '../../redux/auth/operations';
 import { selectIsAuthError } from '../../redux/auth/selectors';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import { useTogglePassword } from '../../hooks/useTogglePassword';
 import logo from '../../images/logo.svg';
 import IconSvg from '../../components/IconSvg/IconSvg';
-import { useTogglePassword } from '../../hooks/useTogglePassword';
+import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import styles from './RegistrationForm.module.css';
-import { toast } from 'react-toastify';
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();

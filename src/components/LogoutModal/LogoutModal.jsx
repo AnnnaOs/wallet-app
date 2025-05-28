@@ -1,10 +1,11 @@
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { logoutThunk } from '../../redux/auth/operations.js';
-import styles from './LogoutModal.module.css';
-import logo from '../../images/logo.svg';
-import { toast } from 'react-toastify';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
+import logo from '../../images/logo.svg';
+import styles from './LogoutModal.module.css';
 
 const LogoutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();

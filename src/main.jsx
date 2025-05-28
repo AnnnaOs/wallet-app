@@ -3,12 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { initializeToken } from './configAPI/api';
 import { store, persistor } from './redux/store';
 import App from './components/App.jsx';
 import 'modern-normalize';
 import './index.css';
-import { initializeToken } from './configAPI/api';
-// import { StrictMode } from 'react';
 
 initializeToken();
 

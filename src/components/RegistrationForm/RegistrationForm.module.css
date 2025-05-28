@@ -13,7 +13,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
 }
 
 .modal {
@@ -50,7 +49,6 @@
 
 .inputContainer {
     position: relative;
-
 }
 
 .inputContainer::after {
@@ -127,7 +125,6 @@
     border: 1px solid #ff4d4d;
     background-color: var(--main-background);
     background-image: url('../../images/gradient-mobile.webp');
-
 }
 
 .errorText {
@@ -210,16 +207,16 @@
 @media only screen and (min-width: 768px) {
 
     .container {
-        background-image: url('../../images/tablet-back-dollars-min.png'), url('../../images/gradient-tablet.webp');
+        background-image: url('../../images/gradient-register-tab.webp');
         padding: 0;
     }
 
     .modal {
         border-radius: 8px;
         width: 533px;
-        backdrop-filter: blur(100px);
         box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-        background: var(--form-color);
+        background-color: var(--main-background);
+        background-image: url('../../images/gradient-mobile.webp');
         padding-top: 40px;
         padding-bottom: 40px;
     }
@@ -246,6 +243,6 @@
 @media only screen and (min-width: 1280px) {
 
     .container {
-        background-image: url('../../images/desktop-back-dollars.png'), url('../../images/gradient-desktop.webp');
+        background-image: url('../../images/gradient-register-desk.webp');
     }
 }
