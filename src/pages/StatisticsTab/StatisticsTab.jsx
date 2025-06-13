@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 import { getExpenseSummaryByCategories, getIncomeAndExpenseSummaryByPeriod } from '../../redux/statistics/operations';
 import { selectStatLoading, selectStatError, selectSummary, selectIncomeSummaryByPeriod, selectExpenseSummaryByPeriod } from '../../redux/statistics/selectors';
+
+import { months } from '../../components/StatisticsDashboard/constants';
 import Chart from '../../components/Chart/Chart';
 import Loader from '../../components/Loader/Loader';
 import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
 import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
-import { months } from '../../components/StatisticsDashboard/constants';
-
 import css from './StatisticsTab.module.css';
 
 const StatisticsTab = () => {
@@ -36,7 +36,9 @@ const StatisticsTab = () => {
   useEffect(() => {
     if (!isLoggedIn || !token) {
       navigate('/login');
+      return;
     }
+
     const fetchData = (monthName, year) => {
       if (!monthName || !year) return;
 
@@ -50,7 +52,7 @@ const StatisticsTab = () => {
     };
 
     fetchData(selectedMonth, selectedYear);
-  }, [selectedMonth, selectedYear, dispatch]);
+  }, [isLoggedIn, token, navigate, selectedMonth, selectedYear, dispatch]);
 
   const handleMonthChange = month => {
     setSelectedMonth(month);

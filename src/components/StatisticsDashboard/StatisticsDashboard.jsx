@@ -1,6 +1,7 @@
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
 
 import { months, years } from '../../components/StatisticsDashboard/constants';
+
 import css from './StatisticsDashboard.module.css';
 
 const StatisticsDashboard = ({ selectedMonth, selectedYear, onMonthChange, onYearChange }) => {

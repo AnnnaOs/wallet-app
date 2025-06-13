@@ -6,6 +6,7 @@ import { deleteTransaction } from '../../redux/transactions/operations';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { formatDate } from '../../utils/formatDate';
 import useResponsive from '../../hooks/useResponsive';
+
 import IconSvg from '../IconSvg/IconSvg';
 import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction.jsx';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
@@ -36,10 +37,12 @@ const TransactionsItem = () => {
     setIsModalOpen(false);
     setSelectedTransaction(null);
   };
+
   const filteredTransactions = transactions.filter(t => {
     if (filterType === 'All') return true;
     return t.type === (filterType === 'Income' ? 'Income' : 'Expense');
   });
+
   return (
     <div className={s.homeTabWrap}>
       {transactions.length !== 0 ? (
@@ -50,7 +53,7 @@ const TransactionsItem = () => {
                 Filter by type
               </label>
               <div className={s.selectContainer}>
-                <CustomSelect options={['All', 'Income', 'Expense']} value={filterType} onChange={value => setFilterType(value)} placeholder="Select type" />
+                <CustomSelect options={['All', 'Income', 'Expense']} value={filterType} onChange={value => setFilterType(value)} name="filterSelect" placeholder="Select type" />
               </div>
             </div>
             <p className={s.transactionCount}>Total: {transactions.length}</p>

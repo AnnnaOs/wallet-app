@@ -3,6 +3,7 @@ import { FaSort } from 'react-icons/fa';
 
 import { formatNumber } from '../../components/StatisticsTable/formatNumber';
 import { getCategoryColor } from '../../components/StatisticsTable/getCategoryColor';
+
 import css from './StatisticsTable.module.css';
 
 const StatisticsTable = ({ summary, incomeSummaryByPeriod, expensesSummaryByPeriod }) => {

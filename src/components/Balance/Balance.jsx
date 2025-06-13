@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { selectAllTransactions } from '../../redux/transactions/selectors';
+
 import s from './Balance.module.css';
 
 const Balance = () => {

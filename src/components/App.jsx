@@ -9,10 +9,10 @@ import { refreshThunk } from '../redux/auth/operations';
 import { selectIsRefreshing } from '../redux/auth/selectors';
 import { setTokenFromStorage } from '../redux/auth/slice.js';
 import useResponsive from '../hooks/useResponsive.js';
+
 import PrivateRoute from '../routes/PrivateRoute.jsx';
 import RestrictedRoute from '../routes/RestrictedRoute.jsx';
 import Loader from './Loader/Loader';
-
 import '../styles/toastify-custom.css';
 
 const DashboardPage = lazy(() => import('../pages/DashboardPage/DashboardPage'));

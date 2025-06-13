@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import useResponsive from '../../hooks/useResponsive.js';
+
 import Header from '../../components/Header/Header.jsx';
 import Navigation from '../../components/Navigation/Navigation.jsx';
 import Currency from '../../components/Currency/Currency.jsx';

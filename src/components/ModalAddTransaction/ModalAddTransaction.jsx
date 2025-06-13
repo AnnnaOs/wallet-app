@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
 import useResponsive from '../../hooks/useResponsive.js';
+
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm.jsx';
 import Loader from '../Loader/Loader.jsx';
 import IconSvg from '../IconSvg/IconSvg.jsx';
-
 import style from './ModalAddTransaction.module.css';
 
 Modal.setAppElement('#root');

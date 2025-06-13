@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logoutThunk } from '../../redux/auth/operations.js';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
+
 import logo from '../../images/logo.svg';
 import styles from './LogoutModal.module.css';
 

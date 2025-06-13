@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { registerUserThunk } from '../../redux/auth/operations';
 import { selectIsAuthError } from '../../redux/auth/selectors';
 import { useTogglePassword } from '../../hooks/useTogglePassword';
+
 import logo from '../../images/logo.svg';
 import IconSvg from '../../components/IconSvg/IconSvg';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';

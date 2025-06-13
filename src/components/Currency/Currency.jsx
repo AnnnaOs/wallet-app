@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrencyData, selectCurrencyLoading } from '../../redux/currency/selectors';
 import { getCurrency } from '../../redux/currency/operations';
+
 import CurrencyChart from './CurrencyChart/CurrencyChart';
 import s from './Currency.module.css';
 

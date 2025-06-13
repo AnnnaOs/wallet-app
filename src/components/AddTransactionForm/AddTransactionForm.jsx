@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { getCategories } from '../../redux/categories/selectors.js';
 import { createTransaction } from '../../redux/transactions/operations.js';
+
 import IconSvg from '../IconSvg/IconSvg.jsx';
 import CustomSelect from '../EditTransactionForm/CustomSelect.jsx';
 import style from './AddTransactionForm.module.css';

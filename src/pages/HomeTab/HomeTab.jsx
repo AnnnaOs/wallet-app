@@ -5,6 +5,7 @@ import { fetchCategories } from '../../redux/categories/operations.js';
 import { areCategoriesLoaded } from '../../redux/categories/selectors.js';
 import { fetchTransactions } from '../../redux/transactions/operations.js';
 import useResponsive from '../../hooks/useResponsive';
+
 import Balance from '../../components/Balance/Balance';
 import ButtonAddTransactions from '../../components/ButtonAddTransactions/ButtonAddTransactions';
 import TransactionsList from '../../components/TransactionsList/TransactionsList';

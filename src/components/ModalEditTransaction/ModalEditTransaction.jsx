@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import useResponsive from '../../hooks/useResponsive.js';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock.js';
+
 import EditTransactionForm from '../EditTransactionForm/EditTransactionForm.jsx';
 import Loader from '../Loader/Loader.jsx';
 import IconSvg from '../IconSvg/IconSvg.jsx';
@@ -17,7 +18,7 @@ const ModalEditTransaction = ({ isOpen, onClose, transaction }) => {
   useEffect(() => {
     if (isOpen) {
       setIsLoading(true);
-      
+
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 1000);

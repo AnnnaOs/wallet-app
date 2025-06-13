@@ -1,4 +1,5 @@
 import PasswordStrengthBar from 'react-password-strength-bar';
+
 import style from './ProgressBar.module.css';
 
 const ProgressBar = ({ watch }) => {
